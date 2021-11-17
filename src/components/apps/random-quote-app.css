@@ -38,6 +38,7 @@
 
 .sharing-buttons {
   display: flex;
+  padding-bottom: 0px;
 }
 
 .btn {
@@ -50,16 +51,18 @@
   text-decoration: none;
   color: white;
   text-align: center;
-  &:hover {
-    opacity: 0.5;
-  }
+}
+
+.btn:hover {
+  opacity: 0.5;
 }
 
 .new-quote {
   align-self: flex-end;
-  &:hover {
-    opacity: 0.5;
-  }
+}
+
+.new-quote:hover {
+  opacity: 0.5;
 }
 
 .new-quote-button {
