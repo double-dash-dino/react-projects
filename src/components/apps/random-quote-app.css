@@ -1,0 +1,71 @@
+.main-page {
+  font-family: FontAwesome;
+  top: 0;
+  left: 0;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quote-card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px 20px 10px 20px;
+
+  width: 40%;
+}
+
+.quote {
+  text-align: center;
+}
+
+.fa-quote-left {
+  padding-right: 10px;
+}
+
+.author {
+  text-align: right;
+  padding-right: 20px;
+}
+
+.quote-card-controls {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sharing-buttons {
+  display: flex;
+}
+
+.btn {
+  height: 3.5em;
+  width: 3.5em;
+  border-radius: 4px;
+  padding: 5px;
+  padding-bottom: 2px;
+  margin: 5px;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+.new-quote {
+  align-self: flex-end;
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+.new-quote-button {
+  color: white;
+  font-weight: bold;
+  padding: 15px 10px;
+  border-radius: 4px;
+  border: none;
+}
