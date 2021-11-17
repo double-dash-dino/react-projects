@@ -7,12 +7,18 @@ function App() {
   const clickHandlerQuoteApp = () => {
     setDisplayApp("quoteApp");
   };
+
+  const clearApp = () => {
+    setDisplayApp("");
+  };
   return (
     <div className="App">
       <button id="quote-app-button" onClick={clickHandlerQuoteApp}>
         Random quote app
       </button>
-      <button className="clearApp" onClick={}>X</button>
+      <button className="clearApp" onClick={clearApp}>
+        X
+      </button>
       {displayApp === "quoteApp" && <RandomQuoteApp />}
     </div>
   );
