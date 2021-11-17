@@ -3,12 +3,14 @@ import React, { useState } from "react";
 
 function App() {
   const [isClicked, setIsClicked] = useState("");
-  const clickHandler = () => {
-    setIsClicked(!isClicked);
+  const clickHandlerQuoteApp = () => {
+    setIsClicked("quoteApp");
   };
   return (
     <div className="App">
-      <button onClick={clickHandler}>Load project X</button>
+      <button id="quote-app-button" onClick={clickHandlerQuoteApp}>
+        Random quote app
+      </button>
       {isClicked && <div className="projectX">Here it is</div>}
     </div>
   );
