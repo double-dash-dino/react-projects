@@ -2,6 +2,8 @@ import "./App.css";
 import React, { useState } from "react";
 import RandomQuoteApp from "./components/apps/random-quote-app.js";
 
+// TODO: PASS AND LIFT THE STATE TO HAVE THE CLEAR BUTTON IN EVERY APP
+
 function App() {
   const [displayApp, setDisplayApp] = useState("");
   const clickHandlerQuoteApp = () => {
