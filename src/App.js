@@ -18,10 +18,8 @@ function App() {
       <button id="quote-app-button" onClick={clickHandlerQuoteApp}>
         Random quote app
       </button>
-      <button className="clearApp" onClick={clearApp}>
-        X
-      </button>
-      {displayApp === "quoteApp" && <RandomQuoteApp />}
+
+      {displayApp === "quoteApp" && <RandomQuoteApp onClearApp={clearApp} />}
     </div>
   );
 }
