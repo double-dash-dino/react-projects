@@ -55,14 +55,16 @@
 
 .btn:hover {
   opacity: 0.5;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.5;
+  cursor: pointer;
 }
 
 .new-quote {
   align-self: flex-end;
-}
-
-.new-quote:hover {
-  opacity: 0.5;
 }
 
 .new-quote-button {
