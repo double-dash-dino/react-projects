@@ -55,7 +55,7 @@ const RandomQuoteApp = () => {
             <a className="btn" href={linkToTweet} style={backgroundStyle}>
               <i class="fa fa-twitter fa-2x"></i>
             </a>
-            <a className="btn" href="#" style={backgroundStyle}>
+            <a className="btn" style={backgroundStyle}>
               <i class="fa fa-facebook fa-2x"></i>
             </a>
           </div>
