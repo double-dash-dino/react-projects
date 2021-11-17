@@ -40,7 +40,7 @@ const RandomQuoteApp = () => {
     quote +
     "%0A%09- " +
     author +
-    "%0A%0A Get more wisdom by visiting https://codepen.io/double-dash-dino/pen/ZEeyKYP";
+    "%0A%0A Get more wisdom by visiting https://ecstatic-feynman-aa45ec.netlify.app/";
 
   return (
     <div className="main-page" style={backgroundStyle}>
@@ -56,7 +56,11 @@ const RandomQuoteApp = () => {
             <a className="btn" href={linkToTweet} style={backgroundStyle}>
               <i class="fa fa-twitter fa-2x"></i>
             </a>
-            <a className="btn" style={backgroundStyle}>
+            <a
+              className="btn"
+              href="https://facebook.com"
+              style={backgroundStyle}
+            >
               <i class="fa fa-facebook fa-2x"></i>
             </a>
           </div>
