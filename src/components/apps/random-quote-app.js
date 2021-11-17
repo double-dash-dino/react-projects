@@ -53,10 +53,10 @@ const RandomQuoteApp = () => {
         <div className="quote-card-controls">
           <div className="sharing-buttons">
             <a className="btn" href={linkToTweet} style={backgroundStyle}>
-              <i class="fa fa-twitter fa-3x"></i>
+              <i class="fa fa-twitter fa-2x"></i>
             </a>
             <a className="btn" href="#" style={backgroundStyle}>
-              <i class="fa fa-facebook fa-3x"></i>
+              <i class="fa fa-facebook fa-2x"></i>
             </a>
           </div>
           <div className="new-quote">
