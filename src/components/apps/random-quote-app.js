@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import "./random-quote-app.css";
 
+// TODO: FIX STYLING SO THAT IT WORKS WELL ON ALL DEVICES
+// ADD MORE / BETTER COLOURS
+// MAKE IT IMPOSSIBLE TO GET THE SAME QUOTE / COLOUR TWICE IN A ROW
+
 const RandomQuoteApp = () => {
   const [quote, setQuote] = useState(
     "Life isn’t about getting and having, it’s about giving and being."
