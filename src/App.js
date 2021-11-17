@@ -3,16 +3,17 @@ import React, { useState } from "react";
 import RandomQuoteApp from "./components/apps/random-quote-app.js";
 
 function App() {
-  const [isClicked, setIsClicked] = useState("");
+  const [displayApp, setDisplayApp] = useState("");
   const clickHandlerQuoteApp = () => {
-    setIsClicked("quoteApp");
+    setDisplayApp("quoteApp");
   };
   return (
     <div className="App">
       <button id="quote-app-button" onClick={clickHandlerQuoteApp}>
         Random quote app
       </button>
-      {isClicked === "quoteApp" && <RandomQuoteApp />}
+      <button className="clearApp" onClick={}>X</button>
+      {displayApp === "quoteApp" && <RandomQuoteApp />}
     </div>
   );
 }
