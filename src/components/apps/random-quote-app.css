@@ -1,20 +1,15 @@
 .main-page {
   font-family: FontAwesome;
-  top: 0;
-  left: 0;
-  position: fixed;
-  height: 100%;
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 50px 0px 50px 0px;
 }
 
 .quote-card {
   background: white;
   border-radius: 8px;
   padding: 20px 20px 10px 20px;
-
   width: 40%;
 }
 
@@ -69,7 +64,7 @@ button:hover {
 
 .new-quote-button {
   height: 4em;
-  padding: 5px;
+  padding: 5px 15px 5px 15px;
   margin: 5px;
   color: white;
   font-size: large;
