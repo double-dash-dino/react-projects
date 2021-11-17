@@ -1,6 +1,6 @@
-import "./clearButton.css";
+import "./ClearButton.css";
 
-const clearButton = (props) => {
+const ClearButton = (props) => {
   const clearApp = () => {
     props.onClearApp();
   };
@@ -11,4 +11,4 @@ const clearButton = (props) => {
   );
 };
 
-export default clearButton;
+export default ClearButton;

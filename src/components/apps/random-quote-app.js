@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ClearButton from "../UI/ClearButton.js";
 import "./random-quote-app.css";
 
 // TODO: FIX STYLING SO THAT IT WORKS WELL ON ALL DEVICES
@@ -42,15 +43,13 @@ const RandomQuoteApp = (props) => {
     author +
     "%0A%0A Get more wisdom by visiting https://ecstatic-feynman-aa45ec.netlify.app/";
 
-  const clearAppHandler = () => {
+  const clearApp = () => {
     props.onClearApp();
   };
 
   return (
     <div className="main-page" style={backgroundStyle}>
-      <button className="clearApp" onClick={clearAppHandler}>
-        X
-      </button>
+      <ClearButton onClearApp={clearApp} />
       <div className="quote-card" style={fontStyle}>
         <h2 className="quote">
           <i class="fa fa-quote-left" aria-hidden="true"></i>
