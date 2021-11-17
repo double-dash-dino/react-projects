@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ClearButton from "../UI/ClearButton.js";
 import "./random-quote-app.css";
 
 // TODO: FIX STYLING SO THAT IT WORKS WELL ON ALL DEVICES
@@ -6,7 +7,7 @@ import "./random-quote-app.css";
 // MAKE IT IMPOSSIBLE TO GET THE SAME QUOTE / COLOUR TWICE IN A ROW
 // MAKE IT POSSIBLE TO SHARE QUOTE ON FACEBOOK
 
-const RandomQuoteApp = () => {
+const RandomQuoteApp = (props) => {
   const [quote, setQuote] = useState(
     "Life isn’t about getting and having, it’s about giving and being."
   );
@@ -42,8 +43,13 @@ const RandomQuoteApp = () => {
     author +
     "%0A%0A Get more wisdom by visiting https://ecstatic-feynman-aa45ec.netlify.app/";
 
+  const clearApp = () => {
+    props.onClearApp();
+  };
+
   return (
     <div className="main-page" style={backgroundStyle}>
+      <ClearButton onClearApp={clearApp} />
       <div className="quote-card" style={fontStyle}>
         <h2 className="quote">
           <i class="fa fa-quote-left" aria-hidden="true"></i>
