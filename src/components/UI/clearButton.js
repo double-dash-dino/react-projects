@@ -5,7 +5,7 @@ const ClearButton = (props) => {
     props.onClearApp();
   };
   return (
-    <button className="clearButton" onClick={clearApp}>
+    <button className="clear-button" onClick={clearApp}>
       X
     </button>
   );
