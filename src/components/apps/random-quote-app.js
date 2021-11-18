@@ -12,12 +12,12 @@ const RandomQuoteApp = (props) => {
     "Life isn’t about getting and having, it’s about giving and being."
   );
   const [author, setAuthor] = useState("Kevin Kruse");
-  const [colour, setColour] = useState("#E27D60");
+  const [colourNumber, setColourNumber] = useState(0);
 
-  const colours = ["#E27D60", "#85DCB8", "#E8A87C", "#C38D9E", "#41B3A3"];
+  const coloursList = ["#E27D60", "#85DCB8", "#E8A87C", "#C38D9E", "#41B3A3"];
 
-  let backgroundStyle = { backgroundColor: colour };
-  let fontStyle = { color: colour };
+  let backgroundStyle = { backgroundColor: coloursList[colourNumber] };
+  let fontStyle = { color: coloursList[colourNumber] };
 
   const getRandomNumber = (listLength) => {
     return Math.round(Math.random() * listLength);
@@ -32,8 +32,15 @@ const RandomQuoteApp = (props) => {
         let quoteNumber = getRandomNumber(101);
         setQuote(responseJson.quotes[quoteNumber].quote);
         setAuthor(responseJson.quotes[quoteNumber].author);
-        setColour(colours[getRandomNumber(colours.length - 1)]);
       });
+
+    if (colourNumber >= coloursList.length - 1) {
+      setColourNumber(0);
+    } else {
+      setColourNumber(parseInt(colourNumber) + 1);
+    }
+
+    console.log(colourNumber);
   };
 
   const linkToTweet =
