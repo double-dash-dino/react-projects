@@ -73,7 +73,11 @@ const RandomQuoteApp = (props) => {
             </a>
             <a
               className="btn"
-              href="http://www.facebook.com/sharer.php?src=https://lionels-react-projects.netlify.app/"
+              data-posttype="quote"
+              data-title="myquote"
+              data-content="quoteText"
+              data-caption="quoteAuthor"
+              href="http://tumblr.com/widgets/share"
               style={backgroundStyle}
             >
               <i class="fa fa-facebook fa-2x"></i>
