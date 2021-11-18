@@ -48,7 +48,7 @@ const RandomQuoteApp = (props) => {
     quote +
     "%0A%09- " +
     author +
-    "%0A%0A Get more wisdom by visiting https://ecstatic-feynman-aa45ec.netlify.app/";
+    "%0A%0A Get more wisdom by visiting https://lionels-react-projects.netlify.app/";
 
   const clearApp = () => {
     props.onClearApp();
@@ -73,7 +73,7 @@ const RandomQuoteApp = (props) => {
             </a>
             <a
               className="btn"
-              href="https://facebook.com"
+              href="http://www.facebook.com/sharer.php?src=https://lionels-react-projects.netlify.app/"
               style={backgroundStyle}
             >
               <i class="fa fa-facebook fa-2x"></i>
