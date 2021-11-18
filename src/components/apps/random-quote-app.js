@@ -51,10 +51,12 @@ const RandomQuoteApp = (props) => {
     <div className="main-page" style={backgroundStyle}>
       <ClearButton onClearApp={clearApp} />
       <div className="quote-card" style={fontStyle}>
-        <h2 className="quote">
-          <i class="fa fa-quote-left" aria-hidden="true"></i>
-          {quote}
-        </h2>
+        <div className="quote-box">
+          <p>
+            <i class="fa fa-quote-left" aria-hidden="true"></i>
+            {quote}
+          </p>
+        </div>
 
         <h5 className="author">- {author}</h5>
         <div className="quote-card-controls">
