@@ -52,6 +52,10 @@
   text-align: center;
 }
 
+.fa-clipboard {
+  padding-top: 13px;
+}
+
 .btn:hover {
   opacity: 0.5;
   cursor: pointer;

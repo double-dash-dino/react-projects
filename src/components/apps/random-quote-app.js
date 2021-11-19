@@ -75,14 +75,15 @@ const RandomQuoteApp = (props) => {
             <a className="btn" href={linkToTweet} style={backgroundStyle}>
               <i class="fa fa-twitter fa-2x"></i>
             </a>
-            <button
+            <a
               className="btn"
               id="copy-quote"
               onClick={copyQuote}
               style={backgroundStyle}
+              target="google.com"
             >
-              <i class="far fa-clipboard fa-2x"></i>
-            </button>
+              <i className="fa fa-clipboard"></i>
+            </a>
           </div>
           <div className="new-quote">
             <button
