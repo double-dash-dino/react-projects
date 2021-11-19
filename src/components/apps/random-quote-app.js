@@ -13,6 +13,7 @@ const RandomQuoteApp = (props) => {
   );
   const [author, setAuthor] = useState("Kevin Kruse");
   const [colourNumber, setColourNumber] = useState(0);
+  const [copied, setCopied] = useState(false);
 
   const coloursList = ["#E27D60", "#85DCB8", "#E8A87C", "#C38D9E", "#41B3A3"];
 
@@ -39,8 +40,7 @@ const RandomQuoteApp = (props) => {
     } else {
       setColourNumber(parseInt(colourNumber) + 1);
     }
-
-    console.log(colourNumber);
+    setCopied(false);
   };
 
   const linkToTweet =
@@ -54,8 +54,10 @@ const RandomQuoteApp = (props) => {
     props.onClearApp();
   };
 
-  const copyQuote = (quote, author) => {
-    alert("test");
+  const copyQuote = () => {
+    navigator.clipboard.writeText(quote + "\n-" + author);
+    setCopied(true);
+    console.log(quote, author);
   };
 
   return (
@@ -75,15 +77,17 @@ const RandomQuoteApp = (props) => {
             <a className="btn" href={linkToTweet} style={backgroundStyle}>
               <i class="fa fa-twitter fa-2x"></i>
             </a>
-            <a
-              className="btn"
-              id="copy-quote"
-              onClick={copyQuote}
-              style={backgroundStyle}
-              target="google.com"
-            >
-              <i className="fa fa-clipboard"></i>
-            </a>
+            {copied === false && (
+              <button
+                className="btn"
+                id="copy-quote"
+                onClick={copyQuote}
+                style={backgroundStyle}
+              >
+                <i className="fa fa-clipboard fa-2x"></i>
+              </button>
+            )}
+            {copied === true && <p className="copied-message">Copied!</p>}
           </div>
           <div className="new-quote">
             <button
