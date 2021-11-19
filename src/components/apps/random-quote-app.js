@@ -54,6 +54,10 @@ const RandomQuoteApp = (props) => {
     props.onClearApp();
   };
 
+  const copyQuote = (quote, author) => {
+    alert("test");
+  };
+
   return (
     <div className="main-page" style={backgroundStyle}>
       <ClearButton onClearApp={clearApp} />
@@ -71,17 +75,14 @@ const RandomQuoteApp = (props) => {
             <a className="btn" href={linkToTweet} style={backgroundStyle}>
               <i class="fa fa-twitter fa-2x"></i>
             </a>
-            <a
+            <button
               className="btn"
-              data-posttype="quote"
-              data-title="myquote"
-              data-content="quoteText"
-              data-caption="quoteAuthor"
-              href="http://tumblr.com/widgets/share"
+              id="copy-quote"
+              onClick={copyQuote}
               style={backgroundStyle}
             >
-              <i class="fa fa-facebook fa-2x"></i>
-            </a>
+              <i class="far fa-clipboard fa-2x"></i>
+            </button>
           </div>
           <div className="new-quote">
             <button
