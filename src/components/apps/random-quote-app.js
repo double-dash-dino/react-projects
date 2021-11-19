@@ -3,9 +3,6 @@ import ClearButton from "../UI/ClearButton.js";
 import "./random-quote-app.css";
 
 // TODO: FIX STYLING SO THAT IT WORKS WELL ON ALL DEVICES
-// ADD MORE / BETTER COLOURS
-// MAKE IT IMPOSSIBLE TO GET THE SAME QUOTE / COLOUR TWICE IN A ROW
-// MAKE IT POSSIBLE TO SHARE QUOTE ON FACEBOOK
 
 const RandomQuoteApp = (props) => {
   const [quote, setQuote] = useState(
