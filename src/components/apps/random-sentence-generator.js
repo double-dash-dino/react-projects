@@ -1,5 +1,6 @@
 import "./random-sentence-generator.css";
 import React, { useState } from "react";
+import ClearButton from "../UI/ClearButton.js";
 
 import RandomPepTalkGenerator from "../sentence-generators/RandomPepTalkGenerator";
 import RandomShakespeareInsultGenerator from "../sentence-generators/RandomShakespeareInsultGenerator.js";
@@ -14,8 +15,13 @@ const RandomSentenceGenerator = (props) => {
     setSentence(sentence);
   };
 
+  const clearApp = () => {
+    props.onClearApp();
+  };
+
   return (
     <div>
+      <ClearButton onClearApp={clearApp} />
       <h2>What do you need?</h2>
       <br />
       <div className="generator-controls">
