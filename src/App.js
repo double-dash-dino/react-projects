@@ -2,6 +2,7 @@ import "./App.css";
 import React, { useState } from "react";
 import RandomQuoteApp from "./components/apps/random-quote-app.js";
 import DrumMachine from "./components/apps/drum-machine.js";
+import RandomSentenceGenerator from "./components/apps/random-sentence-generator.js";
 
 function App() {
   const [displayApp, setDisplayApp] = useState("");
@@ -11,6 +12,10 @@ function App() {
 
   const clickHandlerDrumMachine = () => {
     setDisplayApp("drumMachine");
+  };
+
+  const clickHandlerRandomSentenceGenerator = () => {
+    setDisplayApp("randomSentenceGenerator");
   };
 
   const clearApp = () => {
@@ -24,9 +29,18 @@ function App() {
       <button id="drum-machine-button" onClick={clickHandlerDrumMachine}>
         Drum machine
       </button>
+      <button
+        id="random-sentence-generator-button"
+        onClick={clickHandlerRandomSentenceGenerator}
+      >
+        Random sentence generator
+      </button>
 
       {displayApp === "quoteApp" && <RandomQuoteApp onClearApp={clearApp} />}
       {displayApp === "drumMachine" && <DrumMachine onClearApp={clearApp} />}
+      {displayApp === "randomSentenceGenerator" && (
+        <RandomSentenceGenerator onClearApp={clearApp} />
+      )}
     </div>
   );
 }
