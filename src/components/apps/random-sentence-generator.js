@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 import RandomPepTalkGenerator from "../sentence-generators/RandomPepTalkGenerator";
 import RandomShakespeareInsultGenerator from "../sentence-generators/RandomShakespeareInsultGenerator.js";
-import RandomSentence from "./RandomSentence.js";
+import RandomSentence from "../sentence-generators/RandomSentence.js";
 import RandomThankYouGenerator from "../sentence-generators/RandomThankYouGenerator.js";
 import RandomBirthdayWishGenerator from "../sentence-generators/RandomBirthdayWishGenerator.js";
 import RandomCongratulationsGenerator from "../sentence-generators/RandomCongratulationsGenerator.js";
