@@ -23,3 +23,7 @@ _Random sentence generator_
 -Punctuation doesn't always work well
 
 -Shakespeare insults aren't really insults
+
+-App is too tall
+
+-App is too wide
