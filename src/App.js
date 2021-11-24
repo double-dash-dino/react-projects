@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import RandomQuoteApp from "./components/apps/random-quote-app.js";
 import DrumMachine from "./components/apps/drum-machine.js";
 import RandomSentenceGenerator from "./components/apps/random-sentence-generator.js";
+import NavBar from "./components/UI/NavBar";
 
 function App() {
   const [displayApp, setDisplayApp] = useState("");
@@ -23,6 +24,7 @@ function App() {
   };
   return (
     <div className="App">
+      <NavBar />
       <button id="quote-app-button" onClick={clickHandlerQuoteApp}>
         Random quote app
       </button>
