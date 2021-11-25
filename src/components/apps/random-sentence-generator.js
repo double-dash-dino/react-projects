@@ -20,7 +20,7 @@ const RandomSentenceGenerator = (props) => {
   };
 
   return (
-    <div className="App">
+    <div className="random-sentence-app">
       <ClearButton onClearApp={clearApp} />
       <h2>What do you need?</h2>
       <br />

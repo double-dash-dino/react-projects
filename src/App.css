@@ -1,4 +1,10 @@
-.App {
+.main-page {
+  display: flex;
+  flex-direction: column;
+  background-color: #282c34;
+}
+
+.apps {
   text-align: center;
   background-color: #282c34;
   min-height: 100vh;
