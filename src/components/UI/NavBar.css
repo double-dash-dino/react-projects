@@ -3,9 +3,9 @@
   align-self: flex-start;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   min-width: 20vw;
-  position: fixed;
+  /* position: fixed; */
   background-color: #282c34;
 }
 

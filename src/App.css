@@ -1,5 +1,6 @@
 .main-page {
   display: flex;
+  flex-direction: row;
   background-color: #282c34;
 }
 
