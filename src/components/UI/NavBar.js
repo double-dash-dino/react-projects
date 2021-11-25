@@ -1,5 +1,7 @@
 import "./NavBar.css";
 import React, { useState } from "react";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faExpandAlt, faCompressAlt } from "@fortawesome/free-solid-svg-icons";
 
 const NavBar = () => {
   const [displayMenu, setDisplayMenu] = useState(false);
@@ -8,16 +10,24 @@ const NavBar = () => {
   };
   return (
     <div className="navigation-bar" id="navigation-bar">
-      <i className="fa-solid fa-bars"></i>
-      <button
-        className="nav-button fa-solid fa-bars"
-        id="menu-button"
-        onClick={menuClickHandler}
-      >
-        <i className="fa-solid fa-bars"></i>
-      </button>
+      {!displayMenu && (
+        <button
+          className="nav-button menu-button"
+          id="menu-button"
+          onClick={menuClickHandler}
+        >
+          <i className="fa fa-bars fa-3x"></i>
+        </button>
+      )}
       {displayMenu && (
-        <div>
+        <div className="opened-bar">
+          <button
+            className="nav-button menu-button"
+            id="menu-button"
+            onClick={menuClickHandler}
+          >
+            <i className="fa fa-bars fa-3x"></i>
+          </button>
           <button className="nav-button" id="projects-button">
             Projects
           </button>
