@@ -22,6 +22,14 @@
   font-size: 1em;
 }
 
+.project-active {
+  display: none;
+}
+
+#project-button:hover + .project-active {
+  display: fixed;
+}
+
 .opened-bar {
   display: flex;
   flex-direction: column;

@@ -6,6 +6,10 @@ const NavBar = () => {
   const menuClickHandler = () => {
     setDisplayMenu(!displayMenu);
   };
+
+  const displayProjectList = () => {
+    return <button className="nav-button">Project 1</button>;
+  };
   return (
     <div className="navigation-bar" id="navigation-bar">
       {!displayMenu && (
@@ -26,7 +30,11 @@ const NavBar = () => {
           >
             <i className="fa fa-bars fa-3x"></i>
           </button>
-          <button className="nav-button" id="projects-button">
+          <button
+            className="nav-button"
+            id="projects-button"
+            onMouseOver={displayProjectList}
+          >
             Projects
           </button>
           <button className="nav-button" id="about-button">
