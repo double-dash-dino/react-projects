@@ -1,0 +1,15 @@
+.navigation-bar {
+  font-family: FontAwesome;
+}
+
+.nav-button {
+  border: none;
+  color: white;
+  background-color: transparent;
+}
+
+.fa-solid {
+  border: none;
+  color: white;
+  background-color: transparent;
+}

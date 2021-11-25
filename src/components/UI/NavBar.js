@@ -8,12 +8,13 @@ const NavBar = () => {
   };
   return (
     <div className="navigation-bar" id="navigation-bar">
+      <i className="fa-solid fa-bars"></i>
       <button
-        className="nav-button"
+        className="nav-button fa-solid fa-bars"
         id="menu-button"
         onClick={menuClickHandler}
       >
-        Menu
+        <i className="fa-solid fa-bars"></i>
       </button>
       {displayMenu && (
         <div>
