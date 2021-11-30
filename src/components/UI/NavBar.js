@@ -3,13 +3,17 @@ import React, { useState } from "react";
 
 const NavBar = () => {
   const [displayMenu, setDisplayMenu] = useState(false);
+  const [displayProjects, setDisplayProjects] = useState(false);
   const menuClickHandler = () => {
     setDisplayMenu(!displayMenu);
   };
 
   const displayProjectList = () => {
-    return <button className="nav-button">Project 1</button>;
+    setDisplayProjects(!displayProjects);
   };
+
+  console.log(document.getElementById("projects-button"));
+
   return (
     <div className="navigation-bar" id="navigation-bar">
       {!displayMenu && (
@@ -33,16 +37,21 @@ const NavBar = () => {
           <button
             className="nav-button"
             id="projects-button"
-            onMouseOver={displayProjectList}
+            onClick={displayProjectList}
           >
             Projects
           </button>
-          <button className="nav-button" id="about-button">
-            About
-          </button>
-          <button className="nav-button" id="contact-button">
-            Contact
-          </button>{" "}
+          {displayProjects && <button className="nav-button">Project 1</button>}
+          {!displayProjects && (
+            <>
+              <button className="nav-button" id="about-button">
+                About
+              </button>
+              <button className="nav-button" id="contact-button">
+                Contact
+              </button>{" "}
+            </>
+          )}
         </div>
       )}
     </div>
