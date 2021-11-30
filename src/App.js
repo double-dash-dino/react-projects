@@ -26,19 +26,6 @@ function App() {
     <div className="main-page">
       <NavBar />
       <div className="apps">
-        <button id="quote-app-button" onClick={clickHandlerQuoteApp}>
-          Random quote app
-        </button>
-        <button id="drum-machine-button" onClick={clickHandlerDrumMachine}>
-          Drum machine
-        </button>
-        <button
-          id="random-sentence-generator-button"
-          onClick={clickHandlerRandomSentenceGenerator}
-        >
-          Random sentence generator
-        </button>
-
         {displayApp === "quoteApp" && <RandomQuoteApp onClearApp={clearApp} />}
         {displayApp === "drumMachine" && <DrumMachine onClearApp={clearApp} />}
         {displayApp === "randomSentenceGenerator" && (

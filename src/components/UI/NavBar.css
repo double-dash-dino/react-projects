@@ -22,6 +22,13 @@
   font-size: 1em;
 }
 
+.back-button {
+  padding: 30px 0px 50px 0px;
+  background-color: #282c34;
+  border: none;
+  color: white;
+}
+
 .project-active {
   display: none;
 }
@@ -35,7 +42,7 @@
   flex-direction: column;
 }
 
-.fa.fa-bars {
+.fa {
   text-decoration: none;
   font-style: none;
 }
