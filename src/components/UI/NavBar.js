@@ -1,9 +1,10 @@
 import "./NavBar.css";
 import React, { useState } from "react";
 
-const NavBar = () => {
+const NavBar = (props) => {
   const [displayMenu, setDisplayMenu] = useState(false);
   const [displayProjects, setDisplayProjects] = useState(false);
+  const [projectToDisplay, setProjetToDisplay] = useState("");
 
   const menuClickHandler = () => {
     setDisplayMenu(!displayMenu);
@@ -13,11 +14,17 @@ const NavBar = () => {
     setDisplayProjects(!displayProjects);
   };
 
-  const clickHandlerQuoteApp = () => {};
+  const clickHandlerQuoteApp = (props) => {
+    props.onSelectApp("randomQuoteApp");
+  };
 
-  const clickHandlerDrumMachine = () => {};
+  const clickHandlerDrumMachine = () => {
+    setProjetToDisplay("drumMachine");
+  };
 
-  const clickHandlerRandomSentenceGenerator = () => {};
+  const clickHandlerRandomSentenceGenerator = () => {
+    setProjetToDisplay("randomSentenceGenerator");
+  };
 
   console.log(document.getElementById("projects-button"));
 

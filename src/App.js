@@ -7,6 +7,9 @@ import NavBar from "./components/UI/NavBar";
 
 function App() {
   const [displayApp, setDisplayApp] = useState("");
+  const selectAppHandler = (appName) => {
+    setDisplayApp(appName);
+  };
   const clickHandlerQuoteApp = () => {
     setDisplayApp("quoteApp");
   };
@@ -24,7 +27,7 @@ function App() {
   };
   return (
     <div className="main-page">
-      <NavBar />
+      <NavBar onSelectApp={selectAppHandler} />
       <div className="apps">
         {displayApp === "quoteApp" && <RandomQuoteApp onClearApp={clearApp} />}
         {displayApp === "drumMachine" && <DrumMachine onClearApp={clearApp} />}
