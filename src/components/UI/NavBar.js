@@ -14,8 +14,8 @@ const NavBar = (props) => {
     setDisplayProjects(!displayProjects);
   };
 
-  const clickHandlerQuoteApp = (props) => {
-    props.onSelectApp("randomQuoteApp");
+  const clickHandlerQuoteApp = () => {
+    props.onSelectApp("quoteApp");
   };
 
   const clickHandlerDrumMachine = () => {
