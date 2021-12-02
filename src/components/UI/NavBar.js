@@ -4,7 +4,6 @@ import React, { useState } from "react";
 const NavBar = (props) => {
   const [displayMenu, setDisplayMenu] = useState(false);
   const [displayProjects, setDisplayProjects] = useState(false);
-  const [projectToDisplay, setProjetToDisplay] = useState("");
 
   const menuClickHandler = () => {
     setDisplayMenu(!displayMenu);
@@ -19,11 +18,11 @@ const NavBar = (props) => {
   };
 
   const clickHandlerDrumMachine = () => {
-    setProjetToDisplay("drumMachine");
+    props.onSelectApp("drumMachine");
   };
 
   const clickHandlerRandomSentenceGenerator = () => {
-    setProjetToDisplay("randomSentenceGenerator");
+    props.onSelectApp("randomSentenceGenerator");
   };
 
   console.log(document.getElementById("projects-button"));

@@ -10,17 +10,6 @@ function App() {
   const selectAppHandler = (appName) => {
     setDisplayApp(appName);
   };
-  const clickHandlerQuoteApp = () => {
-    setDisplayApp("quoteApp");
-  };
-
-  const clickHandlerDrumMachine = () => {
-    setDisplayApp("drumMachine");
-  };
-
-  const clickHandlerRandomSentenceGenerator = () => {
-    setDisplayApp("randomSentenceGenerator");
-  };
 
   const clearApp = () => {
     setDisplayApp("");
