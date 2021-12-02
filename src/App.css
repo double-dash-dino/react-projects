@@ -1,11 +1,22 @@
-.App {
+.main-page {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  background-color: #282c34;
+}
+
+.apps {
   text-align: center;
   background-color: #282c34;
   min-height: 100vh;
+  grid-column: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+button:hover {
+  cursor: pointer;
 }

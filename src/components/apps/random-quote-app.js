@@ -58,7 +58,7 @@ const RandomQuoteApp = (props) => {
   };
 
   return (
-    <div className="main-page" style={backgroundStyle}>
+    <div className="random-quote-app" style={backgroundStyle}>
       <ClearButton onClearApp={clearApp} />
       <div className="quote-card" style={fontStyle}>
         <div className="quote-box">

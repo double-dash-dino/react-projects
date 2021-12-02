@@ -1,7 +1,6 @@
 .App {
   text-align: center;
   background-color: #363636;
-  /* min-height: 100vh; */
   min-width: 100vw;
   display: flex;
   align-items: center;
