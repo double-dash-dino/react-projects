@@ -8,15 +8,13 @@
   text-align: center;
   background-color: #282c34;
   min-height: 100vh;
-  grid-column: 2 / span 1;
-  /* width: 80vw; */
+  grid-column: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  /* padding-right: 10%; */
 }
 
 button:hover {
