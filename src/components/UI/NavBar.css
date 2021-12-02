@@ -1,9 +1,11 @@
 .navigation-bar {
   font-family: FontAwesome;
+  position: fixed;
   align-self: flex-start;
   display: flex;
   flex-direction: column;
   min-width: 20vw;
+  height: 100vh;
   background-color: #282c34;
 }
 
