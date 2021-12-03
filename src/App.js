@@ -6,21 +6,21 @@ import RandomSentenceGenerator from "./components/apps/random-sentence-generator
 import NavBar from "./components/UI/NavBar";
 
 function App() {
-  const [displayApp, setDisplayApp] = useState("");
+  const [onDisplay, setOnDisplay] = useState("");
   const selectAppHandler = (appName) => {
-    setDisplayApp(appName);
+    setOnDisplay(appName);
   };
 
   const clearApp = () => {
-    setDisplayApp("");
+    setOnDisplay("");
   };
   return (
     <div className="main-page">
       <NavBar onSelectApp={selectAppHandler} />
-      <div className="apps">
-        {displayApp === "quoteApp" && <RandomQuoteApp onClearApp={clearApp} />}
-        {displayApp === "drumMachine" && <DrumMachine onClearApp={clearApp} />}
-        {displayApp === "randomSentenceGenerator" && (
+      <div className="onDisplay">
+        {onDisplay === "quoteApp" && <RandomQuoteApp onClearApp={clearApp} />}
+        {onDisplay === "drumMachine" && <DrumMachine onClearApp={clearApp} />}
+        {onDisplay === "randomSentenceGenerator" && (
           <RandomSentenceGenerator onClearApp={clearApp} />
         )}
       </div>
