@@ -1,6 +1,6 @@
 import "./contact-page.css";
 
-const contactPage = () => {
+const ContactPage = () => {
   return (
     <div className="contact-page">
       <h1>Contact me</h1>
@@ -15,4 +15,4 @@ const contactPage = () => {
   );
 };
 
-export default contactPage;
+export default ContactPage;
