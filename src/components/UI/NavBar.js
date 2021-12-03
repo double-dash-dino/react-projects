@@ -25,6 +25,10 @@ const NavBar = (props) => {
     props.onSelectApp("randomSentenceGenerator");
   };
 
+  const clickHandlerContact = () => {
+    props.onSelectApp("contact");
+  };
+
   console.log(document.getElementById("projects-button"));
 
   return (
