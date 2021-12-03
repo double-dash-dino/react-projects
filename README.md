@@ -27,3 +27,10 @@ _Random sentence generator_
 -App is too tall
 
 -App is too wide
+
+
+_Navigation_
+
+-Refactor the state-only keep 1
+
+-Animate the bar depending on the choice
