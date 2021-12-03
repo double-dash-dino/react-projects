@@ -9,7 +9,7 @@ const NavBar = (props) => {
     setDisplayMenu(!displayMenu);
   };
 
-  const displayProjectList = () => {
+  const clickHandlerProjectList = () => {
     setDisplayProjects(!displayProjects);
   };
 
@@ -50,7 +50,7 @@ const NavBar = (props) => {
           <button
             className="nav-button"
             id="projects-button"
-            onClick={displayProjectList}
+            onClick={clickHandlerProjectList}
           >
             Projects
           </button>
@@ -68,7 +68,7 @@ const NavBar = (props) => {
               >
                 Random sentence generator
               </button>
-              <button className="back-button" onClick={displayProjectList}>
+              <button className="back-button" onClick={clickHandlerProjectList}>
                 <i className="fa fa-undo fa-3x"></i>
               </button>
             </>
@@ -78,7 +78,11 @@ const NavBar = (props) => {
               <button className="nav-button" id="about-button">
                 About
               </button>
-              <button className="nav-button" id="contact-button">
+              <button
+                className="nav-button"
+                id="contact-button"
+                onClick={clickHandlerContact}
+              >
                 Contact
               </button>{" "}
             </>
