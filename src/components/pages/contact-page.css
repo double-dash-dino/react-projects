@@ -1,2 +1,11 @@
 .contact-links {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-button {
+  border: none;
+  color: white;
+  background-color: transparent;
+  min-height: 3em;
 }

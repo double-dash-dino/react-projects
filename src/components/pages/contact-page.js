@@ -5,14 +5,14 @@ const ContactPage = () => {
     <div className="contact-page">
       <h1>Contact me</h1>
       <div className="contact-links">
-        <button>
-          <i className="fa fa-linkedin"></i>
+        <button className="contact-button">
+          <i className="fa fa-linkedin fa-2x"></i>
         </button>
-        <button>
-          <i className="fa fa-github"></i>
+        <button className="contact-button">
+          <i className="fa fa-github fa-2x"></i>
         </button>
-        <button>
-          <i className="fa fa-envelope"></i>
+        <button className="contact-button">
+          <i className="fa fa-envelope fa-2x"></i>
         </button>
       </div>
     </div>
