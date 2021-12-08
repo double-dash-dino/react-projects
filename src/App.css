@@ -1,6 +1,11 @@
 .main-page {
+  min-height: 100vh;
   display: grid;
   grid-template-columns: 20% 80%;
+  background-color: #282c34;
+}
+
+body {
   background-color: #282c34;
 }
 
