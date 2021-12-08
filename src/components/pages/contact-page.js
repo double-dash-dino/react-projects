@@ -5,11 +5,15 @@ const ContactPage = () => {
     <div className="contact-page">
       <h1>Contact me</h1>
       <div className="contact-links">
-        <ul>
-          <li>LinkedIn</li>
-          <li>Github</li>
-          <li>Polywork</li>
-        </ul>
+        <button>
+          <i className="fa fa-linkedin"></i>
+        </button>
+        <button>
+          <i className="fa fa-github"></i>
+        </button>
+        <button>
+          <i className="fa fa-envelope"></i>
+        </button>
       </div>
     </div>
   );
