@@ -16,16 +16,11 @@ _Random quote app_
 
 _Drum machine_
 
--App is too tall (look at the differences in the className App and className main-page)
-
--Sounds take too long to reset inbetween plays
-
 _Random sentence generator_
 
 -Punctuation doesn't always work well
 
 -Shakespeare insults aren't really insults
-
 
 _Navigation_
 
