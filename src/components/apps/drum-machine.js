@@ -57,49 +57,65 @@ const DrumMachine = (props) => {
 
   const clickHandlerQ = () => {
     setActiveKey("q");
-    document.getElementById("hi-hat-audio").play();
+    let audio = document.getElementById("hi-hat-audio");
+    audio.currentTime = 0;
+    audio.play();
   };
 
   const clickHandlerW = () => {
     setActiveKey("w");
-    document.getElementById("snare-drum-audio").play();
+    let audio = document.getElementById("snare-drum-audio");
+    audio.currentTime = 0;
+    audio.play();
   };
 
   const clickHandlerE = () => {
     setActiveKey("e");
-
-    document.getElementById("kick-drum-audio").play();
+    let audio = document.getElementById("kick-drum-audio");
+    audio.currentTime = 0;
+    audio.play();
   };
 
   const clickHandlerA = () => {
     setActiveKey("a");
-
-    document.getElementById("tom-01-audio").play();
+    let audio = document.getElementById("tom-01-audio");
+    audio.currentTime = 0;
+    audio.play();
   };
 
   const clickHandlerS = () => {
     setActiveKey("s");
-    document.getElementById("tom-02-audio").play();
+    let audio = document.getElementById("tom-02-audio");
+    audio.currentTime = 0;
+    audio.play();
   };
 
   const clickHandlerD = () => {
     setActiveKey("d");
-    document.getElementById("tom-03-audio").play();
+    let audio = document.getElementById("tom-03-audio");
+    audio.currentTime = 0;
+    audio.play();
   };
 
   const clickHandlerZ = () => {
     setActiveKey("z");
-    document.getElementById("trash-cymbal-audio").play();
+    let audio = document.getElementById("trash-cymbal-audio");
+    audio.currentTime = 0;
+    audio.play();
   };
 
   const clickHandlerX = () => {
     setActiveKey("x");
-    document.getElementById("crash-cymbal-audio").play();
+    let audio = document.getElementById("crash-cymbal-audio");
+    audio.currentTime = 0;
+    audio.play();
   };
 
   const clickHandlerC = () => {
     setActiveKey("c");
-    document.getElementById("cow-bell-audio").play();
+    let audio = document.getElementById("cow-bell-audio");
+    audio.currentTime = 0;
+    audio.play();
   };
 
   const instrumentName = (key) => {
