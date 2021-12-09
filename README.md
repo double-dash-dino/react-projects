@@ -8,6 +8,8 @@ _All apps_
 
 -Re-work components folder structure
 
+-On hover, on firefox, buttons are almost invisible
+
 _Random quote app_
 
 -Copy button currently expands the bottom of the card by a few pxs, must get rid
@@ -23,10 +25,6 @@ _Random sentence generator_
 -Punctuation doesn't always work well
 
 -Shakespeare insults aren't really insults
-
--App is too tall
-
--App is too wide
 
 
 _Navigation_
