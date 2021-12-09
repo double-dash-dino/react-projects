@@ -132,7 +132,7 @@ const DrumMachine = (props) => {
   };
 
   return (
-    <div className="App">
+    <div className="drum-machine">
       <ClearButton onClearApp={clearApp} />
       <div id="drum-machine" className="drum-card">
         <div className="card-header">Make some noise!</div>
