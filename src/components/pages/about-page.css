@@ -1,0 +1,21 @@
+.about-sections {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 50% 50%;
+}
+
+.section__work {
+  grid-column: 1;
+  column-span: 2;
+}
+
+.section__education {
+  grid-column: 2;
+  column-span: 3;
+}
+
+.section__programming {
+}
+
+.section__personal-interests {
+}
