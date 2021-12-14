@@ -33,6 +33,10 @@ const NavBar = (props) => {
     props.onSelectApp("contact");
   };
 
+  const clickHandlerAbout = () => {
+    props.onSelectApp("about");
+  };
+
   return (
     <div className="navigation-bar" id="navigation-bar">
       {!displayMenu && (
@@ -84,7 +88,11 @@ const NavBar = (props) => {
           )}
           {!displayProjects && (
             <>
-              <button className="nav-button" id="about-button">
+              <button
+                className="nav-button"
+                id="about-button"
+                onClick={clickHandlerAbout}
+              >
                 About
               </button>
               <button

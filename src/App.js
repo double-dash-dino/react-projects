@@ -6,6 +6,7 @@ import RandomSentenceGenerator from "./components/apps/random-sentence-generator
 import NavBar from "./components/UI/NavBar";
 import ContactPage from "./components/pages/contact-page";
 import StudyTimer from "./components/apps/study-timer";
+import AboutPage from "./components/pages/about-page.js";
 
 function App() {
   const [onDisplay, setOnDisplay] = useState("");
@@ -27,6 +28,7 @@ function App() {
         )}
         {onDisplay === "studyTimer" && <StudyTimer onClearApp={clearApp} />}
         {onDisplay === "contact" && <ContactPage />}
+        {onDisplay === "about" && <AboutPage />}
       </div>
     </div>
   );
