@@ -1,29 +1,15 @@
 .about-sections {
   display: grid;
   grid-template-columns: 50% 50%;
-  grid-template-rows: 50% 50%;
+  /* grid-gap: 10px; */
 }
 
-.section__work {
-  min-width: 50%;
-  min-height: 4em;
-}
-
-.section__work__title {
+.section-title {
   padding-bottom: 10px;
+  min-width: 12em;
 }
 
-.section__education {
-  min-width: 50%;
-  min-height: 4em;
-}
-
-.section__programming {
-  min-width: 50%;
-  min-height: 4em;
-}
-
-.section__personal-interests {
-  min-width: 50%;
+.section-body {
+  padding: 20px 0px 30px 0px;
   min-height: 4em;
 }
