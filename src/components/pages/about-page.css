@@ -5,17 +5,25 @@
 }
 
 .section__work {
-  grid-column: 1;
-  column-span: 2;
+  min-width: 50%;
+  min-height: 4em;
+}
+
+.section__work__title {
+  padding-bottom: 10px;
 }
 
 .section__education {
-  grid-column: 2;
-  column-span: 3;
+  min-width: 50%;
+  min-height: 4em;
 }
 
 .section__programming {
+  min-width: 50%;
+  min-height: 4em;
 }
 
 .section__personal-interests {
+  min-width: 50%;
+  min-height: 4em;
 }
