@@ -18,21 +18,6 @@ const AboutPage = () => {
     }
   };
 
-  // const addExpenseHandler = (expense) => {
-  //   setExpenses((prevExpenses) => {
-  //     return [expense, ...prevExpenses];
-  //   });
-  // };
-  //   // let index = toUnfurl.indexOf("workSection");
-  // console.log("hi");
-  //   // let newArr = toUnfurl.splice(index, 1);
-  //   // setToUnfurl(newArr);
-  // } else {
-  //   let newArr = toUnfurl.push("workSection");
-  //   setToUnfurl(newArr);
-  // }
-  console.log(toUnfurl, toUnfurl.length, toUnfurl.includes("bla"));
-
   return (
     <div className="about-page">
       <h1>About me</h1>
