@@ -14,8 +14,22 @@ const StudyTimer = (props) => {
           <h1>Study timer</h1>
         </div>
         <div className="timer-settings">
-          <div className="break-length-setting">Break length</div>
-          <div className="session-length-setting">Session length</div>
+          <div className="timer-setting">
+            <div className="setting-title">Break length</div>
+            <div className="setting-controls">
+              <button>+</button>
+              <p>5</p>
+              <button>-</button>
+            </div>
+          </div>
+          <div className="timer-setting">
+            <div className="setting-title">Session length</div>
+            <div className="setting-controls">
+              <button>+</button>
+              <p>5</p>
+              <button>-</button>
+            </div>
+          </div>
         </div>
         <div className="timer-countdown">
           Session
