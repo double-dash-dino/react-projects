@@ -1,0 +1,12 @@
+.study-timer {
+  background-color: teal;
+  border-radius: 10px;
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timer-settings {
+  display: flex;
+}
