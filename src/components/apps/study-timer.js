@@ -9,6 +9,7 @@ const StudyTimer = (props) => {
 
   const [breakLength, setBreakLength] = useState(5);
   const [sessionLength, setSessionLength] = useState(25);
+  const [timer, setTimer] = useState(10);
 
   const breakLengthHandler = (event) => {
     if (event.target.id === "break-length-down" && breakLength > 0) {
@@ -24,6 +25,10 @@ const StudyTimer = (props) => {
     } else if (event.target.id === "session-length-up") {
       setSessionLength(sessionLength + 1);
     }
+  };
+
+  const timerClickHandler = () => {
+    setInterval(setTimer(timer - 1), 1000);
   };
 
   return (
@@ -63,11 +68,13 @@ const StudyTimer = (props) => {
           <h2>
             Session
             <br />
-            {breakLength + sessionLength}
+            {timer}
           </h2>
         </div>
         <div className="timer-controls">
-          <button className="timer-control">Start / Pause</button>
+          <button className="timer-control" onClick={timerClickHandler}>
+            Start / Pause
+          </button>
           <button className="timer-control">Reset</button>
         </div>
       </div>

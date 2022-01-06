@@ -33,8 +33,6 @@ const NavBar = (props) => {
     props.onSelectApp("contact");
   };
 
-  console.log(document.getElementById("projects-button"));
-
   return (
     <div className="navigation-bar" id="navigation-bar">
       {!displayMenu && (
