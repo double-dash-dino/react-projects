@@ -11,17 +11,17 @@ const StudyTimer = (props) => {
   const [sessionLength, setSessionLength] = useState(25);
 
   const breakLengthHandler = (event) => {
-    if (event.target.id == "break-length-down" && breakLength > 0) {
+    if (event.target.id === "break-length-down" && breakLength > 0) {
       setBreakLength(breakLength - 1);
-    } else if (event.target.id == "break-length-up") {
+    } else if (event.target.id === "break-length-up") {
       setBreakLength(breakLength + 1);
     }
   };
 
   const sessionLengthHandler = (event) => {
-    if (event.target.id == "session-length-down") {
+    if (event.target.id === "session-length-down") {
       setSessionLength(sessionLength - 1);
-    } else if (event.target.id == "session-length-up") {
+    } else if (event.target.id === "session-length-up") {
       setSessionLength(sessionLength + 1);
     }
   };
