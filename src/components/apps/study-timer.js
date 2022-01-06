@@ -6,6 +6,20 @@ const StudyTimer = (props) => {
   const clearApp = () => {
     props.onClearApp();
   };
+
+  const [breakLength, setBreakLength] = useState(5);
+  const [sessionLength, setSessionLength] = useState(25);
+
+  const breakLengthDownHandler = () => {
+    if (breakLength > 0) {
+      setBreakLength(breakLength - 1);
+    }
+  };
+
+  const breakLengthUpHandler = () => {
+    setBreakLength(breakLength + 1);
+  };
+
   return (
     <div className="study-timer">
       <ClearButton onClearApp={clearApp} />
@@ -17,16 +31,16 @@ const StudyTimer = (props) => {
           <div className="timer-setting">
             <div className="setting-title">Break length</div>
             <div className="setting-controls">
-              <button>+</button>
-              <p>5</p>
-              <button>-</button>
+              <button onClick={breakLengthDownHandler}>-</button>
+              <p>{breakLength}</p>
+              <button onClick={breakLengthUpHandler}>+</button>
             </div>
           </div>
           <div className="timer-setting">
             <div className="setting-title">Session length</div>
             <div className="setting-controls">
               <button>+</button>
-              <p>5</p>
+              <p>{sessionLength}</p>
               <button>-</button>
             </div>
           </div>
