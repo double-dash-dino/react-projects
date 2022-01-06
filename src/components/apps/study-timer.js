@@ -20,6 +20,14 @@ const StudyTimer = (props) => {
     setBreakLength(breakLength + 1);
   };
 
+  const sessionLengthHandler = (event) => {
+    if (event.target.id == "session-length-down") {
+      setSessionLength(sessionLength - 1);
+    } else if (event.target.id == "session-length-up") {
+      setSessionLength(sessionLength + 1);
+    }
+  };
+
   return (
     <div className="study-timer">
       <ClearButton onClearApp={clearApp} />
@@ -39,9 +47,13 @@ const StudyTimer = (props) => {
           <div className="timer-setting">
             <div className="setting-title">Session length</div>
             <div className="setting-controls">
-              <button>+</button>
+              <button id="session-length-down" onClick={sessionLengthHandler}>
+                -
+              </button>
               <p>{sessionLength}</p>
-              <button>-</button>
+              <button id="session-length-up" onClick={sessionLengthHandler}>
+                +
+              </button>
             </div>
           </div>
         </div>
