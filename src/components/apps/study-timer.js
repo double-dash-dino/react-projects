@@ -11,7 +11,7 @@ const StudyTimer = (props) => {
       <ClearButton onClearApp={clearApp} />
       <div className="timer-box">
         <div className="timer-title">
-          <h1>Study timer</h1>
+          <h3>Study timer</h3>
         </div>
         <div className="timer-settings">
           <div className="timer-setting">
@@ -32,9 +32,11 @@ const StudyTimer = (props) => {
           </div>
         </div>
         <div className="timer-countdown">
-          Session
-          <br />
-          25:00
+          <h2>
+            Session
+            <br />
+            25:00
+          </h2>
         </div>
         <div className="timer-controls">
           <button className="timer-control">Start / Pause</button>
