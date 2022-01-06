@@ -10,14 +10,12 @@ const StudyTimer = (props) => {
   const [breakLength, setBreakLength] = useState(5);
   const [sessionLength, setSessionLength] = useState(25);
 
-  const breakLengthDownHandler = () => {
-    if (breakLength > 0) {
+  const breakLengthHandler = (event) => {
+    if (event.target.id == "break-length-down" && breakLength > 0) {
       setBreakLength(breakLength - 1);
+    } else if (event.target.id == "break-length-up") {
+      setBreakLength(breakLength + 1);
     }
-  };
-
-  const breakLengthUpHandler = () => {
-    setBreakLength(breakLength + 1);
   };
 
   const sessionLengthHandler = (event) => {
@@ -39,9 +37,13 @@ const StudyTimer = (props) => {
           <div className="timer-setting">
             <div className="setting-title">Break length</div>
             <div className="setting-controls">
-              <button onClick={breakLengthDownHandler}>-</button>
+              <button id="break-length-down" onClick={breakLengthHandler}>
+                -
+              </button>
               <p>{breakLength}</p>
-              <button onClick={breakLengthUpHandler}>+</button>
+              <button id="break-length-up" onClick={breakLengthHandler}>
+                +
+              </button>
             </div>
           </div>
           <div className="timer-setting">
@@ -61,7 +63,7 @@ const StudyTimer = (props) => {
           <h2>
             Session
             <br />
-            25:00
+            {breakLength + sessionLength}
           </h2>
         </div>
         <div className="timer-controls">
