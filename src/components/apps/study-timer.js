@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./study-timer.css";
 import ClearButton from "../UI/ClearButton";
 
@@ -9,26 +9,39 @@ const StudyTimer = (props) => {
 
   const [breakLength, setBreakLength] = useState(5);
   const [sessionLength, setSessionLength] = useState(25);
-  const [timer, setTimer] = useState(10);
+  const [timer, setTimer] = useState(sessionLength);
+  const [timerGoing, setTimerGoing] = useState(false);
 
   const breakLengthHandler = (event) => {
     if (event.target.id === "break-length-down" && breakLength > 0) {
       setBreakLength(breakLength - 1);
-    } else if (event.target.id === "break-length-up") {
+    } else if (event.target.id === "break-length-up" && sessionLength < 60) {
       setBreakLength(breakLength + 1);
     }
   };
 
   const sessionLengthHandler = (event) => {
-    if (event.target.id === "session-length-down") {
+    if (event.target.id === "session-length-down" && sessionLength > 0) {
       setSessionLength(sessionLength - 1);
-    } else if (event.target.id === "session-length-up") {
+    } else if (event.target.id === "session-length-up" && sessionLength < 60) {
       setSessionLength(sessionLength + 1);
     }
   };
-
   const timerClickHandler = () => {
-    setInterval(setTimer(timer - 1), 1000);
+    setTimerGoing(!timerGoing);
+  };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (timerGoing) {
+        setTimer(timer - 1);
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [timer, timerGoing]);
+
+  const resetClickHandler = () => {
+    setTimer(10);
+    setTimerGoing(false);
   };
 
   return (
@@ -42,11 +55,19 @@ const StudyTimer = (props) => {
           <div className="timer-setting">
             <div className="setting-title">Break length</div>
             <div className="setting-controls">
-              <button id="break-length-down" onClick={breakLengthHandler}>
+              <button
+                id="break-length-down"
+                onClick={breakLengthHandler}
+                className="length-control"
+              >
                 -
               </button>
-              <p>{breakLength}</p>
-              <button id="break-length-up" onClick={breakLengthHandler}>
+              <p className="length-field">{breakLength}</p>
+              <button
+                id="break-length-up"
+                onClick={breakLengthHandler}
+                className="length-control"
+              >
                 +
               </button>
             </div>
@@ -54,11 +75,19 @@ const StudyTimer = (props) => {
           <div className="timer-setting">
             <div className="setting-title">Session length</div>
             <div className="setting-controls">
-              <button id="session-length-down" onClick={sessionLengthHandler}>
+              <button
+                id="session-length-down"
+                onClick={sessionLengthHandler}
+                className="length-control"
+              >
                 -
               </button>
-              <p>{sessionLength}</p>
-              <button id="session-length-up" onClick={sessionLengthHandler}>
+              <p className="length-field">{sessionLength}</p>
+              <button
+                id="session-length-up"
+                onClick={sessionLengthHandler}
+                className="length-control"
+              >
                 +
               </button>
             </div>
@@ -68,14 +97,17 @@ const StudyTimer = (props) => {
           <h2>
             Session
             <br />
-            {timer}
+            {timer > 0 && timer}
+            {timer <= 0 && <p>Time is up!</p>}
           </h2>
         </div>
         <div className="timer-controls">
           <button className="timer-control" onClick={timerClickHandler}>
             Start / Pause
           </button>
-          <button className="timer-control">Reset</button>
+          <button className="timer-control" onClick={resetClickHandler}>
+            Reset
+          </button>
         </div>
       </div>
     </div>

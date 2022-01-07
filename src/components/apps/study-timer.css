@@ -26,11 +26,24 @@
   flex-direction: column;
 }
 
+.length-control {
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+  margin: 0px 5px 0px 5px;
+}
+
+.length-field {
+  min-width: 1.5em;
+}
+
 .setting-controls {
   border: solid;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 50%;
+  height: 30%;
 }
