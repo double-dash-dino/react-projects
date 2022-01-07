@@ -21,15 +21,17 @@
 }
 
 .timer-setting {
-  border: solid;
+  /* border: solid; */
   display: flex;
   flex-direction: column;
 }
 
 .length-control {
+  height: 2em;
+  width: 2em;
   background-color: transparent;
   border: 2px solid white;
-  border-radius: 50%;
+  border-radius: 100%;
   color: white;
   font-weight: bold;
   margin: 0px 5px 0px 5px;
@@ -40,7 +42,7 @@
 }
 
 .setting-controls {
-  border: solid;
+  /* border: solid; */
   display: flex;
   flex-direction: row;
   justify-content: center;
