@@ -10,7 +10,6 @@
 
 .timer-box {
   width: 75%;
-  /* border: solid; */
 }
 
 .timer-settings {
@@ -22,7 +21,6 @@
 }
 
 .timer-setting {
-  /* border: solid; */
   display: flex;
   flex-direction: column;
   padding: 0px;
@@ -59,7 +57,6 @@
 
 .timer-countdown {
   padding: 0px 0px 20px 0px;
-  /* border: solid white; */
 }
 
 .timer-control {
