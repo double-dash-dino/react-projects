@@ -5,6 +5,7 @@ import DrumMachine from "./components/apps/drum-machine.js";
 import RandomSentenceGenerator from "./components/apps/random-sentence-generator.js";
 import NavBar from "./components/UI/NavBar";
 import ContactPage from "./components/pages/contact-page";
+import StudyTimer from "./components/apps/study-timer";
 
 function App() {
   const [onDisplay, setOnDisplay] = useState("");
@@ -24,6 +25,7 @@ function App() {
         {onDisplay === "randomSentenceGenerator" && (
           <RandomSentenceGenerator onClearApp={clearApp} />
         )}
+        {onDisplay === "studyTimer" && <StudyTimer onClearApp={clearApp} />}
         {onDisplay === "contact" && <ContactPage />}
       </div>
     </div>

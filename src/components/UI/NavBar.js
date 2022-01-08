@@ -25,11 +25,13 @@ const NavBar = (props) => {
     props.onSelectApp("randomSentenceGenerator");
   };
 
+  const clickHandlerStudyTimer = () => {
+    props.onSelectApp("studyTimer");
+  };
+
   const clickHandlerContact = () => {
     props.onSelectApp("contact");
   };
-
-  console.log(document.getElementById("projects-button"));
 
   return (
     <div className="navigation-bar" id="navigation-bar">
@@ -71,6 +73,9 @@ const NavBar = (props) => {
                 onClick={clickHandlerRandomSentenceGenerator}
               >
                 Random sentence generator
+              </button>
+              <button className="nav-button" onClick={clickHandlerStudyTimer}>
+                Study timer
               </button>
               <button className="back-button" onClick={clickHandlerProjectList}>
                 <i className="fa fa-undo fa-3x"></i>

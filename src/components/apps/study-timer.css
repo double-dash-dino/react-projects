@@ -1,0 +1,65 @@
+.study-timer {
+  background-color: teal;
+  border-radius: 10px;
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 30px;
+}
+
+.timer-box {
+  width: 75%;
+}
+
+.timer-settings {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.timer-setting {
+  display: flex;
+  flex-direction: column;
+  padding: 0px;
+  justify-content: flex-end;
+}
+
+.setting-controls {
+  padding: 0px 0px 0px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  max-height: 10%;
+}
+
+.setting-title {
+  padding: 0px;
+}
+
+.length-control {
+  height: 2em;
+  width: 2em;
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 100%;
+  color: white;
+  font-weight: bold;
+  margin: 0px 5px 0px 5px;
+}
+
+.length-field {
+  min-width: 1.5em;
+}
+
+.timer-countdown {
+  padding: 0px 0px 20px 0px;
+}
+
+.timer-control {
+  background-color: transparent;
+  color: white;
+  border: none;
+}
