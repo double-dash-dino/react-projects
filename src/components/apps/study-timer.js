@@ -144,7 +144,7 @@ const StudyTimer = (props) => {
               id="start-stop"
               onClick={timerClickHandler}
             >
-              <i className="fa fa-pause"></i>
+              <i className="play-pause-button fa fa-pause fa-2x"></i>
             </button>
           )}
           {!timerGoing && (
@@ -153,7 +153,7 @@ const StudyTimer = (props) => {
               id="start-stop"
               onClick={timerClickHandler}
             >
-              <i className="fa fa-play"></i>
+              <i className="play-pause-button fa fa-play fa-2x"></i>
             </button>
           )}
 
@@ -162,7 +162,7 @@ const StudyTimer = (props) => {
             id="reset"
             onClick={resetClickHandler}
           >
-            <i className="fa fa-sync"></i>
+            <i className="reset-button fa fa-undo fa-2x"></i>
           </button>
         </div>
       </div>
