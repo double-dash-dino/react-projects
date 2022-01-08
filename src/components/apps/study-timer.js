@@ -5,6 +5,7 @@
 import { useState, useEffect } from "react";
 import "./study-timer.css";
 import ClearButton from "../UI/ClearButton";
+// import FontAwesomeIcon
 
 const StudyTimer = (props) => {
   const beep = document.getElementById("beep");
@@ -62,7 +63,9 @@ const StudyTimer = (props) => {
   }, [timer, timerGoing, breakLength, sessionLength, timerType, beep]);
 
   const resetClickHandler = () => {
-    setTimer(sessionLength);
+    setSessionLength(25);
+    setBreakLength(5);
+    setTimer(25);
     setTimerGoing(false);
     setTimerType("Session");
     beep.pause();
@@ -135,19 +138,31 @@ const StudyTimer = (props) => {
           ></audio>
         </div>
         <div className="timer-controls">
-          <button
-            className="timer-control"
-            id="start-stop"
-            onClick={timerClickHandler}
-          >
-            Start / Pause
-          </button>
+          {timerGoing && (
+            <button
+              className="timer-control"
+              id="start-stop"
+              onClick={timerClickHandler}
+            >
+              <i className="fa fa-pause"></i>
+            </button>
+          )}
+          {!timerGoing && (
+            <button
+              className="timer-control"
+              id="start-stop"
+              onClick={timerClickHandler}
+            >
+              <i className="fa fa-play"></i>
+            </button>
+          )}
+
           <button
             className="timer-control"
             id="reset"
             onClick={resetClickHandler}
           >
-            Reset
+            <i className="fa fa-sync"></i>
           </button>
         </div>
       </div>
