@@ -1,7 +1,3 @@
-// todo
-// put the lengths updaters in a useEffect to help with asynchronous calls
-//
-
 import { useState, useEffect } from "react";
 import "./study-timer.css";
 import ClearButton from "../UI/ClearButton";
