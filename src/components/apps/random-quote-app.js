@@ -54,7 +54,6 @@ const RandomQuoteApp = (props) => {
   const copyQuote = () => {
     navigator.clipboard.writeText(quote + "\n-" + author);
     setCopied(true);
-    console.log(quote, author);
   };
 
   return (

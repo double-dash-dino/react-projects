@@ -31,7 +31,6 @@ const StudyTimer = (props) => {
   const breakLengthHandler = (event) => {
     if (event.target.id === "break-decrement" && breakLength > 0) {
       setBreakLength(breakLength - 1);
-      console.log(breakLength);
     } else if (event.target.id === "break-increment" && sessionLength < 60) {
       setBreakLength(breakLength + 1);
     }
@@ -52,7 +51,6 @@ const StudyTimer = (props) => {
   };
   const timerClickHandler = () => {
     if (minutes > 0) {
-      console.log("timer starts");
       setTimerGoing(!timerGoing);
     }
   };
@@ -60,16 +58,11 @@ const StudyTimer = (props) => {
     const interval = setInterval(() => {
       if (timerGoing) {
         if (seconds === 0) {
-          console.log("its zero seconds,", minutes, "minutes");
           setMinutes(minutes - 1);
           setSeconds(59);
         } else {
           setSeconds(seconds - 1);
         }
-
-        console.log("seconds:", seconds);
-
-        console.log("minutes:", minutes);
       }
       if (minutes <= 0 && seconds <= 0) {
         beep.play();
