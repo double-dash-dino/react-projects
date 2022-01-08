@@ -1,11 +1,9 @@
 // todo
 // US 8 - format mm:ss
-// US 11 - reset should reset the whole page values
 
 import { useState, useEffect } from "react";
 import "./study-timer.css";
 import ClearButton from "../UI/ClearButton";
-// import FontAwesomeIcon
 
 const StudyTimer = (props) => {
   const beep = document.getElementById("beep");
@@ -18,6 +16,14 @@ const StudyTimer = (props) => {
   const [timer, setTimer] = useState(sessionLength);
   const [timerGoing, setTimerGoing] = useState(false);
   const [timerType, setTimerType] = useState("Session");
+
+  const timeFormatter = (timeInt) => {
+    if (timeInt < 10) {
+      return "0" + timeInt + ":00";
+    } else {
+      return timeInt + ":00";
+    }
+  };
 
   const breakLengthHandler = (event) => {
     if (event.target.id === "break-decrement" && breakLength > 0) {
@@ -131,7 +137,7 @@ const StudyTimer = (props) => {
         </div>
         <div className="timer-countdown">
           <h3 id="timer-label">{timerType}</h3>
-          <h2 id="time-left">{timer}</h2>
+          <h2 id="time-left">{timeFormatter(timer)}</h2>
           <audio
             id="beep"
             src="https://react-course-assets.s3.eu-west-2.amazonaws.com/audio/beep-synth.wav"
@@ -162,7 +168,7 @@ const StudyTimer = (props) => {
             id="reset"
             onClick={resetClickHandler}
           >
-            <i className="reset-button fa fa-undo fa-2x"></i>
+            <i className="reset-button fa fa-refresh fa-2x"></i>
           </button>
         </div>
       </div>
