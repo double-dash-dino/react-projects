@@ -1,47 +1,72 @@
+// todo
+// US 8 - format mm:ss
+// US 11 - reset should reset the whole page values
+
 import { useState, useEffect } from "react";
 import "./study-timer.css";
 import ClearButton from "../UI/ClearButton";
 
 const StudyTimer = (props) => {
+  const beep = document.getElementById("beep");
   const clearApp = () => {
     props.onClearApp();
   };
 
   const [breakLength, setBreakLength] = useState(5);
-  const [sessionLength, setSessionLength] = useState(25);
+  const [sessionLength, setSessionLength] = useState(3);
   const [timer, setTimer] = useState(sessionLength);
   const [timerGoing, setTimerGoing] = useState(false);
+  const [timerType, setTimerType] = useState("Session");
 
   const breakLengthHandler = (event) => {
-    if (event.target.id === "break-length-down" && breakLength > 0) {
+    if (event.target.id === "break-decrement" && breakLength > 0) {
       setBreakLength(breakLength - 1);
-    } else if (event.target.id === "break-length-up" && sessionLength < 60) {
+    } else if (event.target.id === "break-increment" && sessionLength < 60) {
       setBreakLength(breakLength + 1);
     }
   };
 
   const sessionLengthHandler = (event) => {
-    if (event.target.id === "session-length-down" && sessionLength > 0) {
+    if (event.target.id === "session-decrement" && sessionLength > 0) {
       setSessionLength(sessionLength - 1);
-    } else if (event.target.id === "session-length-up" && sessionLength < 60) {
+    } else if (event.target.id === "session-increment" && sessionLength < 60) {
       setSessionLength(sessionLength + 1);
     }
   };
   const timerClickHandler = () => {
-    setTimerGoing(!timerGoing);
+    if (timer > 0) {
+      console.log("timer starts");
+      setTimerGoing(!timerGoing);
+    }
   };
   useEffect(() => {
     const interval = setInterval(() => {
       if (timerGoing) {
         setTimer(timer - 1);
+        console.log(timer);
+      }
+      if (timer <= 0) {
+        beep.play();
+
+        if (timerType === "Session") {
+          setTimerType("Break");
+          setTimer(breakLength);
+        }
+        if (timerType === "Break") {
+          setTimerType("Session");
+          setTimer(sessionLength);
+        }
       }
     }, 1000);
     return () => clearInterval(interval);
-  }, [timer, timerGoing]);
+  }, [timer, timerGoing, breakLength, sessionLength, timerType, beep]);
 
   const resetClickHandler = () => {
-    setTimer(10);
+    setTimer(sessionLength);
     setTimerGoing(false);
+    setTimerType("Session");
+    beep.pause();
+    beep.currentTime = 0;
   };
 
   return (
@@ -53,18 +78,22 @@ const StudyTimer = (props) => {
         </div>
         <div className="timer-settings">
           <div className="timer-setting">
-            <div className="setting-title">Break length</div>
+            <div className="setting-title" id="break-label">
+              Break length
+            </div>
             <div className="setting-controls">
               <button
-                id="break-length-down"
+                id="break-decrement"
                 onClick={breakLengthHandler}
                 className="length-control"
               >
                 -
               </button>
-              <p className="length-field">{breakLength}</p>
+              <p className="length-field" id="break-length">
+                {breakLength}
+              </p>
               <button
-                id="break-length-up"
+                id="break-increment"
                 onClick={breakLengthHandler}
                 className="length-control"
               >
@@ -73,18 +102,22 @@ const StudyTimer = (props) => {
             </div>
           </div>
           <div className="timer-setting">
-            <div className="setting-title">Session length</div>
+            <div className="setting-title" id="session-label">
+              Session length
+            </div>
             <div className="setting-controls">
               <button
-                id="session-length-down"
+                id="session-decrement"
                 onClick={sessionLengthHandler}
                 className="length-control"
               >
                 -
               </button>
-              <p className="length-field">{sessionLength}</p>
+              <p className="length-field" id="session-length">
+                {sessionLength}
+              </p>
               <button
-                id="session-length-up"
+                id="session-increment"
                 onClick={sessionLengthHandler}
                 className="length-control"
               >
@@ -94,18 +127,26 @@ const StudyTimer = (props) => {
           </div>
         </div>
         <div className="timer-countdown">
-          <h2>
-            Session
-            <br />
-            {timer > 0 && timer}
-            {timer <= 0 && <p>Time is up!</p>}
-          </h2>
+          <h3 id="timer-label">{timerType}</h3>
+          <h2 id="time-left">{timer}</h2>
+          <audio
+            id="beep"
+            src="https://react-course-assets.s3.eu-west-2.amazonaws.com/audio/beep-synth.wav"
+          ></audio>
         </div>
         <div className="timer-controls">
-          <button className="timer-control" onClick={timerClickHandler}>
+          <button
+            className="timer-control"
+            id="start-stop"
+            onClick={timerClickHandler}
+          >
             Start / Pause
           </button>
-          <button className="timer-control" onClick={resetClickHandler}>
+          <button
+            className="timer-control"
+            id="reset"
+            onClick={resetClickHandler}
+          >
             Reset
           </button>
         </div>

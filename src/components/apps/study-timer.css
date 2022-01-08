@@ -17,6 +17,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: flex-start;
   width: 100%;
 }
 
@@ -24,6 +25,21 @@
   /* border: solid; */
   display: flex;
   flex-direction: column;
+  padding: 0px;
+  justify-content: flex-end;
+}
+
+.setting-controls {
+  padding: 0px 0px 0px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  max-height: 10%;
+}
+
+.setting-title {
+  padding: 0px;
 }
 
 .length-control {
@@ -41,11 +57,7 @@
   min-width: 1.5em;
 }
 
-.setting-controls {
-  /* border: solid; */
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  height: 30%;
+.timer-countdown {
+  padding-top: 0x;
+  /* border: solid white; */
 }
