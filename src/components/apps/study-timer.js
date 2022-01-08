@@ -13,16 +13,22 @@ const StudyTimer = (props) => {
 
   const [breakLength, setBreakLength] = useState(5);
   const [sessionLength, setSessionLength] = useState(3);
-  const [timer, setTimer] = useState(sessionLength);
+  const [minutes, setMinutes] = useState(sessionLength);
+  const [seconds, setSeconds] = useState(0);
   const [timerGoing, setTimerGoing] = useState(false);
   const [timerType, setTimerType] = useState("Session");
 
-  const timeFormatter = (timeInt) => {
-    if (timeInt < 10) {
-      return "0" + timeInt + ":00";
-    } else {
-      return timeInt + ":00";
+  const timeFormatter = (minutes, seconds) => {
+    if (minutes < 10) {
+      minutes = "0" + minutes;
     }
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+    if (seconds === 60) {
+      seconds = "00";
+    }
+    return minutes + ":" + seconds;
   };
 
   const breakLengthHandler = (event) => {
@@ -41,7 +47,7 @@ const StudyTimer = (props) => {
     }
   };
   const timerClickHandler = () => {
-    if (timer > 0) {
+    if (minutes > 0) {
       console.log("timer starts");
       setTimerGoing(!timerGoing);
     }
@@ -49,33 +55,52 @@ const StudyTimer = (props) => {
   useEffect(() => {
     const interval = setInterval(() => {
       if (timerGoing) {
-        setTimer(timer - 1);
-        console.log(timer);
+        if (seconds === 0) {
+          console.log("its zero");
+          setSeconds(10);
+          setMinutes(minutes - 1);
+        } else {
+          setSeconds(seconds - 1);
+        }
+
+        console.log("seconds:", seconds);
+
+        // setMinutes(minutes - 1);
+        console.log("minutes:", minutes);
       }
-      if (timer <= 0) {
+      if (minutes <= 0 && seconds <= 0) {
         beep.play();
 
         if (timerType === "Session") {
           setTimerType("Break");
-          setTimer(breakLength);
+          setMinutes(breakLength);
         }
         if (timerType === "Break") {
           setTimerType("Session");
-          setTimer(sessionLength);
+          setMinutes(sessionLength);
         }
       }
     }, 1000);
     return () => clearInterval(interval);
-  }, [timer, timerGoing, breakLength, sessionLength, timerType, beep]);
+  }, [
+    minutes,
+    timerGoing,
+    breakLength,
+    sessionLength,
+    timerType,
+    beep,
+    seconds,
+  ]);
 
   const resetClickHandler = () => {
     setSessionLength(25);
     setBreakLength(5);
-    setTimer(25);
+    setMinutes(25);
+    setSeconds(0);
     setTimerGoing(false);
     setTimerType("Session");
-    beep.pause();
-    beep.currentTime = 0;
+    // beep.pause();
+    // beep.currentTime = 0;
   };
 
   return (
@@ -137,7 +162,7 @@ const StudyTimer = (props) => {
         </div>
         <div className="timer-countdown">
           <h3 id="timer-label">{timerType}</h3>
-          <h2 id="time-left">{timeFormatter(timer)}</h2>
+          <h2 id="time-left">{timeFormatter(minutes, seconds)}</h2>
           <audio
             id="beep"
             src="https://react-course-assets.s3.eu-west-2.amazonaws.com/audio/beep-synth.wav"
