@@ -1,5 +1,6 @@
 // todo
-// US 8 - format mm:ss
+// put the lengths updaters in a useEffect to help with asynchronous calls
+//
 
 import { useState, useEffect } from "react";
 import "./study-timer.css";
@@ -12,7 +13,7 @@ const StudyTimer = (props) => {
   };
 
   const [breakLength, setBreakLength] = useState(5);
-  const [sessionLength, setSessionLength] = useState(3);
+  const [sessionLength, setSessionLength] = useState(25);
   const [minutes, setMinutes] = useState(sessionLength);
   const [seconds, setSeconds] = useState(0);
   const [timerGoing, setTimerGoing] = useState(false);
@@ -34,6 +35,7 @@ const StudyTimer = (props) => {
   const breakLengthHandler = (event) => {
     if (event.target.id === "break-decrement" && breakLength > 0) {
       setBreakLength(breakLength - 1);
+      console.log(breakLength);
     } else if (event.target.id === "break-increment" && sessionLength < 60) {
       setBreakLength(breakLength + 1);
     }
@@ -42,8 +44,14 @@ const StudyTimer = (props) => {
   const sessionLengthHandler = (event) => {
     if (event.target.id === "session-decrement" && sessionLength > 0) {
       setSessionLength(sessionLength - 1);
+      if (!timerGoing) {
+        setMinutes(minutes - 1);
+      }
     } else if (event.target.id === "session-increment" && sessionLength < 60) {
       setSessionLength(sessionLength + 1);
+      if (!timerGoing) {
+        setMinutes(minutes + 1);
+      }
     }
   };
   const timerClickHandler = () => {
@@ -56,16 +64,15 @@ const StudyTimer = (props) => {
     const interval = setInterval(() => {
       if (timerGoing) {
         if (seconds === 0) {
-          console.log("its zero");
-          setSeconds(10);
+          console.log("its zero seconds,", minutes, "minutes");
           setMinutes(minutes - 1);
+          setSeconds(59);
         } else {
           setSeconds(seconds - 1);
         }
 
         console.log("seconds:", seconds);
 
-        // setMinutes(minutes - 1);
         console.log("minutes:", minutes);
       }
       if (minutes <= 0 && seconds <= 0) {
@@ -74,10 +81,12 @@ const StudyTimer = (props) => {
         if (timerType === "Session") {
           setTimerType("Break");
           setMinutes(breakLength);
+          setSeconds(0);
         }
         if (timerType === "Break") {
           setTimerType("Session");
           setMinutes(sessionLength);
+          setSeconds(0);
         }
       }
     }, 1000);
@@ -99,8 +108,9 @@ const StudyTimer = (props) => {
     setSeconds(0);
     setTimerGoing(false);
     setTimerType("Session");
-    // beep.pause();
-    // beep.currentTime = 0;
+    const beep = document.getElementById("beep");
+    beep.pause();
+    beep.currentTime = 0;
   };
 
   return (
