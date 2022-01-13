@@ -91,7 +91,6 @@ const StudyTimer = (props) => {
 
   useEffect(() => {
     setDynamicTime(document.getElementById("time-left").innerHTML);
-    console.log(dynamicTime);
     if (document.getElementById("time-left").innerHTML === "00:00") {
       beep.play();
     }
