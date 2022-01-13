@@ -66,8 +66,6 @@ const StudyTimer = (props) => {
         }
       }
       if (minutes <= 0 && seconds <= 0) {
-        // beep.play();
-
         if (timerType === "Session") {
           setTimerType("Break");
           setMinutes(breakLength);
@@ -93,11 +91,10 @@ const StudyTimer = (props) => {
 
   useEffect(() => {
     setDynamicTime(document.getElementById("time-left").innerHTML);
-    console.log(dynamicTime);
-    if (document.getElementById("time-left").innerHTML == "00:00") {
+    if (document.getElementById("time-left").innerHTML === "00:00") {
       beep.play();
     }
-  }, [seconds, dynamicTime]);
+  }, [seconds, dynamicTime, beep]);
 
   const resetClickHandler = () => {
     setSessionLength(25);
