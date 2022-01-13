@@ -1,0 +1,6 @@
+1. When I click the element with the id of "reset", any running timer should be stopped, 
+the value within id="break-length" should return to 5, the value within id="session-length" 
+should return to 25, and the element with id="time-left" should reset to it's default state.
+7. I should not be able to set a session or break length to > 60.
+1. When a countdown reaches zero (NOTE: timer MUST reach 00:00), a sound indicating that time is up should play.
+This should utilize an HTML5 <audio> tag and have a corresponding id="beep".
