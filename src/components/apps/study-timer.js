@@ -16,6 +16,7 @@ const StudyTimer = (props) => {
   const [seconds, setSeconds] = useState(0);
   const [timerGoing, setTimerGoing] = useState(false);
   const [timerType, setTimerType] = useState("Session");
+  const [dynamicTime, setDynamicTime] = useState(0);
 
   const timeFormatter = (minutes, seconds) => {
     if (minutes < 10) {
@@ -33,7 +34,7 @@ const StudyTimer = (props) => {
   const breakLengthHandler = (event) => {
     if (event.target.id === "break-decrement" && breakLength > 0) {
       setBreakLength(breakLength - 1);
-    } else if (event.target.id === "break-increment" && sessionLength < 60) {
+    } else if (event.target.id === "break-increment" && breakLength < 60) {
       setBreakLength(breakLength + 1);
     }
   };
@@ -67,8 +68,6 @@ const StudyTimer = (props) => {
         }
       }
       if (minutes <= 0 && seconds <= 0) {
-        beep.play();
-
         if (timerType === "Session") {
           setTimerType("Break");
           setMinutes(breakLength);
@@ -91,6 +90,13 @@ const StudyTimer = (props) => {
     beep,
     seconds,
   ]);
+
+  useEffect(() => {
+    setDynamicTime(document.getElementById("time-left").innerHTML);
+    if (document.getElementById("time-left").innerHTML === "00:00") {
+      beep.play();
+    }
+  }, [seconds, dynamicTime, beep]);
 
   const resetClickHandler = () => {
     setSessionLength(25);
