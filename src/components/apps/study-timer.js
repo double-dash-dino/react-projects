@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import "./study-timer.css";
 import ClearButton from "../UI/ClearButton";
 
+// #TODO: Investigate the behaviour of the timer, make sure it is working as intented
+
 const StudyTimer = (props) => {
   const beep = document.getElementById("beep");
   const clearApp = () => {

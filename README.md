@@ -27,3 +27,7 @@ _Navigation_
 -Refactor the state-only keep 1
 
 -Animate the bar depending on the choice
+
+_Study timer_
+
+-Investigate the behaviour to ensure it works as expected
