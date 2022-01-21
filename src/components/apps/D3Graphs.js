@@ -18,10 +18,10 @@ setGraphSelected(event.target.value)
 
     return (<div className="d3-graphs-app">
         <ClearButton onClearApp={clearApp}/>
-    Graph selector
+    <h2>Graph selector</h2>
         <label htmlFor="graphs">Pick a type of graph</label>
     <select name="graphs" className="graph-selector" onChange={selectChangeHandler} >
-        <option></option>
+        <option>Please select</option>
         <option value="bar-chart">Simple bar chart</option>
         <option value="scatterplot-graph">Scatterplot graph</option>
         <option value="heat-map">Heat map</option>
