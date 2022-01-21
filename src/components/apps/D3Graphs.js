@@ -1,6 +1,7 @@
 import "./D3Graphs.css"
 import React, {useState} from "react"
 import ClearButton from "../UI/ClearButton"
+import SimpleBarChartGDP from "../graphs/SimpleBarChartGDP.js"
 
 const D3Graphs = (props) => {
 
