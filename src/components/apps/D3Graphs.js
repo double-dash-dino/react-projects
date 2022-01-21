@@ -10,28 +10,25 @@ const clearApp=() => {
 props.onClearApp()
 }
 
-const graphPick = () => {
-    
+const selectChangeHandler=(event)=>{
+setGraphSelected(event.target.value)
 }
+
 
     return (<div className="d3-graphs-app">
         <ClearButton onClearApp={clearApp}/>
     Graph selector
-    <form>
-    <select className="graph-selector" placeholder="Select a graph" >
-        <label>Pick a type of graph</label>
+        <label htmlFor="graphs">Pick a type of graph</label>
+    <select name="graphs" className="graph-selector" onChange={selectChangeHandler} >
         <option></option>
         <option value="bar-chart">Simple bar chart</option>
         <option value="scatterplot-graph">Scatterplot graph</option>
         <option value="heat-map">Heat map</option>
         <option value="choropleth">Choropleth (density map)</option>
         <option value="treemap-diagram">Treemap diagram</option>
-        
-        
         </select>
 
-        <button onClick={graphPick}>Show me the graph!</button>
-    </form>
+{graphSelected === "bar-chart" && <SimpleBarChartGDP />}
     
     </div>)
 }
