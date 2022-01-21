@@ -13,6 +13,20 @@ const dataset = [3,5,6]
             {d3.data(dataset) }
             </script>
             bar chart here
+            <svg
+            style={{
+                height: 500,
+                width: "100%",
+                marginLeft: "0px",
+                marginRight:"0px",
+            }}
+            >
+<g className="plot-area" />
+<g className="x-axis" />
+<g className="y-axis" />
+
+
+            </svg>
         </div>
     )
 }
