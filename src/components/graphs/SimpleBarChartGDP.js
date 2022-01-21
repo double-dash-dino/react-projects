@@ -8,3 +8,5 @@ const SimpleBarChartGDP = (props) => {
         </div>
     )
 }
+
+export default SimpleBarChartGDP;
