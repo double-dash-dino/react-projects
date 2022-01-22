@@ -16,17 +16,40 @@ const SimpleBarChartGDP = (props) => {
   }
 
   const generateGraph = (dataset) => {
+    const height = d3.max(dataset.data, (d) => d[1]) / 30 + 50;
+    const width = dataset.data.length * 3;
+    // const xScale = d3
+    //   .scaleLinear()
+    //   .domain([0, d3.max(dataset.data), (d) => d[0] * 2])
+    //   .range([0, 1000]);
+
+    // const yScale = d3
+    //   .scaleLinear()
+    //   .domain(0, [d3.max(dataset.data, (d) => d[1])])
+    //   .range([500, 0]);
+
     d3.select("svg")
+      .attr("height", height)
+      .attr("width", width)
+
       .selectAll("rect")
       .data(dataset.data)
       .enter()
       .append("rect")
       .attr("class", "chart-bar")
-      //   .attr("width", "2px")
-      .attr("height", (d) => d[1] / 10 + "px")
-      //   .attr("background-color", "black")
+      .attr("height", (d) => d[1] / 20 + "px")
       .attr("x", (d, i) => i * 3)
-      .attr("y", (d) => 500 - d[1] / 10);
+      .attr("y", (d) => height - d[1] / 30);
+
+    d3.select("svg")
+      .selectAll("text")
+      .data(dataset.data)
+      .enter()
+      .append("text")
+      .attr("class", "tooltip")
+      .attr("x", (d, i) => i * 3)
+      .attr("y", height)
+      .text("LABEL");
   };
 
   useEffect(() => {
@@ -37,7 +60,6 @@ const SimpleBarChartGDP = (props) => {
 
   return (
     <div className="simple-bar-chart">
-      bar chart here
       <svg className="svg-element">
         <g className="plot-area" />
         <g className="x-axis" />

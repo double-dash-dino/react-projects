@@ -1,17 +1,36 @@
 .simple-bar-chart {
   background-color: blanchedalmond;
-  /* color: black; */
+  color: black;
 }
 
 .svg-element {
-  height: 500px;
-  width: 100%;
   margin-left: 0px;
   margin-right: 0px;
   background-color: blue;
+  padding: 20px;
 }
 
 .chart-bar {
   fill: black;
   width: 2px;
+}
+
+.chart-bar:hover {
+  opacity: 0%;
+}
+
+.tooltip {
+  width: 40px;
+  height: 100%;
+  opacity: 0%;
+}
+
+.tooltip:hover {
+  font-size: 40px;
+  display: block;
+  width: 100px;
+  height: 100px;
+  background-color: white;
+  color: white;
+  opacity: 100%;
 }
