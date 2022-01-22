@@ -1,14 +1,31 @@
-import D3Graphs from '../apps/D3Graphs';
+
 import './SimpleBarChartGDP.css'
 import * as d3 from 'd3'
+import React, {useEffect} from 'react'
 
 
 const SimpleBarChartGDP = (props) => {
 
-const dataset = [3,5,6]
-const buildGraph = () => {
+// const dataset = [3,5,6]
+
+
+useEffect(() => {
+
 d3.select('svg')
 .attr('background-color', 'white')
+.append('h2')
+.attr("font-size", "25px")
+.text('test')
+.attr('x', 100)
+.attr('y', 100)
+.attr('color', 'white')
+.attr('background-color', 'white')
+.attr('font-size', '25px')
+})
+
+
+const buildGraph = () => {
+d3.select('svg').attr('background-color', 'white')
 // .append('h2')
 // .text('test')
 // .attr('x', 100)
