@@ -21,9 +21,10 @@ const SimpleBarChartGDP = (props) => {
       .data(dataset.data)
       .enter()
       .append("rect")
-      .attr("width", "2px")
+      .attr("class", "chart-bar")
+      //   .attr("width", "2px")
       .attr("height", (d) => d[1] / 10 + "px")
-      .attr("background-color", "black")
+      //   .attr("background-color", "black")
       .attr("x", (d, i) => i * 3)
       .attr("y", (d) => 500 - d[1] / 10);
   };

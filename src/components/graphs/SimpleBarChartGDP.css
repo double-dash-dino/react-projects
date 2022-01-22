@@ -1,6 +1,6 @@
 .simple-bar-chart {
   background-color: blanchedalmond;
-  color: black;
+  /* color: black; */
 }
 
 .svg-element {
@@ -9,4 +9,9 @@
   margin-left: 0px;
   margin-right: 0px;
   background-color: blue;
+}
+
+.chart-bar {
+  fill: black;
+  width: 2px;
 }
