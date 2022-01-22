@@ -37,16 +37,7 @@ const SimpleBarChartGDP = (props) => {
   return (
     <div className="simple-bar-chart">
       bar chart here
-      <svg
-        className="svg-element"
-        style={{
-          height: 500,
-          width: "100%",
-          marginLeft: "0px",
-          marginRight: "0px",
-          backgroundColor: "blue",
-        }}
-      >
+      <svg className="svg-element">
         <g className="plot-area" />
         <g className="x-axis" />
         <g className="y-axis" />
