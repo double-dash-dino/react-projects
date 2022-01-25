@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 
 const SimpleBarChartGDP = (props) => {
   const [datasetUS, setDatasetUS] = useState("");
+  const [chartIsBuilt, setChartIsBuilt] = useState(false);
 
   if (datasetUS === "") {
     fetch(
@@ -16,47 +17,66 @@ const SimpleBarChartGDP = (props) => {
   }
 
   const generateGraph = (dataset) => {
+    console.log("building graph");
     const height = d3.max(dataset.data, (d) => d[1]) / 30 + 50;
     const width = dataset.data.length * 3;
-    // const xScale = d3
-    //   .scaleLinear()
-    //   .domain([0, d3.max(dataset.data), (d) => d[0] * 2])
-    //   .range([0, 1000]);
 
-    // const yScale = d3
-    //   .scaleLinear()
-    //   .domain(0, [d3.max(dataset.data, (d) => d[1])])
-    //   .range([500, 0]);
+    d3.select("svg").attr("height", height).attr("width", width);
 
-    d3.select("svg")
-      .attr("height", height)
-      .attr("width", width)
+    d3.select("svg").append("g").attr("id", "bar-node");
+    d3.select("svg").append("g").attr("id", "tooltip-node");
 
+    d3.select("#bar-node")
       .selectAll("rect")
       .data(dataset.data)
       .enter()
       .append("rect")
+      .attr("id", (d, i) => "bar-" + i)
       .attr("class", "chart-bar")
       .attr("height", (d) => d[1] / 20 + "px")
       .attr("x", (d, i) => i * 3)
       .attr("y", (d) => height - d[1] / 30);
 
-    d3.select("svg")
-      .selectAll("text")
+    d3.select("#tooltip-node")
+      .selectAll("rect")
       .data(dataset.data)
       .enter()
-      .append("text")
+      .append("rect")
+      .attr("id", (d, i) => "bar-label-" + i)
       .attr("class", "tooltip")
       .attr("x", (d, i) => i * 3)
-      .attr("y", height)
-      .text("LABEL");
+      .attr("y", height / 2)
+      .attr("height", "100px")
+      .attr("width", "100px")
+      .attr("font-size", "25px")
+      .text((d, i) => i);
+
+    d3.select("#tooltip-node").selectAll("text").attr("fill", "black");
+
+    d3.select("svg")
+      .selectAll("rect")
+      .on("mouseover", (event) => {
+        let barID = event.target.id.match(/\d+/)[0];
+        console.log(barID);
+        d3.select("#bar-label-" + barID).style("opacity", "100%");
+        console.log(document.getElementById("bar-label-" + barID));
+      });
+
+    d3.select("svg")
+      .selectAll("rect")
+      .on("mouseout", (event) => {
+        let barID = event.target.id.match(/\d+/)[0];
+        d3.select("#bar-label-" + barID).style("opacity", "0%");
+      });
+
+    setChartIsBuilt(true);
   };
 
   useEffect(() => {
-    if (datasetUS !== "") {
+    if (datasetUS !== "" && !chartIsBuilt) {
       generateGraph(datasetUS);
     }
-  }, [datasetUS]);
+  }, [datasetUS, chartIsBuilt]);
 
   return (
     <div className="simple-bar-chart">
