@@ -22,8 +22,8 @@
 }
 
 .tooltip {
-  position:absolute;
-  width: 3em;
+  position:relative;
+  width: 6em;
   height: 3em;
   background-color: white;
   fill: white;
@@ -32,6 +32,7 @@
 }
 
 .tooltip-text {
+  align-self: center;
   fill: black;
   font-size: 2em;
   opacity: 0%;

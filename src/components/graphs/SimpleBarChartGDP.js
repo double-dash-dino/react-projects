@@ -52,18 +52,17 @@ const SimpleBarChartGDP = (props) => {
         .attr("class", "tooltip")
         .attr("x", i * 3)
         .attr("y", height / 2)
-        .attr("height", "100px")
-        .attr("width", "100px");
     }
 
     for (let i = 0; i < dataset.data.length; i++) {
+      let tooltipText = dataset.data[i][0]+' quarter'+'$'+dataset.data[i][1]+' Billion'
       d3.select("#data-point" + i)
         .append("text")
         .attr('id', 'data-point-text-'+i)
         .attr("class", "tooltip-text")
         .attr("x", i * 3)
         .attr("y", height / 2 + 25)
-        .text(dataset.data[i][1]);
+        .text(tooltipText);
     }
 
     d3.select("#tooltip-node").selectAll("text").attr("fill", "black");
