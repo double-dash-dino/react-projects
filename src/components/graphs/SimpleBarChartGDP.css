@@ -22,21 +22,17 @@
 }
 
 .tooltip {
-  width: 40px;
-  height: 40px;
+  position:absolute;
+  width: 3em;
+  height: 3em;
   background-color: white;
   fill: white;
   font-size: 40px;
   opacity: 0%;
 }
 
-.tooltip-hover {
-  font-size: 40px;
-  display: block;
-  width: 100px;
-  height: 100px;
-  background-color: white;
-  fill: white;
-
-  opacity: 100%;
+.tooltip-text {
+  fill: black;
+  font-size: 2em;
+  opacity: 0%;
 }
