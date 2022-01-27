@@ -22,16 +22,18 @@
 }
 
 .tooltip {
-  position:relative;
+  position: relative;
   width: 6em;
   height: 3em;
   background-color: white;
   fill: white;
   font-size: 40px;
   opacity: 0%;
+  display: flex;
 }
 
 .tooltip-text {
+  display: flex;
   align-self: center;
   fill: black;
   font-size: 2em;

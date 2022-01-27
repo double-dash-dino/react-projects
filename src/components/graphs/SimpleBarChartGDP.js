@@ -51,18 +51,44 @@ const SimpleBarChartGDP = (props) => {
         .attr("id", "bar-label-" + i)
         .attr("class", "tooltip")
         .attr("x", i * 3)
-        .attr("y", height / 2)
+        .attr("y", height / 2);
     }
 
     for (let i = 0; i < dataset.data.length; i++) {
-      let tooltipText = dataset.data[i][0]+' quarter'+'$'+dataset.data[i][1]+' Billion'
+      let quarterNumber = "";
+      switch (dataset.data[i][0].slice(5, 7)) {
+        case "01":
+          quarterNumber = "1";
+          break;
+        case "04":
+          quarterNumber = "2";
+          break;
+        case "07":
+          quarterNumber = "3";
+          break;
+        case "10":
+          quarterNumber = "4";
+          break;
+        default:
+          break;
+      }
+      let year = "";
+      year = dataset.data[i][0].slice(0, 4);
+
+      let tooltipDate = year + " Q" + quarterNumber;
+      let tooltipAmount = " $" + dataset.data[i][1] + " Billion";
       d3.select("#data-point" + i)
         .append("text")
-        .attr('id', 'data-point-text-'+i)
+        .attr("id", "data-point-text-" + i)
         .attr("class", "tooltip-text")
+        .append("tspan")
         .attr("x", i * 3)
-        .attr("y", height / 2 + 25)
-        .text(tooltipText);
+        .attr("y", height / 2 + 40)
+        .text(tooltipDate)
+        .append("tspan")
+        .attr("x", i * 3)
+        .attr("y", height / 2 + 80)
+        .text(tooltipAmount);
     }
 
     d3.select("#tooltip-node").selectAll("text").attr("fill", "black");
@@ -70,12 +96,12 @@ const SimpleBarChartGDP = (props) => {
     d3.select("svg")
       .selectAll("rect")
       .on("mouseover", (event) => {
+        console.log(dataset.data[2][0]);
         let barID = event.target.id.match(/\d+/)[0];
-        console.log(barID);
         d3.select("#bar-label-" + barID).style("opacity", "100%");
-        d3.select('svg').select("#data-point-text-" + barID)
-          .style('opacity','100%');
-        console.log(document.getElementById("bar-label-" + barID));
+        d3.select("svg")
+          .select("#data-point-text-" + barID)
+          .style("opacity", "100%");
       });
 
     d3.select("svg")
@@ -83,8 +109,9 @@ const SimpleBarChartGDP = (props) => {
       .on("mouseout", (event) => {
         let barID = event.target.id.match(/\d+/)[0];
         d3.select("#bar-label-" + barID).style("opacity", "0%");
-        d3.select('svg').select("#data-point-text-" + barID)
-          .style('opacity','0%');
+        d3.select("svg")
+          .select("#data-point-text-" + barID)
+          .style("opacity", "0%");
       });
 
     setChartIsBuilt(true);
