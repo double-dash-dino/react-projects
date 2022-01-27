@@ -17,6 +17,7 @@ const SimpleBarChartGDP = (props) => {
   }
 
   const generateGraph = (dataset) => {
+    console.log("building graph");
     const height = d3.max(dataset.data, (d) => d[1]) / 30 + 50;
     const width = dataset.data.length * 3;
 
@@ -41,20 +42,17 @@ const SimpleBarChartGDP = (props) => {
       .data(dataset.data)
       .enter()
       .append("g")
-      .attr("id", (d, i) => "data-point-" + i)
+      .attr("id", (d, i) => "data-point" + i)
       .attr("class", "data-point-node");
 
-    // for (let i = 0; i < dataset.data.length; i++) {
-    d3.selectAll(".data-point-node")
-      .selectAll("rect")
-      .data(dataset.data)
-      .enter()
-      .append("rect")
-      .attr("id", (d, i) => "bar-label-" + i)
-      .attr("class", "tooltip-box")
-      .attr("x", (d, i) => i * 3)
-      .attr("y", height / 2);
-    // }
+    for (let i = 0; i < dataset.data.length; i++) {
+      d3.select("#data-point" + i)
+        .append("rect")
+        .attr("id", "bar-label-" + i)
+        .attr("class", "tooltip")
+        .attr("x", i * 3)
+        .attr("y", height / 2);
+    }
 
     for (let i = 0; i < dataset.data.length; i++) {
       let quarterNumber = "";
@@ -79,8 +77,9 @@ const SimpleBarChartGDP = (props) => {
 
       let tooltipDate = year + " Q" + quarterNumber;
       let tooltipAmount = " $" + dataset.data[i][1] + " Billion";
-      d3.selectAll(".tooltip-box")
+      d3.select("#data-point" + i)
         .append("text")
+        .attr("id", "data-point-text-" + i)
         .attr("class", "tooltip-text")
         .append("tspan")
         .attr("x", i * 3)
