@@ -10,7 +10,7 @@
   background-color: blue;
   position: relative;
   z-index: 1;
-  padding: 20px;
+  /* padding: 20px; */
 }
 
 .chart-bar {

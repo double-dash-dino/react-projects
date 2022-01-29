@@ -57,24 +57,32 @@ const SimpleBarChartGDP = (props) => {
   // Make the graph
 
   const generateGraph = (dataset) => {
-    const height = d3.max(dataset.data, (d) => d[1]) / 30 + 50;
-    const width = dataset.data.length * 3;
+    const height = 500;
+    const width = 800;
     const padding = 20;
 
-    d3.select("svg").attr("height", height).attr("width", width);
-
-    let scale = d3
+    // Add scales
+    const xScale = d3
       .scaleLinear()
-      .domain([1947, 2015])
+      .domain([
+        d3.min(dataset.data, (d) => d[0].slice(0, 4)),
+        d3.max(dataset.data, (d) => d[0].slice(0, 4)),
+      ])
       .range([padding, width - padding]);
-    let x_axis = d3.axisBottom().scale(scale);
-    d3.select("svg")
-      .append("g")
-      .call(x_axis)
-      .attr("x", "0")
-      //   .attr("y", height)
-      .attr("transform", "transform(0, 500)");
 
+    const yScale = d3
+      .scaleLinear()
+      .domain([0, d3.max(dataset.data, (d) => d[1])])
+      .range(height - padding, padding);
+
+    //   Create canvas
+    d3.select(".simple-bar-chart")
+      .append("svg")
+      .attr("class", "svg-element")
+      .attr("height", height)
+      .attr("width", width);
+
+    // Add bars
     d3.select("svg")
       .selectAll("rect")
       .data(dataset.data)
@@ -82,10 +90,25 @@ const SimpleBarChartGDP = (props) => {
       .append("rect")
       .attr("id", (d, i) => "bar-" + i)
       .attr("class", "chart-bar")
-      .attr("height", (d) => d[1] / 20 + "px")
-      .attr("x", (d, i) => i * 3)
-      .attr("y", (d) => height - d[1] / 30);
+      .attr("height", (d) => d[1])
+      .attr("x", (d) => xScale(d[0]))
+      .attr("y", (d) => yScale(d[1]));
 
+    // Add axes
+    const xAxis = d3.axisBottom().scale(xScale);
+    const yAxis = d3.axisLeft().scale(yScale);
+    d3.select("svg")
+      .append("g")
+      .attr("transform", "translate(0, " + (height - padding) + ")")
+      .call(xAxis);
+    d3.select("svg")
+      .append("g")
+      .attr("transform", "translate(" + padding + ", 0)")
+      .call(yAxis);
+
+    console.log(xScale(2010), width, dataset.data[0][1]);
+
+    // Create tooltip
     let tooltip = d3
       .select(".simple-bar-chart")
       .append("div")
@@ -94,6 +117,8 @@ const SimpleBarChartGDP = (props) => {
       .attr("height", "100px")
       .style("fill", "white")
       .attr("class", "tooltip");
+
+    //   Add pointer events
 
     d3.select(".simple-bar-chart")
       .selectAll(".chart-bar")
@@ -122,14 +147,7 @@ const SimpleBarChartGDP = (props) => {
     }
   }, [datasetUS, chartIsBuilt]);
 
-  return (
-    <div className="simple-bar-chart">
-      <svg className="svg-element">
-        <g className="plot-area" />
-        <g className="y-axis" />
-      </svg>
-    </div>
-  );
+  return <div className="simple-bar-chart"></div>;
 };
 
 export default SimpleBarChartGDP;
