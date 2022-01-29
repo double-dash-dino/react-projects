@@ -6,7 +6,6 @@ const SimpleBarChartGDP = (props) => {
   const [datasetUS, setDatasetUS] = useState("");
   const [chartIsBuilt, setChartIsBuilt] = useState(false);
 
-
   // Get the data
   if (datasetUS === "") {
     fetch(
@@ -17,9 +16,6 @@ const SimpleBarChartGDP = (props) => {
         setDatasetUS(data);
       });
   }
-
-
-
 
   // Format dates & amounts
 
@@ -42,35 +38,42 @@ const SimpleBarChartGDP = (props) => {
       default:
         break;
     }
-    
+
     year = datasetUS.data[num][0].slice(0, 4);
 
     let tooltipDate = year + " Q" + quarterNumber;
-    let tooltipAmount = "$ "+datasetUS.data[num][1].toLocaleString(undefined) + " Billion";
-    
+    let tooltipAmount =
+      "$ " + datasetUS.data[num][1].toLocaleString(undefined) + " Billion";
+
     return (
-      tooltipDate+' <br> '+tooltipAmount
-    )}
+      "<p className='tooltip-text'>" +
+      tooltipDate +
+      " <br> " +
+      tooltipAmount +
+      "</p>"
+    );
+  };
 
-
-    // Make the graph
+  // Make the graph
 
   const generateGraph = (dataset) => {
-
-    console.log(dataset.data)
     const height = d3.max(dataset.data, (d) => d[1]) / 30 + 50;
     const width = dataset.data.length * 3;
-    const padding = 20
+    const padding = 20;
 
-    
+    d3.select("svg").attr("height", height).attr("width", width);
 
-    d3.select("svg").attr("height", height).attr("width", width)
-
-    let scale = d3.scaleLinear().domain([1947, 2015]).range([padding, width-padding])
-    let x_axis = d3.axisBottom().scale(scale)
-    d3.select('svg').append("g").call(x_axis).attr('x','0').attr('y', height)
-
-
+    let scale = d3
+      .scaleLinear()
+      .domain([1947, 2015])
+      .range([padding, width - padding]);
+    let x_axis = d3.axisBottom().scale(scale);
+    d3.select("svg")
+      .append("g")
+      .call(x_axis)
+      .attr("x", "0")
+      //   .attr("y", height)
+      .attr("transform", "transform(0, 500)");
 
     d3.select("svg")
       .selectAll("rect")
@@ -83,32 +86,33 @@ const SimpleBarChartGDP = (props) => {
       .attr("x", (d, i) => i * 3)
       .attr("y", (d) => height - d[1] / 30);
 
-
-let tooltip = d3.select('.simple-bar-chart')
-.append('div')
-.attr('id', 'tooltip')
-.attr('width', "100px")
-.attr('height', '100px')
-.style("fill", "white")
-.attr('class', 'tooltip')
-
-
-
-
+    let tooltip = d3
+      .select(".simple-bar-chart")
+      .append("div")
+      .attr("id", "tooltip")
+      .attr("width", "100px")
+      .attr("height", "100px")
+      .style("fill", "white")
+      .attr("class", "tooltip");
 
     d3.select(".simple-bar-chart")
       .selectAll(".chart-bar")
       .on("mouseover", (event) => {
         let barID = event.target.id.match(/\d+/);
-        tooltip.style('opacity', '100%').html(getToolTipHtml(barID)).attr('top', barID*10+'px').attr('left', '150px')
-
+        tooltip
+          .transition()
+          .duration(0)
+          .style("opacity", "100%")
+          .style("left", barID * 3 + "px")
+          .style("top", "250px");
+        tooltip.html(getToolTipHtml(barID));
       });
 
     d3.select(".simple-bar-chart")
       .selectAll(".chart-bar")
       .on("mouseout", (event) => {
-        tooltip.style('opacity', '0%');
-      })
+        tooltip.style("opacity", "0%");
+      });
     setChartIsBuilt(true);
   };
 
