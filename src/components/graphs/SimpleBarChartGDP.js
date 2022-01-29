@@ -1,7 +1,6 @@
 import "./SimpleBarChartGDP.css";
 import * as d3 from "d3";
 import React, { useState, useEffect } from "react";
-import { svg } from "d3";
 
 const SimpleBarChartGDP = (props) => {
   const [datasetUS, setDatasetUS] = useState("");
@@ -22,7 +21,6 @@ const SimpleBarChartGDP = (props) => {
 
   const getToolTipHtml = (num) => {
     let quarterNumber = "";
-    let offsetPixels = 0;
     let year = "";
     switch (datasetUS.data[num][0].slice(5, 7)) {
       case "01":
@@ -73,15 +71,13 @@ const SimpleBarChartGDP = (props) => {
       ])
       .range([padding, width - padding]);
 
-    // const yScale = d3
-    //   .scaleLinear()
-    //   .domain([
-    //     d3.min(dataset.data, (d) => d[0].slice(0, 4)),
-    //     d3.max(dataset.data, (d) => d[0].slice(0, 4)),
-    //   ])
-    //   .range([padding, width - padding]);
-
-    const yScale = d3.scaleLinear().domain([0, 18064]).range(480, 20);
+    const yScale = d3
+      .scaleLinear()
+      .domain([
+        d3.min(dataset.data, (d) => d[0].slice(0, 4)),
+        d3.max(dataset.data, (d) => d[0].slice(0, 4)),
+      ])
+      .range([padding, width - padding]);
 
     //   Create canvas
     d3.select(".simple-bar-chart")
@@ -132,16 +128,11 @@ const SimpleBarChartGDP = (props) => {
       .attr("transform", "translate(" + padding + ",0)")
       .call(yAxis);
 
-    console.log(yScale(2));
-
     // Create tooltip
     let tooltip = d3
       .select(".simple-bar-chart")
       .append("div")
       .attr("id", "tooltip")
-      .attr("width", "100px")
-      .attr("height", "100px")
-      .style("fill", "white")
       .attr("class", "tooltip");
 
     //   Add pointer events
@@ -164,6 +155,8 @@ const SimpleBarChartGDP = (props) => {
       .on("mouseout", (event) => {
         tooltip.style("opacity", "0%");
       });
+
+    //   Add bottom text
 
     d3.select("svg")
       .append("text")
