@@ -15,7 +15,7 @@
 
 .chart-bar {
   fill: black;
-  width: 2px;
+  width: 3px;
   opacity: 100%;
 }
 
@@ -40,10 +40,6 @@
   z-index: 10;
 }
 
-/* .tooltip text {
-  display: flex;
-  align-self: center;
-  fill: black;
-  font-size: 1em;
-  opacity: 100%;
-} */
+.bottom-text {
+  font-size: 0.7em;
+}
