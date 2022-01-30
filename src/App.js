@@ -6,6 +6,7 @@ import RandomSentenceGenerator from "./components/apps/random-sentence-generator
 import NavBar from "./components/UI/NavBar";
 import ContactPage from "./components/pages/contact-page";
 import StudyTimer from "./components/apps/study-timer";
+import D3Graphs from "./components/apps/D3Graphs";
 
 function App() {
   const [onDisplay, setOnDisplay] = useState("");
@@ -26,6 +27,7 @@ function App() {
           <RandomSentenceGenerator onClearApp={clearApp} />
         )}
         {onDisplay === "studyTimer" && <StudyTimer onClearApp={clearApp} />}
+        {onDisplay === "d3Graphs" && <D3Graphs onClearApp={clearApp} />}
         {onDisplay === "contact" && <ContactPage />}
       </div>
     </div>

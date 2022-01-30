@@ -1,0 +1,51 @@
+.simple-bar-chart {
+  color: black;
+  position: relative;
+  z-index: 1;
+}
+
+.svg-element {
+  margin-left: 0px;
+  margin-right: 0px;
+  background-color: blue;
+  position: relative;
+  z-index: 1;
+}
+
+.chart-bar {
+  fill: black;
+  width: 2px;
+  opacity: 100%;
+}
+
+.chart-bar:hover {
+  opacity: 0%;
+}
+
+.tooltip {
+  width: 5em;
+  height: 1em;
+  background-color: white;
+  opacity: 0%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  text-align: center;
+  padding: 20px;
+  pointer-events: none;
+  box-shadow: 1px 1px 10px 0px;
+  z-index: 10;
+}
+
+.tooltip-text {
+  font-size: 0.6em;
+}
+
+.bottom-text {
+  font-size: 0.4em;
+}
+
+.side-text {
+  font-size: 0.5em;
+}

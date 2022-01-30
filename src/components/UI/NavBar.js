@@ -29,6 +29,10 @@ const NavBar = (props) => {
     props.onSelectApp("studyTimer");
   };
 
+  const clickHandlerGraphs = () => {
+    props.onSelectApp("d3Graphs")
+  }
+
   const clickHandlerContact = () => {
     props.onSelectApp("contact");
   };
@@ -76,6 +80,9 @@ const NavBar = (props) => {
               </button>
               <button className="nav-button" onClick={clickHandlerStudyTimer}>
                 Study timer
+              </button>
+              <button className="nav-button" onClick={clickHandlerGraphs}>
+                D3 graphs
               </button>
               <button className="back-button" onClick={clickHandlerProjectList}>
                 <i className="fa fa-undo fa-3x"></i>

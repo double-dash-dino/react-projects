@@ -1,0 +1,21 @@
+.d3-graphs-app{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+
+.graph-selector{
+    margin: 20px;
+    align-self: center;
+    min-width: 30vw;;
+    background-color: inherit;
+    border: white solid 2px;
+    border-radius: 5px;
+    color: white;
+    font-size: 1em;;
+}
+
+option{
+    background-color: #282c34;
+}
