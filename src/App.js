@@ -8,8 +8,6 @@ import ContactPage from "./components/pages/contact-page";
 import StudyTimer from "./components/apps/study-timer";
 import D3Graphs from "./components/apps/D3Graphs";
 
-import SimpleBarChartGDP from "./components/graphs/SimpleBarChartGDP.js";
-
 function App() {
   const [onDisplay, setOnDisplay] = useState("");
   const selectAppHandler = (appName) => {
