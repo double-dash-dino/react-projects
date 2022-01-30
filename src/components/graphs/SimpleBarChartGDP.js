@@ -74,10 +74,6 @@ const SimpleBarChartGDP = (props) => {
     const yScale = d3
       .scaleLinear()
       .domain([18000, 0])
-      //   .domain([
-      //     d3.min(dataset.data, (d) => d[0].slice(0, 4)),
-      //     d3.max(dataset.data, (d) => d[0].slice(0, 4)),
-      //   ])
       .range([padding, height - padding]);
 
     //   Create canvas
@@ -165,6 +161,16 @@ const SimpleBarChartGDP = (props) => {
       .attr("x", width / 2)
       .attr("y", height - padding / 3)
       .attr("class", "bottom-text");
+
+    //   Add side text
+
+    d3.select("svg")
+      .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("x", -height / 2)
+      .attr("y", width / 8)
+      .text("Gross Domestic Product")
+      .attr("class", "side-text");
 
     setChartIsBuilt(true);
   };
