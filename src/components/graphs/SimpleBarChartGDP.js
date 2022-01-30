@@ -47,7 +47,7 @@ const SimpleBarChartGDP = (props) => {
       "$ " + datasetUS.data[num][1].toLocaleString(undefined) + " Billion";
 
     return (
-      "<p className='tooltip-text'>" +
+      "<p class='tooltip-text'>" +
       tooltipDate +
       " <br> " +
       tooltipAmount +
@@ -158,7 +158,7 @@ const SimpleBarChartGDP = (props) => {
     d3.select("svg")
       .append("text")
       .text("More Information: http://www.bea.gov/national/pdf/nipaguid.pdf")
-      .attr("x", width / 2)
+      .attr("x", width / 3)
       .attr("y", height - padding / 3)
       .attr("class", "bottom-text");
 

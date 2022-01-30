@@ -4,7 +4,7 @@ import ClearButton from "../UI/ClearButton";
 import SimpleBarChartGDP from "../graphs/SimpleBarChartGDP.js";
 
 const D3Graphs = (props) => {
-  const [graphSelected, setGraphSelected] = useState("bar-chart");
+  const [graphSelected, setGraphSelected] = useState("");
 
   const clearApp = () => {
     props.onClearApp();
