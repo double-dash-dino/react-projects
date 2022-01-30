@@ -73,11 +73,12 @@ const SimpleBarChartGDP = (props) => {
 
     const yScale = d3
       .scaleLinear()
-      .domain([
-        d3.min(dataset.data, (d) => d[0].slice(0, 4)),
-        d3.max(dataset.data, (d) => d[0].slice(0, 4)),
-      ])
-      .range([padding, width - padding]);
+      .domain([18000, 0])
+      //   .domain([
+      //     d3.min(dataset.data, (d) => d[0].slice(0, 4)),
+      //     d3.max(dataset.data, (d) => d[0].slice(0, 4)),
+      //   ])
+      .range([padding, height - padding]);
 
     //   Create canvas
     d3.select(".simple-bar-chart")
