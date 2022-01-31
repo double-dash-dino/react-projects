@@ -20,7 +20,7 @@ const ScatterplotGraphDoping = (props) => {
     const buildChart = (dataset) => {
       const height = 700;
       const width = 800;
-      const padding = 50;
+      const padding = 70;
 
       // Build canvas
 
@@ -29,6 +29,29 @@ const ScatterplotGraphDoping = (props) => {
         .attr("height", height)
         .attr("width", width)
         .attr("class", "canvas");
+
+      // Add text elements
+
+      d3.select("svg")
+        .append("text")
+        .attr("x", width / 3)
+        .attr("y", padding)
+        .attr("class", "chart-title")
+        .text("Doping in Professional Bicycle Racing");
+
+      d3.select("svg")
+        .append("text")
+        .attr("x", width / 3 + 50)
+        .attr("y", padding * 1.5)
+        .attr("class", "chart-subtitle")
+        .text("35 Fastest times up Alpe d'Huez");
+
+      d3.select("svg")
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("x", -height / 2)
+        .attr("y", padding + 30)
+        .text("Time in minutes");
 
       // Add scales
 
@@ -49,7 +72,7 @@ const ScatterplotGraphDoping = (props) => {
 
       // Add axes
 
-      const xAxis = d3.axisBottom().scale(xScale);
+      const xAxis = d3.axisBottom().scale(xScale).tickFormat(d3.format("d"));
       const yAxis = d3.axisLeft().scale(yScale);
       d3.select("svg")
         .append("g")
