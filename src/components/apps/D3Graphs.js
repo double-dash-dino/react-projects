@@ -2,6 +2,7 @@ import "./D3Graphs.css";
 import React, { useState } from "react";
 import ClearButton from "../UI/ClearButton";
 import SimpleBarChartGDP from "../graphs/SimpleBarChartGDP.js";
+import ScatterplotGraphDoping from "../graphs/ScatterplotGraphDoping";
 
 const D3Graphs = (props) => {
   const [graphSelected, setGraphSelected] = useState("");
@@ -33,6 +34,7 @@ const D3Graphs = (props) => {
       </select>
 
       {graphSelected === "bar-chart" && <SimpleBarChartGDP />}
+      {graphSelected === "scatterplot-graph" && <ScatterplotGraphDoping />}
     </div>
   );
 };
