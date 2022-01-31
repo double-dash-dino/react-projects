@@ -20,7 +20,7 @@ const ScatterplotGraphDoping = (props) => {
     const buildChart = (dataset) => {
       const height = 500;
       const width = 800;
-      const padding = 20;
+      const padding = 50;
 
       // Build canvas
 
@@ -35,16 +35,31 @@ const ScatterplotGraphDoping = (props) => {
       const xScale = d3
         .scaleLinear()
         .domain([
-          d3.min(dataset, (d) => d["Year"]),
+          d3.min(dataset, (d) => d["Year"]) - 2,
           d3.max(dataset, (d) => d["Year"]),
         ])
         .range([padding, width - padding]);
       const yScale = d3
         .scaleLinear()
-        .domain[
-          (d3.max(dataset, (d) => d["Seconds"]),
-          d3.min(dataset, (d) => d["Seconds"]))
-        ].range([padding, height - padding]);
+        .domain([2400, 2200])
+        // .domain([
+        //   (d3.max(dataset, (d) => d["Seconds"]),
+        //   d3.min(dataset, (d) => d["Seconds"])),
+        // ])
+        .range([padding, height - padding]);
+
+      // Add axes
+
+      const xAxis = d3.axisBottom().scale(xScale);
+      const yAxis = d3.axisLeft().scale(yScale);
+      d3.select("svg")
+        .append("g")
+        .attr("transform", "translate(0," + (height - padding) + ")")
+        .call(xAxis);
+      d3.select("svg")
+        .append("g")
+        .attr("transform", "translate(" + padding + ",0)")
+        .call(yAxis);
 
       console.log(dataset);
     };
