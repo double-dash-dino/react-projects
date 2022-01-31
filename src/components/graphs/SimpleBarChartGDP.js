@@ -81,7 +81,9 @@ const SimpleBarChartGDP = (props) => {
         .append("svg")
         .attr("class", "svg-element")
         .attr("height", height)
-        .attr("width", width);
+        .attr("width", width)
+        .append("title", "Growth of US GDP")
+        .attr('id', 'title')
 
       // Add bars
       d3.select("svg")
