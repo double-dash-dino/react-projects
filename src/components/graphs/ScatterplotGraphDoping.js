@@ -61,6 +61,18 @@ const ScatterplotGraphDoping = (props) => {
         .attr("transform", "translate(" + padding + ",0)")
         .call(yAxis);
 
+      // Add data points
+
+      d3.select("svg")
+        .selectAll("circle")
+        .data(dataset)
+        .enter()
+        .append("circle")
+        .attr("cx", (d) => xScale(d["Year"]))
+        .attr("cy", (d) => yScale(d["Seconds"]))
+        .attr("r", 5)
+        .attr("fill", "black");
+
       console.log(dataset);
     };
 
