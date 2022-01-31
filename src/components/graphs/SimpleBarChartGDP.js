@@ -120,10 +120,12 @@ const SimpleBarChartGDP = (props) => {
       const yAxis = d3.axisLeft().scale(yScale);
       d3.select("svg")
         .append("g")
+        .attr('id', 'x-axis')
         .attr("transform", "translate(0," + (height - padding) + ")")
         .call(xAxis);
       d3.select("svg")
         .append("g")
+        .attr('id', 'y-axis')
         .attr("transform", "translate(" + padding + ",0)")
         .call(yAxis);
 
