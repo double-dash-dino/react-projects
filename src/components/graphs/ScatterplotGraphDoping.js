@@ -71,6 +71,13 @@ const ScatterplotGraphDoping = (props) => {
         .attr("cx", (d) => xScale(d["Year"]))
         .attr("cy", (d) => yScale(d["Seconds"]))
         .attr("r", 5)
+        .attr("class", (d) => {
+          if (d["Doping"] === "") {
+            return "clean-data-point";
+          } else {
+            return "dirty-data-point";
+          }
+        })
         .attr("fill", "black");
 
       console.log(dataset);

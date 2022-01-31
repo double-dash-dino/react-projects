@@ -4,3 +4,15 @@
 .canvas {
   background-color: gainsboro;
 }
+
+circle {
+  stroke: black;
+}
+
+.clean-data-point {
+  fill: yellow;
+}
+
+.dirty-data-point {
+  fill: blue;
+}
