@@ -15,18 +15,18 @@
 .bar {
   fill: black;
   width: 2px;
-  opacity: 100%;
+  opacity: 1;
 }
 
 .bar:hover {
-  opacity: 0%;
+  opacity: 0;
 }
 
 .tooltip {
   width: 5em;
   height: 1em;
   background-color: white;
-  opacity: 0%;
+  opacity: 0;
   display: flex;
   align-items: center;
   justify-content: center;
