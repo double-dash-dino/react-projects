@@ -142,7 +142,7 @@ for (let i=0; i<dataset.data.length; i++){
           tooltip
             .transition()
             .duration(0)
-            .style("opacity", "100%")
+            .style("opacity", "1")
             .style("left", barID * 3 + "px")
             .style("top", "250px")
 
@@ -153,7 +153,7 @@ for (let i=0; i<dataset.data.length; i++){
       d3.select(".simple-bar-chart")
         .selectAll(".bar")
         .on("mouseout", (event) => {
-          tooltip.style("opacity", "0%");
+          tooltip.style("opacity", "0");
         });
 
       //   Add bottom text
