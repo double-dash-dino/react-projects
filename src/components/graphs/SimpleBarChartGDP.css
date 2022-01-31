@@ -12,13 +12,13 @@
   z-index: 1;
 }
 
-.chart-bar {
+.bar {
   fill: black;
   width: 2px;
   opacity: 100%;
 }
 
-.chart-bar:hover {
+.bar:hover {
   opacity: 0%;
 }
 

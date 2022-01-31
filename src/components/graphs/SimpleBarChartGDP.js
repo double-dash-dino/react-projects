@@ -92,7 +92,7 @@ const SimpleBarChartGDP = (props) => {
         .enter()
         .append("rect")
         .attr("id", (d, i) => "bar-" + i)
-        .attr("class", "chart-bar")
+        .attr("class", "bar")
         .attr("height", (d) => d[1] / 50)
         .attr("x", (d) => {
           let quarterNumberOffset = 0;
@@ -139,7 +139,7 @@ const SimpleBarChartGDP = (props) => {
       //   Add pointer events
 
       d3.select(".simple-bar-chart")
-        .selectAll(".chart-bar")
+        .selectAll(".bar")
         .on("mouseover", (event) => {
           let barID = event.target.id.match(/\d+/);
           tooltip
@@ -152,7 +152,7 @@ const SimpleBarChartGDP = (props) => {
         });
 
       d3.select(".simple-bar-chart")
-        .selectAll(".chart-bar")
+        .selectAll(".bar")
         .on("mouseout", (event) => {
           tooltip.style("opacity", "0%");
         });
