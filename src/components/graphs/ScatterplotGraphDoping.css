@@ -27,7 +27,21 @@ circle:hover {
 }
 
 .tooltip {
-  background-color: orangered;
+  width: 10em;
+  height: auto;
+  opacity: 0;
+  padding: 10px;
+  background-color: rgb(255, 150, 111);
+  border-radius: 15px;
   position: absolute;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
   z-index: 10;
+}
+
+.tooltip-text {
+  justify-self: center;
+  align-self: center;
+  font-size: 0.7em;
 }

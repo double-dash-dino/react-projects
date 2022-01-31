@@ -18,7 +18,7 @@ const ScatterplotGraphDoping = (props) => {
 
   useEffect(() => {
     const buildChart = (dataset) => {
-      const height = 500;
+      const height = 700;
       const width = 800;
       const padding = 50;
 
@@ -41,11 +41,10 @@ const ScatterplotGraphDoping = (props) => {
         .range([padding, width - padding]);
       const yScale = d3
         .scaleLinear()
-        .domain([2200, 2400])
-        // .domain([
-        //   (d3.max(dataset, (d) => d["Seconds"]),
-        //   d3.min(dataset, (d) => d["Seconds"])),
-        // ])
+        .domain([
+          d3.min(dataset, (d) => d["Seconds"]),
+          d3.max(dataset, (d) => d["Seconds"]),
+        ])
         .range([padding, height - padding]);
 
       // Add axes
@@ -97,9 +96,9 @@ const ScatterplotGraphDoping = (props) => {
         let line3 = data["Doping"];
 
         return (
-          "<p className='tooltip-text'> " +
+          "<p class='tooltip-text'> " +
           line1 +
-          " <br> <br> " +
+          " <br> " +
           line2 +
           " <br> <br> " +
           line3 +
