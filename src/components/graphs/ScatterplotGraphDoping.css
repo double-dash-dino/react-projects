@@ -1,12 +1,21 @@
 .scatterplot-graph {
+  position: relative;
+  z-index: 1;
 }
 
 .canvas {
   background-color: gainsboro;
+  position: relative;
+  z-index: 1;
 }
 
 circle {
   stroke: black;
+  opacity: 0.6;
+}
+
+circle:hover {
+  opacity: 1;
 }
 
 .clean-data-point {
@@ -15,4 +24,10 @@ circle {
 
 .dirty-data-point {
   fill: blue;
+}
+
+.tooltip {
+  background-color: orangered;
+  position: absolute;
+  z-index: 10;
 }

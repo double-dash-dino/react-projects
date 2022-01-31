@@ -17,8 +17,6 @@ const SimpleBarChartGDP = (props) => {
       });
   }
   useEffect(() => {
-    
-
     const getToolTipHtml = (num) => {
       let quarterNumber = "";
       let year = "";
@@ -57,17 +55,12 @@ const SimpleBarChartGDP = (props) => {
     // Make the graph
 
     const generateGraph = (dataset) => {
+      // Put the dates data in a usable format
 
-
-
-// Put the dates data in a usable format
-
-const datesList = []
-for (let i=0; i<dataset.data.length; i++){
-  datesList.push(new Date(dataset.data[i][0]))
-}
-
-
+      const datesList = [];
+      for (let i = 0; i < dataset.data.length; i++) {
+        datesList.push(new Date(dataset.data[i][0]));
+      }
 
       const height = 500;
       const width = 800;
@@ -76,10 +69,7 @@ for (let i=0; i<dataset.data.length; i++){
       // Add scales
       const xScale = d3
         .scaleTime()
-        .domain([
-          d3.min(datesList),
-          d3.max(datesList)
-        ])
+        .domain([d3.min(datesList), d3.max(datesList)])
         .range([padding, width - padding]);
 
       const yScale = d3
@@ -94,9 +84,7 @@ for (let i=0; i<dataset.data.length; i++){
         .attr("height", height)
         .attr("width", width)
         .append("title", "Growth of US GDP")
-        .attr('id', 'title')
-
-
+        .attr("id", "title");
 
       // Add bars
       d3.select("svg")
@@ -107,31 +95,31 @@ for (let i=0; i<dataset.data.length; i++){
         .attr("id", (d, i) => "bar-" + i)
         .attr("class", "bar")
         .attr("height", (d) => d[1] / 50)
-        .attr('x', (d, i)=> xScale(datesList[i]))
+        .attr("x", (d, i) => xScale(datesList[i]))
         .attr("y", (d) => height - padding - d[1] / 50)
-        .attr('data-date', (d)=>d[0])
-        .attr('data-gdp', (d)=>d[1])
+        .attr("data-date", (d) => d[0])
+        .attr("data-gdp", (d) => d[1]);
 
       // Add axes
       const xAxis = d3.axisBottom().scale(xScale);
       const yAxis = d3.axisLeft().scale(yScale);
       d3.select("svg")
         .append("g")
-        .attr('id', 'x-axis')
+        .attr("id", "x-axis")
         .attr("transform", "translate(0," + (height - padding) + ")")
         .call(xAxis);
       d3.select("svg")
         .append("g")
-        .attr('id', 'y-axis')
+        .attr("id", "y-axis")
         .attr("transform", "translate(" + padding + ",0)")
         .call(yAxis);
 
       // Create tooltip
-      let tooltip = d3
+      const tooltip = d3
         .select(".simple-bar-chart")
         .append("div")
         .attr("id", "tooltip")
-        .attr("class", "tooltip")
+        .attr("class", "tooltip");
 
       //   Add pointer events
 
@@ -144,9 +132,8 @@ for (let i=0; i<dataset.data.length; i++){
             .duration(0)
             .style("opacity", "1")
             .style("left", barID * 3 + "px")
-            .style("top", "250px")
+            .style("top", "250px");
 
-            
           tooltip.html(getToolTipHtml(barID));
         });
 
@@ -180,7 +167,6 @@ for (let i=0; i<dataset.data.length; i++){
     if (datasetUS !== "" && !chartIsBuilt) {
       generateGraph(datasetUS);
     }
-
   }, [datasetUS, chartIsBuilt]);
 
   return <div className="simple-bar-chart"></div>;

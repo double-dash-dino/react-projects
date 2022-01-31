@@ -41,7 +41,7 @@ const ScatterplotGraphDoping = (props) => {
         .range([padding, width - padding]);
       const yScale = d3
         .scaleLinear()
-        .domain([2400, 2200])
+        .domain([2200, 2400])
         // .domain([
         //   (d3.max(dataset, (d) => d["Seconds"]),
         //   d3.min(dataset, (d) => d["Seconds"])),
@@ -70,7 +70,7 @@ const ScatterplotGraphDoping = (props) => {
         .append("circle")
         .attr("cx", (d) => xScale(d["Year"]))
         .attr("cy", (d) => yScale(d["Seconds"]))
-        .attr("r", 5)
+        .attr("r", 7)
         .attr("class", (d) => {
           if (d["Doping"] === "") {
             return "clean-data-point";
@@ -78,7 +78,38 @@ const ScatterplotGraphDoping = (props) => {
             return "dirty-data-point";
           }
         })
+        .attr("Year", (d) => d["Year"])
         .attr("fill", "black");
+
+      // Add tooltip
+
+      const tooltip = d3
+        .select(".scatterplot-graph")
+        .append("div")
+        .attr("id", "tooltip")
+        .attr("class", "tooltip");
+
+      // Add pointer events
+
+      d3.select("svg")
+        .selectAll("circle")
+        .on("mouseover", (event) => {
+          let circleData = event.target.__data__;
+          console.log(yScale(circleData["Seconds"]));
+          tooltip
+            .transition()
+            .duration(0)
+            .style("opacity", 1)
+            .style("left", xScale(circleData["Year"]) + "px")
+            // .style("top", yScale(circleData["Seconds"] + "px"));
+            .style("top", "80px");
+
+          tooltip.html("This is a test");
+        })
+
+        .on("mouseout", (event) => {
+          tooltip.transition().duration(0).style("opacity", 0);
+        });
 
       console.log(dataset);
     };
