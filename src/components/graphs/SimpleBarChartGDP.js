@@ -17,7 +17,6 @@ const SimpleBarChartGDP = (props) => {
       });
   }
   useEffect(() => {
-    // Format dates & amounts
     
 
     const getToolTipHtml = (num) => {
@@ -61,13 +60,12 @@ const SimpleBarChartGDP = (props) => {
 
 
 
-// Use date data properly
+// Put the dates data in a usable format
 
 const datesList = []
 for (let i=0; i<dataset.data.length; i++){
   datesList.push(new Date(dataset.data[i][0]))
 }
-console.log(datesList[0], datesList[2].getFullYear())
 
 
 
@@ -110,25 +108,6 @@ console.log(datesList[0], datesList[2].getFullYear())
         .attr("class", "bar")
         .attr("height", (d) => d[1] / 50)
         .attr('x', (d, i)=> xScale(datesList[i]))
-        // .attr("x", (d) => {
-        //   let quarterNumberOffset = 0;
-        //   switch (d[0].slice(5, 7)) {
-        //     case "01":
-        //       break;
-        //     case "04":
-        //       quarterNumberOffset = 3;
-        //       break;
-        //     case "07":
-        //       quarterNumberOffset = 6;
-        //       break;
-        //     case "10":
-        //       quarterNumberOffset = 9;
-        //       break;
-        //     default:
-        //       break;
-        //   }
-        //   return xScale(d[0].slice(0, 4)) + quarterNumberOffset;
-        // })
         .attr("y", (d) => height - padding - d[1] / 50)
         .attr('data-date', (d)=>d[0])
         .attr('data-gdp', (d)=>d[1])
