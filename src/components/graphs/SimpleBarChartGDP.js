@@ -18,6 +18,7 @@ const SimpleBarChartGDP = (props) => {
   }
   useEffect(() => {
     // Format dates & amounts
+    
 
     const getToolTipHtml = (num) => {
       let quarterNumber = "";
@@ -57,16 +58,29 @@ const SimpleBarChartGDP = (props) => {
     // Make the graph
 
     const generateGraph = (dataset) => {
+
+
+
+// Use date data properly
+
+const datesList = []
+for (let i=0; i<dataset.data.length; i++){
+  datesList.push(new Date(dataset.data[i][0]))
+}
+console.log(datesList[0], datesList[2].getFullYear())
+
+
+
       const height = 500;
       const width = 800;
       const padding = 70;
 
       // Add scales
       const xScale = d3
-        .scaleLinear()
+        .scaleTime()
         .domain([
-          d3.min(dataset.data, (d) => d[0].slice(0, 4)),
-          d3.max(dataset.data, (d) => d[0].slice(0, 4)),
+          d3.min(datesList),
+          d3.max(datesList)
         ])
         .range([padding, width - padding]);
 
@@ -84,6 +98,8 @@ const SimpleBarChartGDP = (props) => {
         .append("title", "Growth of US GDP")
         .attr('id', 'title')
 
+
+
       // Add bars
       d3.select("svg")
         .selectAll("rect")
@@ -93,25 +109,26 @@ const SimpleBarChartGDP = (props) => {
         .attr("id", (d, i) => "bar-" + i)
         .attr("class", "bar")
         .attr("height", (d) => d[1] / 50)
-        .attr("x", (d) => {
-          let quarterNumberOffset = 0;
-          switch (d[0].slice(5, 7)) {
-            case "01":
-              break;
-            case "04":
-              quarterNumberOffset = 3;
-              break;
-            case "07":
-              quarterNumberOffset = 6;
-              break;
-            case "10":
-              quarterNumberOffset = 9;
-              break;
-            default:
-              break;
-          }
-          return xScale(d[0].slice(0, 4)) + quarterNumberOffset;
-        })
+        .attr('x', (d, i)=> xScale(datesList[i]))
+        // .attr("x", (d) => {
+        //   let quarterNumberOffset = 0;
+        //   switch (d[0].slice(5, 7)) {
+        //     case "01":
+        //       break;
+        //     case "04":
+        //       quarterNumberOffset = 3;
+        //       break;
+        //     case "07":
+        //       quarterNumberOffset = 6;
+        //       break;
+        //     case "10":
+        //       quarterNumberOffset = 9;
+        //       break;
+        //     default:
+        //       break;
+        //   }
+        //   return xScale(d[0].slice(0, 4)) + quarterNumberOffset;
+        // })
         .attr("y", (d) => height - padding - d[1] / 50)
         .attr('data-date', (d)=>d[0])
         .attr('data-gdp', (d)=>d[1])
@@ -142,7 +159,6 @@ const SimpleBarChartGDP = (props) => {
       d3.select(".simple-bar-chart")
         .selectAll(".bar")
         .on("mouseover", (event) => {
-          console.log(dataset.data)
           let barID = event.target.id.match(/\d+/);
           tooltip
             .transition()
