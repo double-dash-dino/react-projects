@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+// import React, { useState } from "react";
 // import RandomQuoteApp from "./components/apps/random-quote-app.js";
 // import DrumMachine from "./components/apps/drum-machine.js";
 // import RandomSentenceGenerator from "./components/apps/random-sentence-generator.js";
@@ -13,7 +13,7 @@ import React, { useState } from "react";
 import ScatterplotGraphDoping from "./components/graphs/ScatterplotGraphDoping";
 
 function App() {
-  const [onDisplay, setOnDisplay] = useState("");
+  // const [onDisplay, setOnDisplay] = useState("");
   // const selectAppHandler = (appName) => {
   //   setOnDisplay(appName);
   // };
