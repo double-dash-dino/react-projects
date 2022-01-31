@@ -89,22 +89,39 @@ const ScatterplotGraphDoping = (props) => {
         .attr("id", "tooltip")
         .attr("class", "tooltip");
 
+      // Format text data for tooltip
+
+      const getTooltipText = (data) => {
+        let line1 = data["Name"] + "   " + data["Nationality"];
+        let line2 = "Year: " + data["Year"] + "  Time: " + data["Time"];
+        let line3 = data["Doping"];
+
+        return (
+          "<p className='tooltip-text'> " +
+          line1 +
+          " <br> <br> " +
+          line2 +
+          " <br> <br> " +
+          line3 +
+          " </p>"
+        );
+      };
+
       // Add pointer events
 
       d3.select("svg")
         .selectAll("circle")
         .on("mouseover", (event) => {
           let circleData = event.target.__data__;
-          console.log(yScale(circleData["Seconds"]));
+          console.log(circleData["Name"] + "   " + circleData["Nationality"]);
           tooltip
             .transition()
             .duration(0)
             .style("opacity", 1)
             .style("left", xScale(circleData["Year"]) + "px")
-            // .style("top", yScale(circleData["Seconds"] + "px"));
-            .style("top", "80px");
+            .style("top", yScale(circleData["Seconds"]) + "px");
 
-          tooltip.html("This is a test");
+          tooltip.html(getTooltipText(circleData));
         })
 
         .on("mouseout", (event) => {
