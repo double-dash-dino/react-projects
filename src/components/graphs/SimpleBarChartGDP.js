@@ -16,9 +16,8 @@ const SimpleBarChartGDP = (props) => {
         setDatasetUS(data);
       });
   }
-
   useEffect(() => {
-    // Format dates & amounts
+    
 
     const getToolTipHtml = (num) => {
       let quarterNumber = "";
@@ -58,16 +57,28 @@ const SimpleBarChartGDP = (props) => {
     // Make the graph
 
     const generateGraph = (dataset) => {
+
+
+
+// Put the dates data in a usable format
+
+const datesList = []
+for (let i=0; i<dataset.data.length; i++){
+  datesList.push(new Date(dataset.data[i][0]))
+}
+
+
+
       const height = 500;
       const width = 800;
       const padding = 70;
 
       // Add scales
       const xScale = d3
-        .scaleLinear()
+        .scaleTime()
         .domain([
-          d3.min(dataset.data, (d) => d[0].slice(0, 4)),
-          d3.max(dataset.data, (d) => d[0].slice(0, 4)),
+          d3.min(datesList),
+          d3.max(datesList)
         ])
         .range([padding, width - padding]);
 
@@ -81,7 +92,11 @@ const SimpleBarChartGDP = (props) => {
         .append("svg")
         .attr("class", "svg-element")
         .attr("height", height)
-        .attr("width", width);
+        .attr("width", width)
+        .append("title", "Growth of US GDP")
+        .attr('id', 'title')
+
+
 
       // Add bars
       d3.select("svg")
@@ -90,38 +105,24 @@ const SimpleBarChartGDP = (props) => {
         .enter()
         .append("rect")
         .attr("id", (d, i) => "bar-" + i)
-        .attr("class", "chart-bar")
+        .attr("class", "bar")
         .attr("height", (d) => d[1] / 50)
-        .attr("x", (d) => {
-          let quarterNumberOffset = 0;
-          switch (d[0].slice(5, 7)) {
-            case "01":
-              break;
-            case "04":
-              quarterNumberOffset = 3;
-              break;
-            case "07":
-              quarterNumberOffset = 6;
-              break;
-            case "10":
-              quarterNumberOffset = 9;
-              break;
-            default:
-              break;
-          }
-          return xScale(d[0].slice(0, 4)) + quarterNumberOffset;
-        })
-        .attr("y", (d) => height - padding - d[1] / 50);
+        .attr('x', (d, i)=> xScale(datesList[i]))
+        .attr("y", (d) => height - padding - d[1] / 50)
+        .attr('data-date', (d)=>d[0])
+        .attr('data-gdp', (d)=>d[1])
 
       // Add axes
       const xAxis = d3.axisBottom().scale(xScale);
       const yAxis = d3.axisLeft().scale(yScale);
       d3.select("svg")
         .append("g")
+        .attr('id', 'x-axis')
         .attr("transform", "translate(0," + (height - padding) + ")")
         .call(xAxis);
       d3.select("svg")
         .append("g")
+        .attr('id', 'y-axis')
         .attr("transform", "translate(" + padding + ",0)")
         .call(yAxis);
 
@@ -130,12 +131,12 @@ const SimpleBarChartGDP = (props) => {
         .select(".simple-bar-chart")
         .append("div")
         .attr("id", "tooltip")
-        .attr("class", "tooltip");
+        .attr("class", "tooltip")
 
       //   Add pointer events
 
       d3.select(".simple-bar-chart")
-        .selectAll(".chart-bar")
+        .selectAll(".bar")
         .on("mouseover", (event) => {
           let barID = event.target.id.match(/\d+/);
           tooltip
@@ -143,12 +144,14 @@ const SimpleBarChartGDP = (props) => {
             .duration(0)
             .style("opacity", "100%")
             .style("left", barID * 3 + "px")
-            .style("top", "250px");
+            .style("top", "250px")
+
+            
           tooltip.html(getToolTipHtml(barID));
         });
 
       d3.select(".simple-bar-chart")
-        .selectAll(".chart-bar")
+        .selectAll(".bar")
         .on("mouseout", (event) => {
           tooltip.style("opacity", "0%");
         });
@@ -177,6 +180,7 @@ const SimpleBarChartGDP = (props) => {
     if (datasetUS !== "" && !chartIsBuilt) {
       generateGraph(datasetUS);
     }
+
   }, [datasetUS, chartIsBuilt]);
 
   return <div className="simple-bar-chart"></div>;

@@ -31,3 +31,7 @@ _Navigation_
 _Study timer_
 
 -Investigate the behaviour to ensure it works as expected
+
+_Simple bar chart_
+
+-Change z-index or position property so that the graph doesn't display over the nav bar on narrow screens
