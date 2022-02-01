@@ -1,3 +1,9 @@
 .canvas {
   background-color: beige;
 }
+
+.data-point {
+  height: 10px;
+  width: 2px;
+  fill: black;
+}

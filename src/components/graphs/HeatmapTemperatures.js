@@ -73,7 +73,7 @@ const HeatmapTemperatures = (props) => {
       const yScale = d3
         .scaleLinear()
         .domain([
-          d3.min(dataset["monthlyVariance"], (d) => d["month"]),
+          d3.min(dataset["monthlyVariance"], (d) => d["month"] - 1),
           d3.max(dataset["monthlyVariance"], (d) => d["month"]),
         ])
         .range([padding, height - padding]);
@@ -96,7 +96,18 @@ const HeatmapTemperatures = (props) => {
         .attr("transform", "translate(" + padding + ",0)")
         .call(yAxis);
 
-      console.log(datesList[0].getFullYear());
+      // Add rect elements
+
+      canvas
+        .selectAll("rect")
+        .data(dataset["monthlyVariance"])
+        .enter()
+        .append("rect")
+        .attr("x", (d, i) => xScale(datesList[i]))
+        .attr("y", (d, i) => yScale(datesList[i].getMonth()))
+        .attr("class", "data-point");
+
+      console.log(datesList);
     };
 
     if (
