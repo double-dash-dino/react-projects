@@ -1,21 +1,22 @@
 .scatterplot-graph {
+  color: black;
   position: relative;
   z-index: 1;
 }
 
 .canvas {
-  padding-top: 50px;
+  padding-top: 30px;
   background-color: gainsboro;
   position: relative;
   z-index: 1;
 }
 
-circle {
+.dot {
   stroke: black;
   opacity: 0.6;
 }
 
-circle:hover {
+.dot:hover {
   opacity: 1;
 }
 
@@ -28,7 +29,7 @@ circle:hover {
 }
 
 .tooltip {
-  width: 10em;
+  width: 5em;
   height: auto;
   opacity: 0;
   padding: 10px;
@@ -44,16 +45,22 @@ circle:hover {
 .tooltip-text {
   justify-self: center;
   align-self: center;
-  font-size: 0.7em;
+  font-size: 0.3em;
 }
 
 .chart-title {
-  font-size: 1.5em;
+  font-size: 0.9em;
+}
+.chart-subtitle {
+  font-size: 0.8em;
+}
+.side-text {
+  font-size: 0.6em;
 }
 
 .key-colour {
-  height: 1em;
-  width: 1em;
+  height: 0.5em;
+  width: 0.5em;
   stroke: black;
 }
 

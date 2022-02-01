@@ -52,6 +52,7 @@ const ScatterplotGraphDoping = (props) => {
         .attr("x", width / 3)
         .attr("y", padding)
         .attr("class", "chart-title")
+        .attr("id", "title")
         .text("Doping in Professional Bicycle Racing");
 
       d3.select("svg")
@@ -66,7 +67,8 @@ const ScatterplotGraphDoping = (props) => {
         .attr("transform", "rotate(-90)")
         .attr("x", -height / 2)
         .attr("y", padding + 30)
-        .text("Time in minutes");
+        .text("Time in minutes")
+        .attr("class", "side-text");
 
       // Add scales
 
@@ -100,14 +102,14 @@ const ScatterplotGraphDoping = (props) => {
         .append("text")
         .attr("x", width - padding - 125)
         .attr("y", height / 2 - 40)
-        .attr("font-size", "0.8em")
+        .attr("font-size", "0.4em")
         .text("No doping allegations");
 
       d3.select("svg")
         .append("text")
         .attr("x", width - padding - 125)
         .attr("y", height / 2 - 90)
-        .attr("font-size", "0.8em")
+        .attr("font-size", "0.4em")
         .text("Riders with doping allegations");
 
       // Add axes
@@ -120,11 +122,15 @@ const ScatterplotGraphDoping = (props) => {
       d3.select("svg")
         .append("g")
         .attr("transform", "translate(0," + (height - padding) + ")")
-        .call(xAxis);
+        .call(xAxis)
+        .attr("stroke", "black")
+        .attr("id", "x-axis");
       d3.select("svg")
         .append("g")
         .attr("transform", "translate(" + padding + ",0)")
-        .call(yAxis);
+        .call(yAxis)
+        .attr("stroke", "black")
+        .attr("id", "y-axis");
 
       // Add data points
 
@@ -138,9 +144,9 @@ const ScatterplotGraphDoping = (props) => {
         .attr("r", 7)
         .attr("class", (d) => {
           if (d["Doping"] === "") {
-            return "clean-data-point";
+            return "dot clean-data-point";
           } else {
-            return "dirty-data-point";
+            return "dot dirty-data-point";
           }
         })
         .attr("Year", (d) => d["Year"])
@@ -178,13 +184,15 @@ const ScatterplotGraphDoping = (props) => {
         .selectAll("circle")
         .on("mouseover", (event) => {
           let circleData = event.target.__data__;
-          console.log(circleData["Name"] + "   " + circleData["Nationality"]);
           tooltip
             .transition()
             .duration(0)
             .style("opacity", 1)
-            .style("left", xScale(circleData["Year"]) + "px")
-            .style("top", yScale(climbTimes[circleData["Place"] - 1]) + "px");
+            .style("left", xScale(circleData["Year"]) + 120 + "px")
+            .style(
+              "top",
+              yScale(climbTimes[circleData["Place"] - 1]) + 20 + "px"
+            );
 
           tooltip.html(getTooltipText(circleData));
         })
@@ -192,8 +200,6 @@ const ScatterplotGraphDoping = (props) => {
         .on("mouseout", (event) => {
           tooltip.transition().duration(0).style("opacity", 0);
         });
-
-      console.log(dataset);
     };
 
     if (
