@@ -18,6 +18,21 @@ const ScatterplotGraphDoping = (props) => {
 
   useEffect(() => {
     const buildChart = (dataset) => {
+      // Convert time data to usable format
+
+      const climbTimes = [];
+      for (let i = 0; i < dataset.length; i++) {
+        let newDate = new Date(
+          1970,
+          0,
+          1,
+          0,
+          dataset[i]["Time"].split(":")[0],
+          dataset[i]["Time"].split(":")[1]
+        );
+        climbTimes.push(newDate);
+      }
+
       const height = 700;
       const width = 800;
       const padding = 70;
@@ -63,10 +78,12 @@ const ScatterplotGraphDoping = (props) => {
         ])
         .range([padding, width - padding]);
       const yScale = d3
-        .scaleLinear()
+        .scaleTime()
         .domain([
-          d3.min(dataset, (d) => d["Seconds"]),
-          d3.max(dataset, (d) => d["Seconds"]),
+          d3.min(climbTimes),
+          d3.max(climbTimes),
+          //   d3.min(dataset, (d) => d["Seconds"]),
+          //   d3.max(dataset, (d) => d["Seconds"]),
         ])
         .range([padding, height - padding]);
 
@@ -101,7 +118,7 @@ const ScatterplotGraphDoping = (props) => {
       // Add axes
 
       const xAxis = d3.axisBottom().scale(xScale).tickFormat(d3.format("d"));
-      const yAxis = d3.axisLeft().scale(yScale);
+      const yAxis = d3.axisLeft().scale(yScale).tickFormat("%M:%S");
       d3.select("svg")
         .append("g")
         .attr("transform", "translate(0," + (height - padding) + ")")
@@ -119,7 +136,7 @@ const ScatterplotGraphDoping = (props) => {
         .enter()
         .append("circle")
         .attr("cx", (d) => xScale(d["Year"]))
-        .attr("cy", (d) => yScale(d["Seconds"]))
+        .attr("cy", (d, i) => yScale(climbTimes[i]))
         .attr("r", 7)
         .attr("class", (d) => {
           if (d["Doping"] === "") {
