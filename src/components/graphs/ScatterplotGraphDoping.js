@@ -118,7 +118,10 @@ const ScatterplotGraphDoping = (props) => {
       // Add axes
 
       const xAxis = d3.axisBottom().scale(xScale).tickFormat(d3.format("d"));
-      const yAxis = d3.axisLeft().scale(yScale).tickFormat("%M:%S");
+      const yAxis = d3
+        .axisLeft()
+        .scale(yScale)
+        .tickFormat(d3.timeFormat("%M:%S"));
       d3.select("svg")
         .append("g")
         .attr("transform", "translate(0," + (height - padding) + ")")
