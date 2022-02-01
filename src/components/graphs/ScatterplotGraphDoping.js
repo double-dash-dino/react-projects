@@ -70,6 +70,34 @@ const ScatterplotGraphDoping = (props) => {
         ])
         .range([padding, height - padding]);
 
+      // Add key
+
+      d3.select("svg")
+        .append("rect")
+        .attr("x", width - padding - 150)
+        .attr("y", height / 2 - 50)
+        .attr("class", "key-colour no-doping");
+
+      d3.select("svg")
+        .append("rect")
+        .attr("x", width - padding - 150)
+        .attr("y", height / 2 - 100)
+        .attr("class", "key-colour doping");
+
+      d3.select("svg")
+        .append("text")
+        .attr("x", width - padding - 125)
+        .attr("y", height / 2 - 40)
+        .attr("font-size", "0.8em")
+        .text("No doping allegations");
+
+      d3.select("svg")
+        .append("text")
+        .attr("x", width - padding - 125)
+        .attr("y", height / 2 - 90)
+        .attr("font-size", "0.8em")
+        .text("Riders with doping allegations");
+
       // Add axes
 
       const xAxis = d3.axisBottom().scale(xScale).tickFormat(d3.format("d"));

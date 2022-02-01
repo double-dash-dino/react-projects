@@ -50,3 +50,17 @@ circle:hover {
 .chart-title {
   font-size: 1.5em;
 }
+
+.key-colour {
+  height: 1em;
+  width: 1em;
+  stroke: black;
+}
+
+.doping {
+  fill: blue;
+}
+
+.no-doping {
+  fill: yellow;
+}
