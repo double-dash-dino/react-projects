@@ -79,12 +79,7 @@ const ScatterplotGraphDoping = (props) => {
         .range([padding, width - padding]);
       const yScale = d3
         .scaleTime()
-        .domain([
-          d3.min(climbTimes),
-          d3.max(climbTimes),
-          //   d3.min(dataset, (d) => d["Seconds"]),
-          //   d3.max(dataset, (d) => d["Seconds"]),
-        ])
+        .domain([d3.min(climbTimes), d3.max(climbTimes)])
         .range([padding, height - padding]);
 
       // Add key
@@ -189,7 +184,7 @@ const ScatterplotGraphDoping = (props) => {
             .duration(0)
             .style("opacity", 1)
             .style("left", xScale(circleData["Year"]) + "px")
-            .style("top", yScale(circleData["Seconds"]) + "px");
+            .style("top", yScale(climbTimes[circleData["Place"] - 1]) + "px");
 
           tooltip.html(getTooltipText(circleData));
         })
