@@ -18,6 +18,19 @@ const HeatmapTemperatures = (props) => {
 
   useEffect(() => {
     const buildChart = (dataset) => {
+      // Convert dates to usable format
+      const datesList = [];
+      for (let i = 0; i < dataset["monthlyVariance"].length; i++) {
+        let newDate = new Date(
+          dataset["monthlyVariance"][i]["year"],
+          dataset["monthlyVariance"][i]["month"] - 1,
+          1,
+          0,
+          0,
+          0
+        );
+        datesList.push(newDate);
+      }
       // Convert number to month of the year
       const monthConverter = (num) => {
         const months = [
@@ -38,7 +51,7 @@ const HeatmapTemperatures = (props) => {
       };
 
       const height = 700;
-      const width = 800;
+      const width = 1000;
       const padding = 70;
 
       // Build canvas
@@ -53,11 +66,8 @@ const HeatmapTemperatures = (props) => {
       // Add scales
 
       const xScale = d3
-        .scaleLinear()
-        .domain([
-          d3.min(dataset["monthlyVariance"], (d) => d["year"]),
-          d3.max(dataset["monthlyVariance"], (d) => d["year"]),
-        ])
+        .scaleTime()
+        .domain([d3.min(datesList), d3.max(datesList)])
         .range([padding, width - padding]);
 
       const yScale = d3
@@ -70,7 +80,7 @@ const HeatmapTemperatures = (props) => {
 
       // Add axes
 
-      const xAxis = d3.axisBottom().scale(xScale).tickFormat(d3.format("d"));
+      const xAxis = d3.axisBottom().scale(xScale);
       const yAxis = d3
         .axisLeft()
         .scale(yScale)
@@ -85,6 +95,8 @@ const HeatmapTemperatures = (props) => {
         .append("g")
         .attr("transform", "translate(" + padding + ",0)")
         .call(yAxis);
+
+      console.log(datesList[0].getFullYear());
     };
 
     if (
