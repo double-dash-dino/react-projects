@@ -1,0 +1,73 @@
+.scatterplot-graph {
+  color: black;
+  position: relative;
+  z-index: 1;
+}
+
+.canvas {
+  padding-top: 30px;
+  background-color: gainsboro;
+  position: relative;
+  z-index: 1;
+}
+
+.dot {
+  stroke: black;
+  opacity: 0.6;
+}
+
+.dot:hover {
+  opacity: 1;
+}
+
+.clean-data-point {
+  fill: yellow;
+}
+
+.dirty-data-point {
+  fill: blue;
+}
+
+.tooltip {
+  width: 5em;
+  height: auto;
+  opacity: 0;
+  padding: 10px;
+  background-color: rgb(255, 150, 111);
+  border-radius: 15px;
+  position: absolute;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+}
+
+.tooltip-text {
+  justify-self: center;
+  align-self: center;
+  font-size: 0.3em;
+}
+
+.chart-title {
+  font-size: 0.9em;
+}
+.chart-subtitle {
+  font-size: 0.8em;
+}
+.side-text {
+  font-size: 0.6em;
+}
+
+.key-colour {
+  height: 0.5em;
+  width: 0.5em;
+  stroke: black;
+}
+
+.doping {
+  fill: blue;
+}
+
+.no-doping {
+  fill: yellow;
+}
