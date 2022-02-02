@@ -31,6 +31,31 @@ const HeatmapTemperatures = (props) => {
         );
         datesList.push(newDate);
       }
+
+      const varianceMax = d3.max(
+        dataset["monthlyVariance"],
+        (d) => d["variance"]
+      );
+      const varianceMin = d3.min(
+        dataset["monthlyVariance"],
+        (d) => d["variance"]
+      );
+
+      const varianceRange = varianceMax - varianceMin;
+      const numberOfShades = 9;
+
+      console.log(varianceRange);
+
+      //   Get colour scale
+      const getColour = (num) => {
+        let shadeNumber = (num + varianceMin / varianceRange) * numberOfShades;
+        return (
+          "rgb(255," + shadeNumber * 15 + 1 + "," + shadeNumber * 28 + 1 + ")"
+        );
+      };
+
+      console.log(varianceMin, varianceMax, varianceRange, numberOfShades);
+
       // Convert number to month of the year
       const monthConverter = (num) => {
         const months = [
@@ -51,7 +76,7 @@ const HeatmapTemperatures = (props) => {
       };
 
       const height = 700;
-      const width = 1000;
+      const width = 1200;
       const padding = 70;
 
       // Build canvas
@@ -105,9 +130,10 @@ const HeatmapTemperatures = (props) => {
         .append("rect")
         .attr("x", (d, i) => xScale(datesList[i]))
         .attr("y", (d, i) => yScale(datesList[i].getMonth()))
-        .attr("class", "data-point");
+        .attr("class", "data-point")
+        .style("fill", (d, i) => getColour(d["variance"]));
 
-      console.log(datesList);
+      console.log(dataset);
     };
 
     if (
