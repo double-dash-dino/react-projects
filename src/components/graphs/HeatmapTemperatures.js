@@ -121,6 +121,12 @@ const HeatmapTemperatures = (props) => {
         .attr("transform", "translate(" + padding + ",0)")
         .call(yAxis);
 
+      // Add tooltip
+
+      const tooltip = d3
+        .select(".heatmap-temperatures")
+        .append("div")
+        .attr("class", "tooltip");
       // Add rect elements
 
       canvas
@@ -134,6 +140,33 @@ const HeatmapTemperatures = (props) => {
         .style("fill", (d, i) => getColour(d["variance"]));
 
       console.log(dataset);
+
+      // Add pointer event
+
+      canvas
+        .selectAll("rect")
+        .on("mouseover", (event) => {
+          let rectData = event.target.__data__;
+          console.log(rectData);
+          tooltip
+            .transition()
+            .transition(0)
+            .style("opacity", 0.8)
+            .style(
+              "left",
+              xScale(
+                new Date(rectData["year"], rectData["month"], 1, 0, 0, 0)
+              ) +
+                5 +
+                "px"
+            )
+            .style("top", yScale(rectData["month"]) + "px");
+
+          tooltip.html("test");
+        })
+        .on("mouseout", (event) => {
+          tooltip.transition().duration(0).style("opacity", 0);
+        });
     };
 
     if (

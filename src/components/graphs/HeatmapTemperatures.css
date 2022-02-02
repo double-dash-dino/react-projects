@@ -1,9 +1,30 @@
+.heatmap-temperatures {
+  position: relative;
+  z-index: 1;
+}
+
 .canvas {
   background-color: beige;
+  position: relative;
+  z-index: 1;
 }
 
 .data-point {
   height: 46px;
-  width: 3px;
+  width: 4px;
   fill: black;
+}
+
+.data-point:hover {
+  stroke: black;
+}
+
+.tooltip {
+  position: absolute;
+  z-index: 10;
+  background-color: black;
+  opacity: 0;
+  height: 25px;
+  width: 25px;
+  pointer-events: none;
 }
