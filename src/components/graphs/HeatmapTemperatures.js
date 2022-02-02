@@ -34,31 +34,35 @@ const HeatmapTemperatures = (props) => {
       //   Get colour scale
 
       const baseTemperature = dataset["baseTemperature"];
-      const varianceMax = d3.max(
+      const temperatureMax = d3.max(
         dataset["monthlyVariance"],
-        (d) => d["variance"]
+        (d) => Math.round((baseTemperature + d["variance"]) * 10) / 10
       );
-      const varianceMin = d3.min(
+      const temperatureMin = d3.min(
         dataset["monthlyVariance"],
-        (d) => d["variance"]
+        (d) => Math.round((baseTemperature + d["variance"]) * 10) / 10
       );
-
-      const varianceRange = varianceMax - varianceMin;
-      const numberOfShades = 8;
+      // const tempScale = d3.scaleLinear().
+      const temperatureRange = temperatureMax - temperatureMin;
 
       const getColour = (num) => {
-        let shadeNumber = Math.round(
-          (num + varianceMin / varianceRange) * numberOfShades
-        );
-        const shades = [];
-        return (
-          "rgb(" +
-          (255 - shadeNumber * (255 / numberOfShades)) +
-          ",0," +
-          shadeNumber * (255 / numberOfShades) +
-          1 +
-          ")"
-        );
+        const shades = ["#E62A00", "F06E00", "#FFCC01", "#ACB5F5", "#2C63DB"];
+        let shade = "";
+        let temperature = Math.round((baseTemperature + num) * 10) / 10;
+        if (temperature < 5) {
+          shade = "#2C63DB";
+        } else if (temperature < 7) {
+          shade = "#ACB5F5";
+        } else if (temperature < 9) {
+          shade = "#FFCC01";
+        } else if (temperature < 11) {
+          shade = "#F06E00";
+        } else {
+          shade = "#E62A00";
+        }
+
+        // console.log(dataset, shade);
+        return shade;
       };
 
       // Get tooltip html
@@ -97,9 +101,9 @@ const HeatmapTemperatures = (props) => {
         return months[num - 1];
       };
 
-      const height = 700;
+      const height = 800;
       const width = 1200;
-      const padding = 70;
+      const padding = 120;
 
       // Build canvas
 
@@ -149,6 +153,38 @@ const HeatmapTemperatures = (props) => {
         .select(".heatmap-temperatures")
         .append("div")
         .attr("class", "tooltip");
+
+      // Add text elements
+
+      canvas
+        .append("text")
+        .attr("x", width / 2)
+        .attr("y", padding - 50)
+        .text("Monthly Global Land-Surface Temperature")
+        .attr("id", "title");
+
+      canvas
+        .append("text")
+        .attr("x", width / 2)
+        .attr("y", padding - 10)
+        .text("1753 - 2015: base temperature 8.66°C")
+        .attr("id", "sub-title");
+
+      canvas
+        .append("text")
+        .attr("x", width / 2)
+        .attr("y", height - padding + 40)
+        .text("Years")
+        .attr("id", "bottom-text")
+        .attr("font-size", "0.8em");
+      canvas
+        .append("text")
+        .attr("x", -height / 2)
+        .attr("y", padding - 40)
+        .attr("transform", "rotate(-90)")
+        .text("Months")
+        .attr("font-size", "0.8em")
+        .attr("id", "side-text");
       // Add rect elements
 
       canvas
@@ -161,15 +197,12 @@ const HeatmapTemperatures = (props) => {
         .attr("class", "data-point")
         .style("fill", (d, i) => getColour(d["variance"]));
 
-      console.log(dataset, dataset["baseTemperature"]);
-
       // Add pointer event
 
       canvas
         .selectAll("rect")
         .on("mouseover", (event) => {
           let rectData = event.target.__data__;
-          console.log(rectData);
           tooltip
             .transition()
             .transition(0)
@@ -186,7 +219,7 @@ const HeatmapTemperatures = (props) => {
 
           tooltip.html(getToolTipHtml(rectData));
         })
-        .on("mouseout", (event) => {
+        .on("mouseout", () => {
           tooltip.transition().duration(0).style("opacity", 0);
         });
     };
