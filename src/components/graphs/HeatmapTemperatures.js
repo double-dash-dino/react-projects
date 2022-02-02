@@ -44,15 +44,30 @@ const HeatmapTemperatures = (props) => {
       );
 
       const varianceRange = varianceMax - varianceMin;
-      const numberOfShades = 9;
+      const numberOfShades = 8;
+
+      const getColour = (num) => {
+        let shadeNumber = Math.round(
+          (num + varianceMin / varianceRange) * numberOfShades
+        );
+        const shades = [];
+        return (
+          "rgb(" +
+          (255 - shadeNumber * (255 / numberOfShades)) +
+          ",0," +
+          shadeNumber * (255 / numberOfShades) +
+          1 +
+          ")"
+        );
+      };
 
       // Get tooltip html
 
       const getToolTipHtml = (data) => {
         let date = data["year"] + " - " + monthConverter(data["month"]);
         let temperature =
-          baseTemperature + Math.round(data["variance"] * 10) / 10 + "°C";
-        let variance = data["variance"] + "°C";
+          Math.round((baseTemperature + data["variance"]) * 10) / 10 + "°C";
+        let variance = Math.round(data["variance"] * 10) / 10 + "°C";
         return (
           "<p class='tooltip-text'>" +
           date +
@@ -60,13 +75,6 @@ const HeatmapTemperatures = (props) => {
           temperature +
           " <br> " +
           variance
-        );
-      };
-
-      const getColour = (num) => {
-        let shadeNumber = (num + varianceMin / varianceRange) * numberOfShades;
-        return (
-          "rgb(255," + shadeNumber * 15 + 1 + "," + shadeNumber * 28 + 1 + ")"
         );
       };
 
@@ -112,8 +120,8 @@ const HeatmapTemperatures = (props) => {
       const yScale = d3
         .scaleLinear()
         .domain([
-          d3.min(dataset["monthlyVariance"], (d) => d["month"] - 1),
-          d3.max(dataset["monthlyVariance"], (d) => d["month"]),
+          d3.min(dataset["monthlyVariance"], (d) => d["month"] - 0.5),
+          d3.max(dataset["monthlyVariance"], (d) => d["month"] + 0.5),
         ])
         .range([padding, height - padding]);
 
@@ -149,11 +157,11 @@ const HeatmapTemperatures = (props) => {
         .enter()
         .append("rect")
         .attr("x", (d, i) => xScale(datesList[i]))
-        .attr("y", (d, i) => yScale(datesList[i].getMonth()))
+        .attr("y", (d, i) => yScale(datesList[i].getMonth() + 0.5))
         .attr("class", "data-point")
         .style("fill", (d, i) => getColour(d["variance"]));
 
-      console.log(dataset);
+      console.log(dataset, dataset["baseTemperature"]);
 
       // Add pointer event
 

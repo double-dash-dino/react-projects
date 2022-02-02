@@ -12,7 +12,6 @@
 .data-point {
   height: 46px;
   width: 4px;
-  fill: black;
 }
 
 .data-point:hover {
