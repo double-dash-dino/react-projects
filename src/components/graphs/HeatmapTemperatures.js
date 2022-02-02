@@ -36,7 +36,6 @@ const HeatmapTemperatures = (props) => {
       const baseTemperature = dataset["baseTemperature"];
 
       const getColour = (num) => {
-        const shades = ["#E62A00", "F06E00", "#FFCC01", "#ACB5F5", "#2C63DB"];
         let shade = "";
         let temperature = Math.round((baseTemperature + num) * 10) / 10;
         if (temperature < 5) {
@@ -91,7 +90,7 @@ const HeatmapTemperatures = (props) => {
 
       const height = 800;
       const width = 1200;
-      const padding = 120;
+      const padding = 150;
 
       // Build canvas
 
@@ -189,8 +188,31 @@ const HeatmapTemperatures = (props) => {
 
       const keyScale = d3
         .scaleLinear()
-        .domain([0, 20])
-        .range([padding, width - padding]);
+        .domain([3, 13])
+        .range([padding, width / 3]);
+
+      const keyAxis = d3.axisBottom().scale(keyScale);
+
+      canvas
+        .append("g")
+        .attr("id", "key-group")
+        .attr("transform", "translate(0, " + (height - padding / 3) + ")")
+        .call(keyAxis.tickValues(["5", "7", "9", "11"]));
+
+      const shades = ["#2C63DB", "#ACB5F5", "#FFCC01", "#F06E00", "#E62A00"];
+
+      canvas
+        .select("#key-group")
+        .selectAll("rect")
+        .data(shades)
+        .enter()
+        .append("rect")
+        .attr("x", (d, i) => keyScale(i) * 2)
+        .attr("y", -keyScale(1) / 2)
+        .attr("height", keyScale(1) / 2)
+        .attr("width", keyScale(1) / 2)
+        .style("stroke", "black")
+        .style("fill", (d) => d);
 
       // Add pointer event
 
