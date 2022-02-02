@@ -53,7 +53,14 @@ const HeatmapTemperatures = (props) => {
         let temperature =
           baseTemperature + Math.round(data["variance"] * 10) / 10 + "°C";
         let variance = data["variance"] + "°C";
-        return "<p>" + date + " <br> " + temperature + " <br> " + variance;
+        return (
+          "<p class='tooltip-text'>" +
+          date +
+          " <br> " +
+          temperature +
+          " <br> " +
+          variance
+        );
       };
 
       const getColour = (num) => {
