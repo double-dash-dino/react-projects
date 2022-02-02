@@ -31,7 +31,9 @@ const HeatmapTemperatures = (props) => {
         );
         datesList.push(newDate);
       }
+      //   Get colour scale
 
+      const baseTemperature = dataset["baseTemperature"];
       const varianceMax = d3.max(
         dataset["monthlyVariance"],
         (d) => d["variance"]
@@ -44,17 +46,22 @@ const HeatmapTemperatures = (props) => {
       const varianceRange = varianceMax - varianceMin;
       const numberOfShades = 9;
 
-      console.log(varianceRange);
+      // Get tooltip html
 
-      //   Get colour scale
+      const getToolTipHtml = (data) => {
+        let date = data["year"] + " - " + monthConverter(data["month"]);
+        let temperature =
+          baseTemperature + Math.round(data["variance"] * 10) / 10 + "°C";
+        let variance = data["variance"] + "°C";
+        return "<p>" + date + " <br> " + temperature + " <br> " + variance;
+      };
+
       const getColour = (num) => {
         let shadeNumber = (num + varianceMin / varianceRange) * numberOfShades;
         return (
           "rgb(255," + shadeNumber * 15 + 1 + "," + shadeNumber * 28 + 1 + ")"
         );
       };
-
-      console.log(varianceMin, varianceMax, varianceRange, numberOfShades);
 
       // Convert number to month of the year
       const monthConverter = (num) => {
@@ -162,7 +169,7 @@ const HeatmapTemperatures = (props) => {
             )
             .style("top", yScale(rectData["month"]) + "px");
 
-          tooltip.html("test");
+          tooltip.html(getToolTipHtml(rectData));
         })
         .on("mouseout", (event) => {
           tooltip.transition().duration(0).style("opacity", 0);
