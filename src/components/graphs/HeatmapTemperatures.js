@@ -34,16 +34,6 @@ const HeatmapTemperatures = (props) => {
       //   Get colour scale
 
       const baseTemperature = dataset["baseTemperature"];
-      const temperatureMax = d3.max(
-        dataset["monthlyVariance"],
-        (d) => Math.round((baseTemperature + d["variance"]) * 10) / 10
-      );
-      const temperatureMin = d3.min(
-        dataset["monthlyVariance"],
-        (d) => Math.round((baseTemperature + d["variance"]) * 10) / 10
-      );
-      // const tempScale = d3.scaleLinear().
-      const temperatureRange = temperatureMax - temperatureMin;
 
       const getColour = (num) => {
         const shades = ["#E62A00", "F06E00", "#FFCC01", "#ACB5F5", "#2C63DB"];
@@ -60,8 +50,6 @@ const HeatmapTemperatures = (props) => {
         } else {
           shade = "#E62A00";
         }
-
-        // console.log(dataset, shade);
         return shade;
       };
 
@@ -196,6 +184,13 @@ const HeatmapTemperatures = (props) => {
         .attr("y", (d, i) => yScale(datesList[i].getMonth() + 0.5))
         .attr("class", "data-point")
         .style("fill", (d, i) => getColour(d["variance"]));
+
+      // Add key
+
+      const keyScale = d3
+        .scaleLinear()
+        .domain([0, 20])
+        .range([padding, width - padding]);
 
       // Add pointer event
 
