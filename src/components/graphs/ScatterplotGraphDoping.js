@@ -43,7 +43,7 @@ const ScatterplotGraphDoping = (props) => {
         .append("svg")
         .attr("height", height)
         .attr("width", width)
-        .attr("class", "canvas");
+        .attr("class", "scatterplot-canvas");
 
       // Add text elements
 
@@ -51,15 +51,15 @@ const ScatterplotGraphDoping = (props) => {
         .append("text")
         .attr("x", width / 3)
         .attr("y", padding)
-        .attr("class", "chart-title")
-        .attr("id", "title")
+        .attr("class", "scatterplot-title")
+        .attr("id", "scatterplot-title")
         .text("Doping in Professional Bicycle Racing");
 
       d3.select("svg")
         .append("text")
         .attr("x", width / 3 + 50)
         .attr("y", padding * 1.5)
-        .attr("class", "chart-subtitle")
+        .attr("class", "scatterplot-subtitle")
         .text("35 Fastest times up Alpe d'Huez");
 
       d3.select("svg")
@@ -157,8 +157,8 @@ const ScatterplotGraphDoping = (props) => {
       const tooltip = d3
         .select(".scatterplot-graph")
         .append("div")
-        .attr("id", "tooltip")
-        .attr("class", "tooltip");
+        .attr("id", "scatterplot-tooltip")
+        .attr("class", "scatterplot-tooltip");
 
       // Format text data for tooltip
 
@@ -168,7 +168,7 @@ const ScatterplotGraphDoping = (props) => {
         let line3 = data["Doping"];
 
         return (
-          "<p class='tooltip-text'> " +
+          "<p class='scatterplot-tooltip-text'> " +
           line1 +
           " <br> " +
           line2 +
@@ -188,7 +188,7 @@ const ScatterplotGraphDoping = (props) => {
             .transition()
             .duration(0)
             .style("opacity", 1)
-            .style("left", xScale(circleData["Year"]) + 120 + "px")
+            .style("left", xScale(circleData["Year"]) + 70 + "px")
             .style(
               "top",
               yScale(climbTimes[circleData["Place"] - 1]) + 20 + "px"

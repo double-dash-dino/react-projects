@@ -4,7 +4,7 @@
   z-index: 1;
 }
 
-.canvas {
+.scatterplot-canvas {
   padding-top: 30px;
   background-color: gainsboro;
   position: relative;
@@ -28,7 +28,7 @@
   fill: blue;
 }
 
-.tooltip {
+.scatterplot-tooltip {
   width: 5em;
   height: auto;
   opacity: 0;
@@ -42,17 +42,17 @@
   z-index: 10;
 }
 
-.tooltip-text {
+.scatterplot-tooltip-text {
   justify-self: center;
   align-self: center;
   font-size: 0.3em;
 }
 
-.chart-title {
-  font-size: 0.9em;
+.scatterplot-title {
+  font-size: 0.7em;
 }
-.chart-subtitle {
-  font-size: 0.8em;
+.scatterplot-subtitle {
+  font-size: 0.5em;
 }
 .side-text {
   font-size: 0.6em;

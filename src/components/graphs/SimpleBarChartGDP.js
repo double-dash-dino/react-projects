@@ -160,7 +160,7 @@ const SimpleBarChartGDP = (props) => {
         .attr("x", -height / 2)
         .attr("y", width / 8)
         .text("Gross Domestic Product")
-        .attr("class", "side-text");
+        .attr("class", "bar-chart-side-text");
 
       setChartIsBuilt(true);
     };
