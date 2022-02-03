@@ -145,14 +145,14 @@ const HeatmapTemperatures = (props) => {
 
       canvas
         .append("text")
-        .attr("x", width / 2)
+        .attr("x", (width - padding) / 2 - 200)
         .attr("y", padding - 50)
         .text("Monthly Global Land-Surface Temperature")
         .attr("id", "title");
 
       canvas
         .append("text")
-        .attr("x", width / 2)
+        .attr("x", (width - padding) / 2 - 100)
         .attr("y", padding - 10)
         .text("1753 - 2015: base temperature 8.66°C")
         .attr("id", "sub-title");

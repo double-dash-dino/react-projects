@@ -35,3 +35,11 @@
   text-align: center;
   font-size: 0.7em;
 }
+
+#title {
+  font-size: 2em;
+}
+
+#sub-title {
+  font-size: 1em;
+}
