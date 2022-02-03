@@ -9,12 +9,12 @@
   z-index: 1;
 }
 
-.data-point {
-  height: 46px;
-  width: 4px;
+.cell {
+  height: 40px;
+  width: 3px;
 }
 
-.data-point:hover {
+.cell:hover {
   stroke: black;
 }
 
@@ -33,13 +33,17 @@
 .tooltip-text {
   color: white;
   text-align: center;
-  font-size: 0.7em;
+  font-size: 0.4em;
 }
 
 #title {
-  font-size: 2em;
+  font-size: 1em;
 }
 
-#sub-title {
-  font-size: 1em;
+#description {
+  font-size: 0.5em;
+}
+
+g {
+  color: black;
 }

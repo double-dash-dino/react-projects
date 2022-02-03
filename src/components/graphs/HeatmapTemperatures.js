@@ -18,19 +18,6 @@ const HeatmapTemperatures = (props) => {
 
   useEffect(() => {
     const buildChart = (dataset) => {
-      // Convert dates to usable format
-      const datesList = [];
-      for (let i = 0; i < dataset["monthlyVariance"].length; i++) {
-        let newDate = new Date(
-          dataset["monthlyVariance"][i]["year"],
-          dataset["monthlyVariance"][i]["month"] - 1,
-          1,
-          0,
-          0,
-          0
-        );
-        datesList.push(newDate);
-      }
       //   Get colour scale
 
       const baseTemperature = dataset["baseTemperature"];
@@ -104,9 +91,10 @@ const HeatmapTemperatures = (props) => {
       // Add scales
 
       const xScale = d3
-        .scaleTime()
-        .domain([d3.min(datesList), d3.max(datesList)])
-        .range([padding, width - padding]);
+        .scaleBand()
+        .domain(dataset["monthlyVariance"].map((d) => d["year"]))
+        .range([padding, width - padding])
+        .padding(0);
 
       const yScale = d3
         .scaleLinear()
@@ -118,7 +106,10 @@ const HeatmapTemperatures = (props) => {
 
       // Add axes
 
-      const xAxis = d3.axisBottom().scale(xScale);
+      const xAxis = d3
+        .axisBottom()
+        .scale(xScale)
+        .tickValues(xScale.domain().filter((year) => year % 10 === 0));
       const yAxis = d3
         .axisLeft()
         .scale(yScale)
@@ -127,12 +118,14 @@ const HeatmapTemperatures = (props) => {
       canvas
         .append("g")
         .attr("transform", "translate(0," + (height - padding) + ")")
-        .call(xAxis);
+        .call(xAxis)
+        .attr("id", "x-axis");
 
       canvas
         .append("g")
         .attr("transform", "translate(" + padding + ",0)")
-        .call(yAxis);
+        .call(yAxis)
+        .attr("id", "y-axis");
 
       // Add tooltip
 
@@ -155,7 +148,7 @@ const HeatmapTemperatures = (props) => {
         .attr("x", (width - padding) / 2 - 100)
         .attr("y", padding - 10)
         .text("1753 - 2015: base temperature 8.66°C")
-        .attr("id", "sub-title");
+        .attr("id", "description");
 
       canvas
         .append("text")
@@ -163,25 +156,25 @@ const HeatmapTemperatures = (props) => {
         .attr("y", height - padding + 40)
         .text("Years")
         .attr("id", "bottom-text")
-        .attr("font-size", "0.8em");
+        .attr("font-size", "0.4em");
       canvas
         .append("text")
         .attr("x", -height / 2)
         .attr("y", padding - 40)
         .attr("transform", "rotate(-90)")
         .text("Months")
-        .attr("font-size", "0.8em")
+        .attr("font-size", "0.4em")
         .attr("id", "side-text");
-      // Add rect elements
 
+      // Add rect elements
       canvas
         .selectAll("rect")
         .data(dataset["monthlyVariance"])
         .enter()
         .append("rect")
-        .attr("x", (d, i) => xScale(datesList[i]))
-        .attr("y", (d, i) => yScale(datesList[i].getMonth() + 0.5))
-        .attr("class", "data-point")
+        .attr("x", (d, i) => xScale(d["year"]))
+        .attr("y", (d, i) => yScale(d["month"] - 0.5))
+        .attr("class", "cell")
         .style("fill", (d, i) => getColour(d["variance"]));
 
       // Add key
@@ -217,26 +210,19 @@ const HeatmapTemperatures = (props) => {
       // Add pointer event
 
       canvas
-        .selectAll("rect")
-        .on("mouseover", (event) => {
+        .selectAll(".cell")
+        .on("mouseenter", (event) => {
           let rectData = event.target.__data__;
           tooltip
             .transition()
             .transition(0)
             .style("opacity", 0.8)
-            .style(
-              "left",
-              xScale(
-                new Date(rectData["year"], rectData["month"], 1, 0, 0, 0)
-              ) +
-                5 +
-                "px"
-            )
+            .style("left", xScale(rectData["year"]) + 5 + "px")
             .style("top", yScale(rectData["month"]) + "px");
 
           tooltip.html(getToolTipHtml(rectData));
         })
-        .on("mouseout", () => {
+        .on("mouseleave", () => {
           tooltip.transition().duration(0).style("opacity", 0);
         });
     };
