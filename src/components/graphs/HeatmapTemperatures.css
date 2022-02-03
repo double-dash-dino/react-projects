@@ -3,7 +3,7 @@
   z-index: 1;
 }
 
-.canvas {
+.heatmap-canvas {
   background-color: beige;
   position: relative;
   z-index: 1;
@@ -18,7 +18,7 @@
   stroke: black;
 }
 
-.tooltip {
+.heatmap-tooltip {
   position: absolute;
   z-index: 10;
   background-color: black;
@@ -36,11 +36,11 @@
   font-size: 0.4em;
 }
 
-#title {
+#heatmap-title {
   font-size: 1em;
 }
 
-#description {
+#heatmap-description {
   font-size: 0.5em;
 }
 

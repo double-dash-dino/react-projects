@@ -22,7 +22,7 @@
   opacity: 0;
 }
 
-.tooltip {
+.bar-chart-tooltip {
   width: 5em;
   height: 1em;
   background-color: white;
@@ -38,7 +38,7 @@
   z-index: 10;
 }
 
-.tooltip-text {
+.bar-chart-tooltip-text {
   font-size: 0.6em;
 }
 
@@ -46,6 +46,6 @@
   font-size: 0.4em;
 }
 
-.side-text {
+.bar-chart-side-text {
   font-size: 0.5em;
 }
