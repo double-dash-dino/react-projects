@@ -45,7 +45,7 @@ const SimpleBarChartGDP = (props) => {
         "$ " + datasetUS.data[num][1].toLocaleString(undefined) + " Billion";
 
       return (
-        "<p class='tooltip-text'>" +
+        "<p class='bar-chart-tooltip-text'>" +
         tooltipDate +
         " <br> " +
         tooltipAmount +
@@ -118,8 +118,8 @@ const SimpleBarChartGDP = (props) => {
       const tooltip = d3
         .select(".simple-bar-chart")
         .append("div")
-        .attr("id", "tooltip")
-        .attr("class", "tooltip");
+        .attr("id", "bar-chart-tooltip")
+        .attr("class", "bar-chart-tooltip");
 
       //   Add pointer events
 

@@ -86,7 +86,7 @@ const HeatmapTemperatures = (props) => {
         .append("svg")
         .attr("height", height)
         .attr("width", width)
-        .attr("class", "canvas");
+        .attr("class", "heatmap-canvas");
 
       // Add scales
 
@@ -132,7 +132,7 @@ const HeatmapTemperatures = (props) => {
       const tooltip = d3
         .select(".heatmap-temperatures")
         .append("div")
-        .attr("class", "tooltip");
+        .attr("class", "heatmap-tooltip");
 
       // Add text elements
 
@@ -141,14 +141,14 @@ const HeatmapTemperatures = (props) => {
         .attr("x", (width - padding) / 2 - 200)
         .attr("y", padding - 50)
         .text("Monthly Global Land-Surface Temperature")
-        .attr("id", "title");
+        .attr("id", "heatmap-title");
 
       canvas
         .append("text")
         .attr("x", (width - padding) / 2 - 100)
         .attr("y", padding - 10)
         .text("1753 - 2015: base temperature 8.66°C")
-        .attr("id", "description");
+        .attr("id", "heatmap-description");
 
       canvas
         .append("text")
@@ -217,7 +217,7 @@ const HeatmapTemperatures = (props) => {
             .transition()
             .transition(0)
             .style("opacity", 0.8)
-            .style("left", xScale(rectData["year"]) + 5 + "px")
+            .style("left", xScale(rectData["year"] + 5) + "px")
             .style("top", yScale(rectData["month"]) + "px");
 
           tooltip.html(getToolTipHtml(rectData));
