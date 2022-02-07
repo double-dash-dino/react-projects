@@ -25,6 +25,7 @@ const ChoroplethUSEducation = (props) => {
 
   useEffect(() => {
     const buildChart = (data1, data2) => {
+      // Get data values
       const dataset = { education: data1, usCounties: data2 };
       const educationMin = d3.min(
         dataset.education,
@@ -34,7 +35,7 @@ const ChoroplethUSEducation = (props) => {
         dataset.education,
         (d) => d["bachelorsOrHigher"]
       );
-      console.log(datasetEducation, datasetUSCounties, dataset);
+      // Build canvas
       const width = 1000;
       const height = 1000;
       const padding = 50;
@@ -46,6 +47,7 @@ const ChoroplethUSEducation = (props) => {
         .attr("width", width)
         .attr("class", "canvas");
 
+      // Get colours scale
       const numberOfSteps = 8;
       const colourScale = d3
         .scaleThreshold()
@@ -58,11 +60,7 @@ const ChoroplethUSEducation = (props) => {
         )
         .range(d3.schemeBlues[numberOfSteps + 1]);
 
-      console.log(
-        colourScale(5),
-        colourScale(50),
-        d3.max(dataset.education, (d) => d["bachelorsOrHigher"])
-      );
+      //  Draw map + fill in colours
 
       canvas
         .append("g")
@@ -87,12 +85,47 @@ const ChoroplethUSEducation = (props) => {
         .attr("d", d3.geoPath());
 
       // Add tooltip
-      d3.select(".choropleth-us-education")
+      const tooltip = d3
+        .select(".choropleth-us-education")
         .append("div")
         .attr("class", "choropleth-tooltip")
         .style("top", "200px")
-        .style("left", "200px")
-        .html("<p> test <p>");
+        .style("left", "200px");
+
+      // Get tooltip HTML
+
+      const getTooltipHtml = (id) => {
+        let countyCode = dataset.education.filter((obj) => {
+          return obj.fips === id;
+        })[0];
+        return (
+          "<p class='choropleth-tooltip-text'>" +
+          countyCode["area_name"] +
+          ", " +
+          countyCode["state"] +
+          " : " +
+          countyCode["bachelorsOrHigher"] +
+          "% </p>"
+        );
+      };
+
+      // Add event listeners
+
+      canvas
+        .selectAll("path")
+        .on("mouseover", (event) => {
+          let data = event.target.__data__;
+          tooltip
+            .transition()
+            .duration(0)
+            .style("opacity", 1)
+            .style("top", event.pageY + 10 + "px")
+            .style("left", event.pageX + 10 + "px");
+          tooltip.html(getTooltipHtml(data.id));
+        })
+        .on("mouseout", () => {
+          tooltip.transition().duration(0).style("opacity", 0);
+        });
     };
 
     if (
