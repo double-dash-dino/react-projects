@@ -56,7 +56,7 @@ const ChoroplethUSEducation = (props) => {
             (educationMax - educationMin) / numberOfSteps
           )
         )
-        .range(d3.schemeGreens[numberOfSteps + 1]);
+        .range(d3.schemeBlues[numberOfSteps + 1]);
 
       console.log(
         colourScale(5),
@@ -78,10 +78,21 @@ const ChoroplethUSEducation = (props) => {
         .append("path")
         .attr("class", "county")
         .attr("data-fips", (d) => d["id"])
-        .attr("fill", (d, i) =>
-          colourScale(dataset.education[i]["bachelorsOrHigher"])
-        )
+        .attr("fill", (d, i) => {
+          let countyCode = dataset.education.filter((obj) => {
+            return obj.fips === d.id;
+          })[0];
+          return colourScale(countyCode["bachelorsOrHigher"]);
+        })
         .attr("d", d3.geoPath());
+
+      // Add tooltip
+      d3.select(".choropleth-us-education")
+        .append("div")
+        .attr("class", "choropleth-tooltip")
+        .style("top", "200px")
+        .style("left", "200px")
+        .html("<p> test <p>");
     };
 
     if (

@@ -1,3 +1,8 @@
+/* .choropleth-us-education {
+  z-index: 1;
+  position: relative;
+} */
+
 .canvas {
   /* fill: whitesmoke; */
   background-color: white;
@@ -9,10 +14,10 @@
   stroke: white;
 }
 
-/* .us-legend {
+.choropleth-tooltip {
   background-color: black;
   height: 100px;
   width: 400px;
   z-index: 10;
   position: absolute;
-} */
+}
