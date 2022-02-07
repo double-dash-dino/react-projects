@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as d3 from "d3";
+import * as topojson from "topojson-client";
 import "./ChoroplethUSEducation.css";
 
 const ChoroplethUSEducation = (props) => {
@@ -36,6 +37,23 @@ const ChoroplethUSEducation = (props) => {
         .attr("height", height)
         .attr("width", width)
         .attr("class", "canvas");
+
+      canvas
+        .append("g")
+        .attr("class", "counties")
+        .selectAll("path")
+        .data(
+          topojson.feature(
+            dataset["usCounties"],
+            dataset["usCounties"].objects.counties
+          ).features
+        )
+        .enter()
+        .append("path")
+        .attr("class", "county")
+        .attr("data-fips", (d) => d["id"])
+        .attr("fill", "black")
+        .attr("d", d3.geoPath());
     };
     if (
       datasetEducation !== "" &&

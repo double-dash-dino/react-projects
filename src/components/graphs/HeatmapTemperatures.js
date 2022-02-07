@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./HeatmapTemperatures.css";
 import * as d3 from "d3";
+import * as topojson from "topojson-client";
 
 const HeatmapTemperatures = (props) => {
   const [dataset, setDataset] = useState("");
