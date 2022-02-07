@@ -26,6 +26,14 @@ const ChoroplethUSEducation = (props) => {
   useEffect(() => {
     const buildChart = (data1, data2) => {
       const dataset = { education: data1, usCounties: data2 };
+      const educationMin = d3.min(
+        dataset.education,
+        (d) => d["bachelorsOrHigher"]
+      );
+      const educationMax = d3.max(
+        dataset.education,
+        (d) => d["bachelorsOrHigher"]
+      );
       console.log(datasetEducation, datasetUSCounties, dataset);
       const width = 1000;
       const height = 1000;
@@ -37,6 +45,24 @@ const ChoroplethUSEducation = (props) => {
         .attr("height", height)
         .attr("width", width)
         .attr("class", "canvas");
+
+      const numberOfSteps = 8;
+      const colourScale = d3
+        .scaleThreshold()
+        .domain(
+          d3.range(
+            educationMin,
+            educationMax,
+            (educationMax - educationMin) / numberOfSteps
+          )
+        )
+        .range(d3.schemeGreens[numberOfSteps + 1]);
+
+      console.log(
+        colourScale(5),
+        colourScale(50),
+        d3.max(dataset.education, (d) => d["bachelorsOrHigher"])
+      );
 
       canvas
         .append("g")
@@ -52,9 +78,12 @@ const ChoroplethUSEducation = (props) => {
         .append("path")
         .attr("class", "county")
         .attr("data-fips", (d) => d["id"])
-        .attr("fill", "black")
+        .attr("fill", (d, i) =>
+          colourScale(dataset.education[i]["bachelorsOrHigher"])
+        )
         .attr("d", d3.geoPath());
     };
+
     if (
       datasetEducation !== "" &&
       datasetUSCounties !== "" &&

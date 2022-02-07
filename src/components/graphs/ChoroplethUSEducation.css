@@ -1,4 +1,18 @@
 .canvas {
   /* fill: whitesmoke; */
   background-color: white;
+  z-index: 1;
+  position: relative;
 }
+
+.county {
+  stroke: white;
+}
+
+/* .us-legend {
+  background-color: black;
+  height: 100px;
+  width: 400px;
+  z-index: 10;
+  position: absolute;
+} */
