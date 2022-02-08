@@ -35,10 +35,24 @@ const ChoroplethUSEducation = (props) => {
         dataset.education,
         (d) => d["bachelorsOrHigher"]
       );
-      // Build canvas
+
       const width = 1000;
       const height = 1000;
-      const padding = 50;
+      const padding = 200;
+
+      // Add text elements div at the top
+
+      d3.select(".choropleth-us-education")
+        .append("div")
+        .attr("class", "choropleth-text-div")
+        .attr("x", width / 2)
+        .attr("y", padding)
+        .attr("width", width)
+        .html(
+          "<p class='choropleth-title'> United States Educational Attainment </p> <p class='choropleth-subtitle'>Percentage of adults age 25 and older with a bachelor's degree or higher</p>"
+        );
+
+      // Build canvas
 
       const canvas = d3
         .select(".choropleth-us-education")
@@ -49,6 +63,7 @@ const ChoroplethUSEducation = (props) => {
 
       // Get colours scale
       const numberOfSteps = 8;
+      const colourArray = d3.schemeBlues;
       const colourScale = d3
         .scaleThreshold()
         .domain(
@@ -58,7 +73,7 @@ const ChoroplethUSEducation = (props) => {
             (educationMax - educationMin) / numberOfSteps
           )
         )
-        .range(d3.schemeBlues[numberOfSteps + 1]);
+        .range(colourArray[numberOfSteps + 1]);
 
       //  Draw map + fill in colours
 
@@ -83,6 +98,72 @@ const ChoroplethUSEducation = (props) => {
           return colourScale(countyCode["bachelorsOrHigher"]);
         })
         .attr("d", d3.geoPath());
+
+      // Add legend
+
+      const legendScale = d3
+        .scaleLinear()
+        .domain([educationMin, educationMax])
+        .range([500, 900]);
+
+      const legendAxis = d3
+        .axisBottom()
+        .scale(legendScale)
+        .tickSize(15)
+        .tickFormat((d, i) => {
+          if (i === numberOfSteps - 1) {
+            return Math.round(d) + "%+";
+          } else {
+            return Math.round(d) + "%";
+          }
+        })
+        .tickValues(colourScale.domain())
+        .tickSizeOuter(0);
+
+      canvas
+        .append("g")
+        .attr("id", "choropleth-key")
+        .attr("transform", "translate(0," + (height / 2 + padding) + ")")
+        .call(legendAxis);
+
+      canvas
+        .select("#choropleth-key")
+        .selectAll("rect")
+        .data(
+          colourScale.range().map((d) => {
+            d = colourScale.invertExtent(d);
+            if (d[0] === null) {
+              d[0] = legendScale.domain()[0];
+            }
+            if (d[1] === null) {
+              d[1] = legendScale.domain()[1];
+            }
+            return d;
+          })
+        )
+        .enter()
+        .append("rect")
+        .attr("x", (d, i) => legendScale(d[0]))
+        .attr("y", 0)
+        .attr("height", "10px")
+        .attr("width", (d, i) => {
+          if (i === numberOfSteps - 1) {
+            return "100px";
+          } else {
+            return "50px";
+          }
+        })
+
+        .style("fill", (d, i) => colourArray[numberOfSteps][i]);
+
+      console.log(legendScale.range());
+      console.log(
+        colourArray[numberOfSteps],
+        educationMax,
+        educationMin,
+        numberOfSteps,
+        legendScale(0 * ((educationMax - educationMin) / numberOfSteps))
+      );
 
       // Add tooltip
       const tooltip = d3

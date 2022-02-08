@@ -1,8 +1,31 @@
-/* .choropleth-us-education {
-  z-index: 1;
-  position: relative;
-} */
+.choropleth-us-education {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center; */
+  /* align-items: center; */
+}
 
+.choropleth-text-div {
+  padding-top: 30px;
+  padding-bottom: 40px;
+  background-color: white;
+  height: 6em;
+  width: 1000px;
+  text-align: center;
+  /* display: flex; */
+  /* flex-direction: column;
+  align-content: center;
+  justify-self: center; */
+}
+
+.choropleth-title {
+  font-size: 2em;
+}
+
+.choropleth-subtitle {
+  font-size: 1em;
+}
 .canvas {
   /* fill: whitesmoke; */
   background-color: white;
