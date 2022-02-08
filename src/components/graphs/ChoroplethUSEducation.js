@@ -123,7 +123,7 @@ const ChoroplethUSEducation = (props) => {
       canvas
         .append("g")
         .attr("id", "choropleth-key")
-        .attr("transform", "translate(0," + (height - 150) + ")")
+        .attr("transform", "translate(0," + (height - 50) + ")")
         .call(legendAxis);
 
       canvas
@@ -156,15 +156,6 @@ const ChoroplethUSEducation = (props) => {
 
         .style("fill", (d, i) => colourArray[numberOfSteps][i]);
 
-      console.log(legendScale.range());
-      console.log(
-        colourArray[numberOfSteps],
-        educationMax,
-        educationMin,
-        numberOfSteps,
-        legendScale(0 * ((educationMax - educationMin) / numberOfSteps))
-      );
-
       // Add source
 
       d3.select(".choropleth-us-education")
@@ -193,7 +184,7 @@ const ChoroplethUSEducation = (props) => {
           countyCode["area_name"] +
           ", " +
           countyCode["state"] +
-          " : " +
+          ": " +
           countyCode["bachelorsOrHigher"] +
           "% </p>"
         );

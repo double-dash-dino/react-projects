@@ -1,33 +1,29 @@
 .choropleth-us-education {
-  /* display: flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
-  justify-items: center; */
-  /* align-items: center; */
+  justify-items: center;
+  align-items: center;
+  color: black;
 }
 
 .choropleth-text-div {
   padding-top: 30px;
   padding-bottom: 40px;
   background-color: white;
-  height: 6em;
+  height: 3em;
   width: 1000px;
   text-align: center;
-  /* display: flex; */
-  /* flex-direction: column;
-  align-content: center;
-  justify-self: center; */
 }
 
 .choropleth-title {
-  font-size: 2em;
+  font-size: 1em;
 }
 
 .choropleth-subtitle {
-  font-size: 1em;
+  font-size: 0.5em;
 }
 .canvas {
-  /* fill: whitesmoke; */
   background-color: white;
   z-index: 1;
   position: relative;
@@ -55,6 +51,7 @@
 
 .choropleth-tooltip-text {
   color: white;
+  font-size: 0.5em;
 }
 
 .choropleth-source-div {
@@ -62,6 +59,11 @@
   margin-top: -10px;
   padding-top: 15px;
   width: 1000px;
-  text-align: end;
-  font-size: 0.9em;
+  text-align: right;
+  font-size: 0.4em;
+}
+
+.choropleth-source-text {
+  position: relative;
+  right: 20px;
 }

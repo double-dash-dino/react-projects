@@ -31,7 +31,7 @@ const D3Graphs = (props) => {
         <option value="bar-chart">Simple bar chart</option>
         <option value="scatterplot-graph">Scatterplot graph</option>
         <option value="heatmap">Heatmap</option>
-        <option value="choropleth">Choropleth (density map)</option>
+        <option value="choropleth">Choropleth</option>
         <option value="treemap-diagram">Treemap diagram</option>
       </select>
 
