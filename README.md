@@ -36,8 +36,6 @@ _Study timer_
 
 _Charts_
 
--Change z-index or position property so that the graph doesn't display over the nav bar on narrow screens
-
 -Can we make tooltip a reusable component?
 
 -Add loading widget for longer loading times
