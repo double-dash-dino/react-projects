@@ -37,7 +37,7 @@ const ChoroplethUSEducation = (props) => {
       );
 
       const width = 1000;
-      const height = 1000;
+      const height = 700;
       const padding = 200;
 
       // Add text elements div at the top
@@ -123,7 +123,7 @@ const ChoroplethUSEducation = (props) => {
       canvas
         .append("g")
         .attr("id", "choropleth-key")
-        .attr("transform", "translate(0," + (height / 2 + padding) + ")")
+        .attr("transform", "translate(0," + (height - 150) + ")")
         .call(legendAxis);
 
       canvas
@@ -164,6 +164,15 @@ const ChoroplethUSEducation = (props) => {
         numberOfSteps,
         legendScale(0 * ((educationMax - educationMin) / numberOfSteps))
       );
+
+      // Add source
+
+      d3.select(".choropleth-us-education")
+        .append("div")
+        .attr("class", "choropleth-source-div")
+        .html(
+          "<p class='choropleth-source-text'>Source: <a href='https://www.ers.usda.gov/data-products/county-level-data-sets/download-data.aspx' target='_blank'>USDA Economic Research Service</a> </p>"
+        );
 
       // Add tooltip
       const tooltip = d3

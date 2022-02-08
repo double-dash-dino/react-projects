@@ -56,3 +56,12 @@
 .choropleth-tooltip-text {
   color: white;
 }
+
+.choropleth-source-div {
+  background-color: white;
+  margin-top: -10px;
+  padding-top: 15px;
+  width: 1000px;
+  text-align: end;
+  font-size: 0.9em;
+}
