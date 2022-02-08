@@ -1,4 +1,5 @@
 .navigation-bar {
+  z-index: 11;
   font-family: FontAwesome;
   position: fixed;
   align-self: flex-start;
