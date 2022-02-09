@@ -65,7 +65,7 @@ const TreemapSales = (props) => {
 
       d3
         .treemap()
-        .size([width - padding, height - padding])
+        .size([width / 1.5, height / 1.5])
         .padding(2)(root);
 
       const cell = canvas
@@ -77,6 +77,7 @@ const TreemapSales = (props) => {
         .attr("y", (d) => d.y0)
         .attr("width", (d) => d.x1 - d.x0)
         .attr("height", (d) => d.y1 - d.y0)
+        .attr("transform", "translate(" + padding + " , " + padding + ")")
         .style("stroke", "black")
         .style("fill", (d, i) => colours[root.children.indexOf(d.parent)]);
 
