@@ -1,3 +1,22 @@
 .treemap-canvas {
   background-color: white;
+  position: relative;
+  z-index: 1;
+}
+
+.treemap-tooltip {
+  background-color: black;
+  opacity: 0;
+  border-radius: 15px;
+  padding: 10px;
+  position: absolute;
+  z-index: 10;
+  height: auto;
+  width: auto;
+  color: white;
+  pointer-events: none;
+}
+
+.treemap-tooltip-text {
+  font-size: 0.5em;
 }

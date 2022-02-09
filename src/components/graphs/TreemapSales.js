@@ -7,9 +7,12 @@ const TreemapSales = (props) => {
   const [datasetFilms, setDatasetFilms] = useState("");
   const [datasetKickstarter, setDatasetKickstarter] = useState("");
 
+  //   NOTE: DATA IS CORRECT AS OF AUGUST 2015, and domestic
+
   // Fetch queries
 
   if (datasetGames === "") {
+    setDatasetGames(null);
   }
 
   if (datasetFilms === "") {
@@ -68,7 +71,7 @@ const TreemapSales = (props) => {
         .size([width / 1.5, height / 1.5])
         .padding(2)(root);
 
-      const cell = canvas
+      const cells = canvas
         .selectAll("rect")
         .data(root.leaves())
         .enter()
@@ -94,6 +97,49 @@ const TreemapSales = (props) => {
       //     .text((d) => d.data.name.split(/(?=[A-Z][^A-Z])/g))
       //     .attr("font-size", "15px")
       //     .attr("fill", "white");
+
+      //   Create tooltip
+
+      const tooltip = d3
+        .select(".treemap-sales")
+        .append("div")
+        .attr("class", "treemap-tooltip")
+        .html("TEST");
+
+      // Get tooltip html
+
+      const getTooltipHtml = (data) => {
+        let name = data.name;
+        let category = data.category;
+        let value = "$" + new Intl.NumberFormat().format(data.value);
+        return (
+          "<p class='treemap-tooltip-text'>" +
+          "Name: " +
+          name +
+          "<br> Category: " +
+          category +
+          "<br> Value: " +
+          value +
+          "</p>"
+        );
+      };
+
+      // Add cursor events
+
+      cells.on("mouseover", (event) => {
+        console.log(event);
+        tooltip
+          .transition()
+          .duration(0)
+          .style("opacity", 1)
+          .style("top", event.target.__data__.y0 + 50 + "px")
+          .style("left", event.target.__data__.x0 + 100 + "px");
+
+        tooltip.html(getTooltipHtml(event.target.__data__.data));
+      });
+      cells.on("mouseout", () =>
+        tooltip.transition().duration(0).style("opacity", 0)
+      );
 
       console.log(root, root.leaves());
     };
