@@ -71,6 +71,14 @@ const TreemapSales = (props) => {
         .size([width / 1.5, height / 1.5])
         .padding(2)(root);
 
+      canvas
+        .selectAll("g")
+        .data(root.leaves())
+        .enter()
+        .append("g")
+        .attr("class", "group")
+        .attr("transform", "translate(" + padding + " , " + padding + ")");
+
       const cells = canvas
         .selectAll("rect")
         .data(root.leaves())
@@ -86,25 +94,25 @@ const TreemapSales = (props) => {
 
       // Add text
 
-      //   canvas
-      //     .append("text")
-      //     .selectAll("tspan")
-      //     .data(root.leaves())
-      //     .enter()
-      //     .append("tspan")
-      //     .attr("x", (d) => d.x0 + 5)
-      //     .attr("y", (d) => d.y0 + 10)
-      //     .text((d) => d.data.name.split(/(?=[A-Z][^A-Z])/g))
-      //     .attr("font-size", "15px")
-      //     .attr("fill", "white");
+      canvas
+        .append("text")
+        .attr("transform", "translate(" + padding + " , " + padding + ")")
+        .selectAll("tspan")
+        .data(root.leaves(), (d) => d.data.name.split(/(?=[A-Z][^A-Z])/g))
+        .enter()
+        .append("tspan")
+        .attr("x", (d) => d.x0 + 5)
+        .attr("y", (d) => d.y0 + 10)
+        .text((d) => d.data.name)
+        .attr("font-size", "0.6em")
+        .attr("fill", "black");
 
       //   Create tooltip
 
       const tooltip = d3
         .select(".treemap-sales")
         .append("div")
-        .attr("class", "treemap-tooltip")
-        .html("TEST");
+        .attr("class", "treemap-tooltip");
 
       // Get tooltip html
 
@@ -127,7 +135,6 @@ const TreemapSales = (props) => {
       // Add cursor events
 
       cells.on("mouseover", (event) => {
-        console.log(event);
         tooltip
           .transition()
           .duration(0)
