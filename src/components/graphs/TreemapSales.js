@@ -33,12 +33,10 @@ const TreemapSales = (props) => {
 
   useEffect(() => {
     const buildChart = (dataset) => {
-      console.log(dataset);
-
       //   Build canvas
 
-      const height = 1000;
-      const width = 1000;
+      const height = 1200;
+      const width = 1200;
       const padding = 50;
 
       const canvas = d3
@@ -77,20 +75,72 @@ const TreemapSales = (props) => {
         .enter()
         .append("g")
         .attr("class", "group")
-        .attr("transform", "translate(" + padding + " , " + padding + ")");
-
-      const cells = canvas
-        .selectAll("rect")
-        .data(root.leaves())
-        .enter()
+        .attr("transform", "translate(" + padding + " , " + padding + ")")
         .append("rect")
         .attr("x", (d) => d.x0)
         .attr("y", (d) => d.y0)
         .attr("width", (d) => d.x1 - d.x0)
+        .attr("data-width", (d) => d.x1 - d.x0)
         .attr("height", (d) => d.y1 - d.y0)
-        .attr("transform", "translate(" + padding + " , " + padding + ")")
+        // .attr("transform", "translate(" + padding + " , " + padding + ")")
         .style("stroke", "black")
         .style("fill", (d, i) => colours[root.children.indexOf(d.parent)]);
+
+      //   const cells = canvas
+      //     .selectAll("g")
+      //     .selectAll("rect")
+      //     .data(root.leaves())
+      //     .enter()
+      //     .append("rect")
+      //     .attr("x", (d) => d.x0)
+      //     .attr("y", (d) => d.y0)
+      //     .attr("width", (d) => d.x1 - d.x0)
+      //     .attr("data-width", (d) => d.x1 - d.x0)
+      //     .attr("height", (d) => d.y1 - d.y0)
+      //     .attr("transform", "translate(" + padding + " , " + padding + ")")
+      //     .style("stroke", "black")
+      //     .style("fill", (d, i) => colours[root.children.indexOf(d.parent)]);
+
+      const fontSize = 6;
+
+      function wrapText(selection) {
+        selection.each(function () {
+          const node = d3.select(this);
+          const rectWidth = +node.attr("data-width");
+          console.log(this);
+          let word;
+          const words = node.text().split(" ").reverse();
+          let line = [];
+          const x = node.attr("x");
+          const y = node.attr("y");
+          let tspan = node.text("").append("tspan").attr("x", x).attr("y", y);
+          let lineNumber = 0;
+          while (words.length > 1) {
+            word = words.pop();
+            line.push(word);
+            tspan.text(line.join(" "));
+            const tspanLength = tspan.node().getComputedTextLength();
+            if (tspanLength > rectWidth && line.length !== 1) {
+              line.pop();
+              tspan.text(line.join(" "));
+              line = [word];
+              tspan = addTspan(word);
+            }
+          }
+
+          addTspan(words.pop());
+
+          function addTspan(text) {
+            lineNumber += 1;
+            return node
+              .append("tspan")
+              .attr("x", x)
+              .attr("y", y)
+              .attr("dy", `${lineNumber * fontSize}px`)
+              .text(text);
+          }
+        });
+      }
 
       // Add text
 
@@ -101,11 +151,12 @@ const TreemapSales = (props) => {
         .data(root.leaves(), (d) => d.data.name.split(/(?=[A-Z][^A-Z])/g))
         .enter()
         .append("tspan")
-        .attr("x", (d) => d.x0 + 5)
-        .attr("y", (d) => d.y0 + 10)
+        .attr("x", (d) => d.x0 + 1)
+        .attr("y", (d) => d.y0 + 9)
         .text((d) => d.data.name)
-        .attr("font-size", "0.6em")
-        .attr("fill", "black");
+        .attr("font-size", "0.4em")
+        .attr("fill", "black")
+        .call(wrapText);
 
       //   Create tooltip
 
@@ -134,7 +185,7 @@ const TreemapSales = (props) => {
 
       // Add cursor events
 
-      cells.on("mouseover", (event) => {
+      d3.selectAll("rect").on("mouseover", (event) => {
         tooltip
           .transition()
           .duration(0)
@@ -144,11 +195,9 @@ const TreemapSales = (props) => {
 
         tooltip.html(getTooltipHtml(event.target.__data__.data));
       });
-      cells.on("mouseout", () =>
+      d3.selectAll("rect").on("mouseout", () =>
         tooltip.transition().duration(0).style("opacity", 0)
       );
-
-      console.log(root, root.leaves());
     };
 
     if (
