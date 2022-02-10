@@ -84,17 +84,11 @@ const TreemapSales = (props) => {
         .attr("width", (d) => d.x1 - d.x0)
         .attr("data-width", (d) => d.x1 - d.x0)
         .attr("height", (d) => d.y1 - d.y0)
-        // .attr("transform", "translate(" + padding + " , " + padding + ")")
         .style("stroke", "black")
         .style("fill", (d, i) => colours[root.children.indexOf(d.parent)]);
 
       const addText = addG
         .append("text")
-        // .attr("transform", "translate(" + padding + " , " + padding + ")")
-        // .selectAll("tspan")
-        // .data(root.leaves())
-        // .enter()
-        // .append("tspan")
         .attr("x", (d) => d.x0 + 1)
         .attr("y", (d) => d.y0 + 9)
         .attr("data-width", (d) => d.x1 - d.x0)
@@ -103,22 +97,7 @@ const TreemapSales = (props) => {
         .attr("fill", "black")
         .call(wrapText);
 
-      //   const cells = canvas
-      //     .selectAll("g")
-      //     .selectAll("rect")
-      //     .data(root.leaves())
-      //     .enter()
-      //     .append("rect")
-      //     .attr("x", (d) => d.x0)
-      //     .attr("y", (d) => d.y0)
-      //     .attr("width", (d) => d.x1 - d.x0)
-      //     .attr("data-width", (d) => d.x1 - d.x0)
-      //     .attr("height", (d) => d.y1 - d.y0)
-      //     .attr("transform", "translate(" + padding + " , " + padding + ")")
-      //     .style("stroke", "black")
-      //     .style("fill", (d, i) => colours[root.children.indexOf(d.parent)]);
-
-      function wrapText(selection) {
+      const wrapText = (selection) => {
         selection.each(function () {
           const node = d3.select(this);
           const rectWidth = +node.attr("data-width");
@@ -155,23 +134,7 @@ const TreemapSales = (props) => {
               .text(text);
           }
         });
-      }
-
-      // Add text
-
-      //   canvas
-      //     .append("text")
-      //     .attr("transform", "translate(" + padding + " , " + padding + ")")
-      //     .selectAll("tspan")
-      //     .data(root.leaves(), (d) => d.data.name.split(/(?=[A-Z][^A-Z])/g))
-      //     .enter()
-      //     .append("tspan")
-      //     .attr("x", (d) => d.x0 + 1)
-      //     .attr("y", (d) => d.y0 + 9)
-      //     .text((d) => d.data.name)
-      //     .attr("font-size", "0.4em")
-      //     .attr("fill", "black")
-      //     .call(wrapText);
+      };
 
       //   Create tooltip
 
