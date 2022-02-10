@@ -33,6 +33,44 @@ const TreemapSales = (props) => {
 
   useEffect(() => {
     const buildChart = (dataset) => {
+      // Text wrapping function
+      const wrapText = (selection) => {
+        selection.each(function () {
+          const node = d3.select(this);
+          const rectWidth = +node.attr("data-width");
+          let word;
+          const words = node.text().split(" ").reverse();
+          let line = [];
+          const x = node.attr("x");
+          const y = node.attr("y");
+          let tspan = node.text("").append("tspan").attr("x", x).attr("y", y);
+          let lineNumber = 0;
+          while (words.length > 1) {
+            word = words.pop();
+            line.push(word);
+            tspan.text(line.join(" "));
+            const tspanLength = tspan.node().getComputedTextLength();
+            if (tspanLength > rectWidth && line.length !== 1) {
+              line.pop();
+              tspan.text(line.join(" "));
+              line = [word];
+              tspan = addTspan(word);
+            }
+          }
+
+          addTspan(words.pop());
+
+          function addTspan(text) {
+            lineNumber += 1;
+            return node
+              .append("tspan")
+              .attr("x", x)
+              .attr("y", y)
+              .attr("dy", `${lineNumber * fontSize}px`)
+              .text(text);
+          }
+        });
+      };
       //   Build canvas
 
       const height = 1200;
@@ -68,21 +106,19 @@ const TreemapSales = (props) => {
         .treemap()
         .size([width / 1.5, height / 1.5])
         .padding(2)(root);
-      const fontSize = 6;
+      const fontSize = 8;
       const addG = canvas
         .selectAll("g")
         .data(root.leaves())
         .enter()
         .append("g")
         .attr("class", "group")
-        .attr("data-width", (d) => d.x1 - d.x0)
         .attr("transform", "translate(" + padding + " , " + padding + ")");
       const addRects = addG
         .append("rect")
         .attr("x", (d) => d.x0)
         .attr("y", (d) => d.y0)
         .attr("width", (d) => d.x1 - d.x0)
-        .attr("data-width", (d) => d.x1 - d.x0)
         .attr("height", (d) => d.y1 - d.y0)
         .style("stroke", "black")
         .style("fill", (d, i) => colours[root.children.indexOf(d.parent)]);
@@ -93,48 +129,9 @@ const TreemapSales = (props) => {
         .attr("y", (d) => d.y0 + 9)
         .attr("data-width", (d) => d.x1 - d.x0)
         .text((d) => d.data.name)
-        .attr("font-size", "0.4em")
+        .attr("font-size", "0.5em")
         .attr("fill", "black")
         .call(wrapText);
-
-      const wrapText = (selection) => {
-        selection.each(function () {
-          const node = d3.select(this);
-          const rectWidth = +node.attr("data-width");
-          console.log(this);
-          let word;
-          const words = node.text().split(" ").reverse();
-          let line = [];
-          const x = node.attr("x");
-          const y = node.attr("y");
-          let tspan = node.text("").append("tspan").attr("x", x).attr("y", y);
-          let lineNumber = 0;
-          while (words.length > 1) {
-            word = words.pop();
-            line.push(word);
-            tspan.text(line.join(" "));
-            const tspanLength = tspan.node().getComputedTextLength();
-            if (tspanLength > rectWidth && line.length !== 1) {
-              line.pop();
-              tspan.text(line.join(" "));
-              line = [word];
-              tspan = addTspan(word);
-            }
-          }
-
-          addTspan(words.pop());
-
-          function addTspan(text) {
-            lineNumber += 1;
-            return node
-              .append("tspan")
-              .attr("x", x)
-              .attr("y", y)
-              .attr("dy", `${lineNumber * fontSize}px`)
-              .text(text);
-          }
-        });
-      };
 
       //   Create tooltip
 
