@@ -90,7 +90,7 @@ const TreemapSales = (props) => {
 
       const colours = [
         "red",
-        "blue",
+        "skyblue",
         "green",
         "yellow",
         "orange",
@@ -129,7 +129,7 @@ const TreemapSales = (props) => {
         .attr("y", (d) => d.y0 + 9)
         .attr("data-width", (d) => d.x1 - d.x0)
         .text((d) => d.data.name)
-        .attr("font-size", "0.5em")
+        .attr("font-size", "0.4em")
         .attr("fill", "black")
         .call(wrapText);
 
@@ -170,9 +170,39 @@ const TreemapSales = (props) => {
 
         tooltip.html(getTooltipHtml(event.target.__data__.data));
       });
+
       d3.selectAll("rect").on("mouseout", () =>
         tooltip.transition().duration(0).style("opacity", 0)
       );
+
+      //   Add key
+
+      canvas
+        .append("g")
+        .attr("id", "legend")
+        .attr("transform", "translate(" + padding + " , " + padding + ")")
+        .selectAll("rect")
+        .data(colours)
+        .enter()
+        .append("rect")
+        .attr("x", (d, i) => ((width / 2) * i) / colours.length + 1)
+        .attr("y", height / 2 + 230)
+        .style("width", "55px")
+        .style("height", "20px")
+        .attr("stroke", "black")
+        .style("fill", (d) => d);
+
+      d3.select("#legend")
+        .selectAll("text")
+        .data(dataset.children)
+        .enter()
+        .append("text")
+        .attr("x", (d, i) => ((width / 2) * i) / colours.length + 1 + 2)
+        .attr("y", height / 2 + 245)
+        .attr("font-size", "10px")
+        .text((d) => d.name);
+
+      console.log(dataset);
     };
 
     if (
