@@ -33,6 +33,8 @@ const TreemapSales = (props) => {
 
   useEffect(() => {
     const buildChart = (dataset) => {
+      console.log(dataset);
+
       //   Build canvas
 
       const height = 1000;
@@ -45,8 +47,8 @@ const TreemapSales = (props) => {
         .attr("class", "treemap-canvas")
         .attr("x", 0)
         .attr("y", 0)
-        .attr("height", height)
-        .attr("width", width);
+        .attr("height", height - padding)
+        .attr("width", width - padding);
 
       // Colours
 
@@ -64,114 +66,46 @@ const TreemapSales = (props) => {
 
       const root = d3.hierarchy(dataset).sum((d) => d["value"]);
 
-      const treemap = d3
+      d3
         .treemap()
-        .size([width / 2, height / 2])
-        //   .padding(10)
-        .paddingInner(1);
+        .size([width / 1.5, height / 1.5])
+        .padding(2)(root);
 
-      treemap(root);
-
-      const groups = canvas
+      canvas
         .selectAll("g")
         .data(root.leaves())
         .enter()
         .append("g")
-        .attr("x", (d) => d.x0)
-        .attr("y", (d) => d.y0)
         .attr("class", "group")
-        .attr(
-          "transform",
-          (d) => "translate(" + padding + " , " + padding + ")"
-        );
+        .attr("transform", "translate(" + padding + " , " + padding + ")");
 
-      groups
+      const cells = canvas
+        .selectAll("rect")
+        .data(root.leaves())
+        .enter()
         .append("rect")
         .attr("x", (d) => d.x0)
         .attr("y", (d) => d.y0)
         .attr("width", (d) => d.x1 - d.x0)
         .attr("height", (d) => d.y1 - d.y0)
-        .attr(
-          "transform",
-          (d) => "translate(" + padding + " , " + padding + ")"
-        )
-        // .attr("transform", "translate(" + padding + " , " + padding + ")")
-        // .style("stroke", "black")
+        .attr("transform", "translate(" + padding + " , " + padding + ")")
+        .style("stroke", "black")
         .style("fill", (d, i) => colours[root.children.indexOf(d.parent)]);
 
       // Add text
 
-      //   d3.selectAll("text")
-      //     .data(root.leaves())
-      //     .selectAll
-      //     .html(
-      //       (d) =>
-      //         "<tspan>" +
-      //         d.data.name[0] +
-      //         "</tspan> <br> <tspan>" +
-      //         d.data.name +
-      //         "</span>"
-      //     );
-      let namesList = { names: [], x: [], y: [] };
-      for (let i = 0; i < root.leaves().length; i++) {
-        namesList.names.push(
-          root.leaves()[i]["data"]["name"].split(/(?=[A-Z][^A-Z])/g)
-        );
-        namesList.x.push(root.leaves()[i].x0);
-        namesList.y.push(root.leaves()[i].y0);
-      }
-
-      groups
+      canvas
         .append("text")
-        .attr(
-          "transform",
-          (d) => "translate(" + padding + " , " + padding + ")"
-        )
-        .attr("id", (d, i) => "treemap-rect-text-" + i)
-        .attr("x", (d, i) =>
-          document
-            .getElementById("treemap-rect-text-" + i)
-            .previousSibling.getAttribute("x")
-        )
-
-        .attr("y", (d, i) =>
-          document
-            .getElementById("treemap-rect-text-" + i)
-            .previousSibling.getAttribute("y")
-        )
+        .attr("transform", "translate(" + padding + " , " + padding + ")")
         .selectAll("tspan")
-        .data((d) => d.data.name.split(/(?=[A-Z][^A-Z])/g))
+        .data(root.leaves(), (d) => d.data.name.split(/(?=[A-Z][^A-Z])/g))
         .enter()
         .append("tspan")
-        .attr("id", (d, i) => "treemap-rect-text-span-" + i)
-        .attr(
-          "transform",
-          (d) => "translate(" + padding + " , " + padding + ")"
-        )
-        .attr("x", (d, i) =>
-          document
-            .getElementById("treemap-rect-text-span-" + i)
-            .parentElement.parentElement.getAttribute("x")
-        )
-        .attr("y", (d, i) =>
-          document
-            .getElementById("treemap-rect-text-span-" + i)
-            .parentElement.parentElement.getAttribute("y")
-        )
-        .text((d) => d);
-
-      //   groups
-      //     .data(namesList)
-      //     .enter()
-      //     .append("text")
-      //     .attr("x", (d) => d.x)
-      //     .attr("y", (d, i) => d["y"] + i * 10)
-      //     .attr("transform", "translate(" + padding + " , " + padding + ")")
-      //     .selectAll("tspan")
-      //     .append("tspan")
-      //     .text((d) => d["name"])
-      //     .attr("font-size", "0.6em")
-      //     .attr("fill", "black");
+        .attr("x", (d) => d.x0 + 5)
+        .attr("y", (d) => d.y0 + 10)
+        .text((d) => d.data.name)
+        .attr("font-size", "0.6em")
+        .attr("fill", "black");
 
       //   Create tooltip
 
@@ -200,7 +134,7 @@ const TreemapSales = (props) => {
 
       // Add cursor events
 
-      canvas.selectAll("rect").on("mouseover", (event) => {
+      cells.on("mouseover", (event) => {
         tooltip
           .transition()
           .duration(0)
@@ -210,11 +144,11 @@ const TreemapSales = (props) => {
 
         tooltip.html(getTooltipHtml(event.target.__data__.data));
       });
-      canvas
-        .selectAll("rect")
-        .on("mouseout", () =>
-          tooltip.transition().duration(0).style("opacity", 0)
-        );
+      cells.on("mouseout", () =>
+        tooltip.transition().duration(0).style("opacity", 0)
+      );
+
+      console.log(root, root.leaves());
     };
 
     if (
