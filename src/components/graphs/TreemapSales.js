@@ -123,7 +123,7 @@ const TreemapSales = (props) => {
         .attr("y", (d) => d.y0 + 9)
         .attr("data-width", (d) => d.x1 - d.x0)
         .text((d) => d.data.name)
-        .attr("font-size", "0.4em")
+        .attr("class", "treemap-rect-text")
         .attr("fill", "black")
         .call(wrapText);
 
@@ -159,8 +159,8 @@ const TreemapSales = (props) => {
           .transition()
           .duration(0)
           .style("opacity", 1)
-          .style("top", event.target.__data__.y0 + 50 + "px")
-          .style("left", event.target.__data__.x0 + 100 + "px");
+          .style("top", event.pageY + 10 + "px")
+          .style("left", event.pageX + 10 + "px");
 
         tooltip.html(getTooltipHtml(event.target.__data__.data));
       });

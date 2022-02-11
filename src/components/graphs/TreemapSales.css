@@ -20,3 +20,15 @@
 .treemap-tooltip-text {
   font-size: 0.6em;
 }
+
+#title {
+  font-size: 1em;
+}
+
+#description {
+  font-size: 0.5em;
+}
+
+.treemap-rect-text {
+  font-size: 0.2em;
+}
