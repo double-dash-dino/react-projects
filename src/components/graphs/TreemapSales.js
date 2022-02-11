@@ -58,7 +58,7 @@ const TreemapSales = (props) => {
       //   Build canvas
 
       const height = 800;
-      const width = 1200;
+      const width = 1000;
       const padding = 100;
 
       const canvas = d3
@@ -74,7 +74,7 @@ const TreemapSales = (props) => {
 
       canvas
         .append("text")
-        .attr("x", width / 4)
+        .attr("x", width / 2 - padding - 40)
         .attr("y", padding - 40)
         .attr("font-size", "2em")
         .attr("id", "title")
@@ -82,7 +82,7 @@ const TreemapSales = (props) => {
 
       canvas
         .append("text")
-        .attr("x", width / 4)
+        .attr("x", width / 2 - padding - 50)
         .attr("y", padding - 10)
         .attr("font-size", "1em")
         .attr("id", "description")
@@ -98,9 +98,9 @@ const TreemapSales = (props) => {
 
       d3
         .treemap()
-        .size([width / 1.5, height / 1.5])
+        .size([width - padding, height - padding])
         .padding(2)(root);
-      const fontSize = 8;
+      const fontSize = 6;
       const addG = canvas
         .selectAll("g")
         .data(root.leaves())
@@ -179,8 +179,8 @@ const TreemapSales = (props) => {
         .data(colours)
         .enter()
         .append("rect")
-        .attr("x", (d, i) => ((width / 2) * i) / colours.length + 1 + 150)
-        .attr("y", height / 2 + 190)
+        .attr("x", (d, i) => ((width / 2) * i) / colours.length + 1)
+        .attr("y", height - padding / 2)
         .style("width", "55px")
         .style("height", "20px")
         .attr("stroke", "black")
@@ -191,8 +191,8 @@ const TreemapSales = (props) => {
         .data(dataset.children)
         .enter()
         .append("text")
-        .attr("x", (d, i) => ((width / 2) * i) / colours.length + 1 + 151)
-        .attr("y", height / 2 + 205)
+        .attr("x", (d, i) => ((width / 2) * i) / colours.length + 1 + 1)
+        .attr("y", height - padding / 2 + 15)
         .attr("font-size", "10px")
         .text((d) => d.name);
     };
