@@ -5,6 +5,7 @@ import SimpleBarChartGDP from "../graphs/SimpleBarChartGDP.js";
 import ScatterplotGraphDoping from "../graphs/ScatterplotGraphDoping";
 import HeatmapTemperatures from "../graphs/HeatmapTemperatures";
 import ChoroplethUSEducation from "../graphs/ChoroplethUSEducation";
+import TreemapSales from "../graphs/TreemapSales";
 
 const D3Graphs = (props) => {
   const [graphSelected, setGraphSelected] = useState("");
@@ -39,6 +40,7 @@ const D3Graphs = (props) => {
       {graphSelected === "scatterplot-graph" && <ScatterplotGraphDoping />}
       {graphSelected === "heatmap" && <HeatmapTemperatures />}
       {graphSelected === "choropleth" && <ChoroplethUSEducation />}
+      {graphSelected === "treemap-diagram" && <TreemapSales />}
     </div>
   );
 };
