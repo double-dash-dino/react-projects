@@ -108,7 +108,7 @@ const TreemapSales = (props) => {
         .append("g")
         .attr("class", "group")
         .attr("transform", "translate(" + padding + " , " + padding + ")");
-      const addRects = addG
+      addG
         .append("rect")
         .attr("x", (d) => d.x0)
         .attr("y", (d) => d.y0)
@@ -117,7 +117,7 @@ const TreemapSales = (props) => {
         .style("stroke", "black")
         .style("fill", (d, i) => colours[root.children.indexOf(d.parent)]);
 
-      const addText = addG
+      addG
         .append("text")
         .attr("x", (d) => d.x0 + 1)
         .attr("y", (d) => d.y0 + 9)
