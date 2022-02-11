@@ -5,8 +5,6 @@ import "./TreemapSales.css";
 const TreemapSales = (props) => {
   const [datasetFilms, setDatasetFilms] = useState("");
 
-  //   NOTE: DATA IS CORRECT AS OF AUGUST 2015, and domestic
-
   // Fetch queries
 
   if (datasetFilms === "") {
