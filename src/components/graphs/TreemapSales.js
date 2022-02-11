@@ -3,17 +3,11 @@ import * as d3 from "d3";
 import "./TreemapSales.css";
 
 const TreemapSales = (props) => {
-  const [datasetGames, setDatasetGames] = useState("");
   const [datasetFilms, setDatasetFilms] = useState("");
-  const [datasetKickstarter, setDatasetKickstarter] = useState("");
 
   //   NOTE: DATA IS CORRECT AS OF AUGUST 2015, and domestic
 
   // Fetch queries
-
-  if (datasetGames === "") {
-    setDatasetGames(null);
-  }
 
   if (datasetFilms === "") {
     fetch(
@@ -21,14 +15,6 @@ const TreemapSales = (props) => {
     )
       .then((response) => response.json())
       .then((data) => setDatasetFilms(data));
-  }
-
-  if (datasetKickstarter === "") {
-    fetch(
-      "https://cdn.freecodecamp.org/testable-projects-fcc/data/tree_map/kickstarter-funding-data.json"
-    )
-      .then((response) => response.json())
-      .then((data) => setDatasetKickstarter(data));
   }
 
   useEffect(() => {
@@ -91,21 +77,22 @@ const TreemapSales = (props) => {
       canvas
         .append("text")
         .attr("x", width / 4)
-        .attr("y", padding - 30)
+        .attr("y", padding - 40)
         .attr("font-size", "2em")
+        .attr("id", "title")
         .text("Top box-office grossing movies");
+
+      canvas
+        .append("text")
+        .attr("x", width / 4)
+        .attr("y", padding - 10)
+        .attr("font-size", "1em")
+        .attr("id", "description")
+        .text("Highest grossing productions (US domestic) as of August 2015");
 
       // Colours
 
-      const colours = [
-        "red",
-        "skyblue",
-        "green",
-        "yellow",
-        "orange",
-        "violet",
-        "pink",
-      ];
+      const colours = d3.schemeTableau10.slice(0, 7);
 
       // Create treemap
 
@@ -210,8 +197,6 @@ const TreemapSales = (props) => {
         .attr("y", height / 2 + 205)
         .attr("font-size", "10px")
         .text((d) => d.name);
-
-      console.log(dataset);
     };
 
     if (
@@ -220,7 +205,7 @@ const TreemapSales = (props) => {
     ) {
       buildChart(datasetFilms);
     }
-  }, [datasetFilms, datasetGames, datasetKickstarter]);
+  }, [datasetFilms]);
 
   return <div className="treemap-sales" id="treemap-sales"></div>;
 };
