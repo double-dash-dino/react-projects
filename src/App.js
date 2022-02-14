@@ -7,6 +7,7 @@ import NavBar from "./components/UI/NavBar";
 import ContactPage from "./components/pages/contact-page";
 import StudyTimer from "./components/apps/study-timer";
 import D3Graphs from "./components/apps/D3Graphs";
+import DBPage from "./components/DB-projects/DBpage";
 
 function App() {
   const [onDisplay, setOnDisplay] = useState("");
@@ -28,6 +29,7 @@ function App() {
         )}
         {onDisplay === "studyTimer" && <StudyTimer onClearApp={clearApp} />}
         {onDisplay === "d3Graphs" && <D3Graphs onClearApp={clearApp} />}
+        {onDisplay === "db-projects" && <DBPage />}
         {onDisplay === "contact" && <ContactPage />}
       </div>
     </div>

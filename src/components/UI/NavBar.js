@@ -30,11 +30,15 @@ const NavBar = (props) => {
   };
 
   const clickHandlerGraphs = () => {
-    props.onSelectApp("d3Graphs")
-  }
+    props.onSelectApp("d3Graphs");
+  };
 
   const clickHandlerContact = () => {
     props.onSelectApp("contact");
+  };
+
+  const clickHandlerBDProjects = () => {
+    props.onSelectApp("db-projects");
   };
 
   return (
@@ -83,6 +87,9 @@ const NavBar = (props) => {
               </button>
               <button className="nav-button" onClick={clickHandlerGraphs}>
                 D3 graphs
+              </button>
+              <button className="nav-button" onClick={clickHandlerBDProjects}>
+                DB projects
               </button>
               <button className="back-button" onClick={clickHandlerProjectList}>
                 <i className="fa fa-undo fa-3x"></i>
