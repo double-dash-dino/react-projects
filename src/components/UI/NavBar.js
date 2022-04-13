@@ -41,6 +41,10 @@ const NavBar = (props) => {
     props.onSelectApp("db-projects");
   };
 
+  const clickHandlerPlaylistBuilder = () => {
+    props.onSelectApp("playlistBuilder");
+  };
+
   return (
     <div className="navigation-bar" id="navigation-bar">
       {!displayMenu && (
@@ -90,6 +94,12 @@ const NavBar = (props) => {
               </button>
               <button className="nav-button" onClick={clickHandlerBDProjects}>
                 DB projects
+              </button>
+              <button
+                className="nav-button"
+                onClick={clickHandlerPlaylistBuilder}
+              >
+                Playlist builder
               </button>
               <button className="back-button" onClick={clickHandlerProjectList}>
                 <i className="fa fa-undo fa-3x"></i>
